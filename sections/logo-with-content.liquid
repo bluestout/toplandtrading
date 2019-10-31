@@ -1,0 +1,162 @@
+<div class="page-width">
+  <div class="LogoMainHead">
+    <h4>{{section.settings.title}}</h4>
+    <p>{{section.settings.subtitle}}</p>
+  </div>
+  <ul class="CustomLogoList">
+    <li>
+   
+      {{section.settings.new_content_1}}
+      <p>{{section.settings.content_1}}</p>
+    </li>
+    <li>
+
+       {{section.settings.new_content_2}}
+      <p>{{section.settings.content_2}}</p>
+    </li>
+    <li>
+  
+       {{section.settings.new_content_3}}
+    <p>{{section.settings.content_3}}</p>
+    </li>
+      </ul>
+</div>
+{% schema %}
+  {
+    "name": "Logo With Content",
+"class":"CustomLogoContent",
+    "settings": [
+ {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "da": "Title",
+        "de": "Title",
+        "en": "Title",
+        "es": "Title"
+      },
+      "default": {
+        "da": "Title",
+        "de": "Title",
+        "en": "Title"
+      }
+    },
+{
+      "type": "textarea",
+      "id": "subtitle",
+      "label": {
+        "da": "Sub Title",
+        "de": "Sub Title",
+        "en": "Sub Title",
+        "es": "Sub Title"
+      },
+      "default": {
+        "da": "Sub Title",
+        "de": "Sub Title",
+        "en": "Sub Title"
+      }
+    },
+{
+      "type": "textarea",
+      "id": "new_content_1",
+      "label": {
+        "da": "Icon 1",
+        "de": "Icon 1",
+        "en": "Icon 1",
+        "es": "Icon 1"
+      },
+      "default": {
+        "da": "Icon 1",
+        "de": "Icon 1",
+        "en": "Icon 1"
+      }
+    },
+
+{
+      "type": "textarea",
+      "id": "content_1",
+      "label": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content",
+        "es": "Content"
+      },
+      "default": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content"
+      }
+    },
+{
+      "type": "textarea",
+      "id": "new_content_2",
+      "label": {
+        "da": "Icon 2",
+        "de": "Icon 2",
+        "en": "Icon 2",
+        "es": "Icon 2"
+      },
+      "default": {
+        "da": "Icon 2",
+        "de": "Icon 2",
+        "en": "Icon 2"
+      }
+    },
+
+{
+      "type": "textarea",
+      "id": "content_2",
+      "label": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content",
+        "es": "Content"
+      },
+      "default": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content"
+      }
+    },
+{
+      "type": "textarea",
+      "id": "new_content_3",
+      "label": {
+        "da": "Icon 3",
+        "de": "Icon 3",
+        "en": "Icon 3",
+        "es": "Icon 3"
+      },
+      "default": {
+        "da": "Icon 3",
+        "de": "Icon 3",
+        "en": "Icon 3"
+      }
+    },
+
+{
+      "type": "textarea",
+      "id": "content_3",
+      "label": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content",
+        "es": "Content"
+      },
+      "default": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content"
+      }
+    }
+    
+
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

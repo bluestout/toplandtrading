@@ -1,0 +1,169 @@
+<div class="CustomBgSect" style="background-image:url('{{section.settings.image | img_url : 'original'}}')">
+<div class="BgImage">
+<div class="page-width">  
+  <div class="MainHeadBg">{{section.settings.title}}</div>
+  <div class="LeftBgSect">
+    <p>{{section.settings.leftdesc}}</p>
+    <span>{{section.settings.author_1}}</span>
+  </div>
+  <div class="RightBgSect">
+    <div class="TopBgSect">
+      <p>{{section.settings.RtTopdesc}}</p>
+      <span>{{section.settings.author_2}}</span>
+    </div>
+    <div class="BottomBgSect">
+      <p>{{section.settings.RtBotdesc}}</p>
+      <span>{{section.settings.author_3}}</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>  
+{% schema %}
+  {
+    "name": "Image With Content",
+   "class":"CustomBgContent",
+
+    "settings": [
+{
+      "type": "image_picker",
+      "id": "image",
+      "label": {
+        "da": "Background Image",
+        "de": "Background Image",
+        "en": "Background Image",
+        "es": "Background Image"
+      }
+    },
+{
+      "type": "text",
+      "id": "title",
+      "label": {
+        "da": "Title",
+        "de": "Title",
+        "en": "Title",
+        "es": "Title"
+      },
+      "default": {
+        "da": "What our clients say",
+        "de": "What our clients say",
+        "en": "What our clients say"
+      }
+    },
+{
+      "type": "header",
+      "content": {
+        "da": "Left Content",
+        "de": "Left Content",
+        "en": "Left Content"
+      }
+    },
+   {
+      "type": "textarea",
+      "id": "leftdesc",
+      "label": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content",
+        "es": "Content"
+      },
+      "default": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content"
+      }
+    },
+{
+      "type": "text",
+      "id": "author_1",
+      "label": {
+        "da": "Author",
+        "de": "Author",
+        "en": "Author",
+        "es": "Author"
+      },
+      "default": {
+        "da": "Author",
+        "de": "Author",
+        "en": "Author"
+      }
+    },
+{
+      "type": "header",
+      "content": {
+        "da": "Right Content",
+        "de": "Right Content",
+        "en": "Right Content"
+      }
+    },
+   {
+      "type": "textarea",
+      "id": "RtTopdesc",
+      "label": {
+        "da": "Top Content",
+        "de": "Top Content",
+        "en": "Top Content",
+        "es": "Top Content"
+      },
+      "default": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content"
+      }
+    },
+{
+      "type": "text",
+      "id": "author_2",
+      "label": {
+        "da": "Author",
+        "de": "Author",
+        "en": "Author",
+        "es": "Author"
+      },
+      "default": {
+        "da": "Author",
+        "de": "Author",
+        "en": "Author"
+      }
+    },
+
+   {
+      "type": "textarea",
+      "id": "RtBotdesc",
+      "label": {
+        "da": "Bottom Content",
+        "de": "Bottom Content",
+        "en": "Bottom Content",
+        "es": "Bottom Content"
+      },
+      "default": {
+        "da": "Content",
+        "de": "Content",
+        "en": "Content"
+      }
+    },
+{
+      "type": "text",
+      "id": "author_3",
+      "label": {
+        "da": "Author",
+        "de": "Author",
+        "en": "Author",
+        "es": "Author"
+      },
+      "default": {
+        "da": "Author",
+        "de": "Author",
+        "en": "Author"
+      }
+    }
+
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

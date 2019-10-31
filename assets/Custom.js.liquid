@@ -1,0 +1,27 @@
+$(document).ready(function(){
+  $(".CustomHoverList").mouseover(function(){
+    var ListNumber = $(this).attr("data-val");
+    $(".CustomHoverList").removeClass("subListActive");
+    $(this).addClass("subListActive");
+    $(this).parents(".LeftNav").next(".AllValue").children(".RightNav").each(function(){
+      var idGet = $(this).attr("data-id");
+      //$(".RightNav").removeClass("ActiveContainer");
+      if(idGet == ListNumber){
+      $(this).addClass("ActiveContainer");
+      }
+      else{
+      $(this).removeClass("ActiveContainer");
+      }
+  })
+})
+  
+ $(window).scroll(function() {
+    if ($(this).scrollTop() > 5) { // this refers to window
+        $("#shopify-section-header").addClass("FixedHeader");
+    }
+   else{
+   $("#shopify-section-header").removeClass("FixedHeader");
+   }
+})
+ 
+})
