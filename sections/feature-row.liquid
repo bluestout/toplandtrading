@@ -5,45 +5,60 @@
     </div>
   {% endif %}
 {% if section.settings.description != blank %}
-    <div class="section-description text-center">
+  <div class="section-description text-center">
       <p>{{ section.settings.description }}</p>
-    </div>
+  </div>
   {% endif %}
+  {% comment %}
   {% capture image_layout %}
-    <div class="feature-row__item">
-      {% if section.settings.image != blank %}
-        {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
-        {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
-        {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-        {% include 'image-style' with image: section.settings.image, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
-        <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
-          <div style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;">
-            <img id="{{ img_id }}"
-                 class="feature-row__image lazyload"
-                 src="{{ section.settings.image | img_url: '200x200' }}"
-                 data-src="{{ img_url }}"
-                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                 data-aspectratio="{{ section.settings.image.aspect_ratio }}"
-                 data-sizes="auto"
-                 alt="{{ section.settings.image.alt | escape }}">
-          </div>
-        </div>
+  <div class="feature-row__item">
+    {% if section.settings.image != blank %}
+    {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+    {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+    {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    {% include 'image-style' with image: section.settings.image, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
+    <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
 
-        <noscript>
-          {{ section.settings.image | img_url: '600x600', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
-        </noscript>
-      {% else %}
-        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-      {% endif %}
+      <div style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;">
+        <img id="{{ img_id }}"
+             class="feature-row__image lazyload"
+             src="{{ section.settings.image | img_url: '200x200' }}"
+             data-src="{{ img_url }}"
+             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+             data-sizes="auto"
+             alt="{{ section.settings.image.alt | escape }}">
+      </div>
     </div>
-  {% endcapture %}
 
+    <noscript>
+      {{ section.settings.image | img_url: '600x600', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
+    </noscript>
+    {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+  </div>
+  {% endcapture %}
+{% endcomment %}
+  
+  
   <div class="feature-row">
+     <div class="feature-row__item">
+        <div class="feat_imgWrap1">
+          <img src="{{ section.settings.image | img_url: 'original' }}">
+        </div>  
+        <div class="feat_imgWrap23">
+          <img class="ft_img2" src="{{ section.settings.image_2 | img_url: 'original' }}">
+          <img class="ft_img3" src="{{ section.settings.image_3 | img_url: 'original' }}">
+        </div>
+     </div>  
     {% if section.settings.layout == 'left' %}
       {{ image_layout }}
     {% endif %}
 
-    <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout }}">
+    <div class="CstfeatRwo feature-row__item feature-row__text feature-row__text--{{ section.settings.layout }}">
+      <div class="featrowTopbox"></div>
+      <div class="cstfeatpbox">
       {% if section.settings.title != blank %}
         <h2 class="h3">{{ section.settings.title | escape }}</h2>
       {% endif %}
@@ -73,6 +88,8 @@
     {% if section.settings.layout == 'right' %}
       {{ image_layout }}
     {% endif %}
+  
+    </div>
   </div>
 </div>
 
@@ -202,6 +219,81 @@
         "da": "Billede",
         "de": "Foto",
         "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Top Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Bottom Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Bottom Image",
         "es": "Imagen",
         "fi": "Kuva",
         "fr": "Image",

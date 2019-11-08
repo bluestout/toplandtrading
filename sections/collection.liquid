@@ -28,9 +28,9 @@
 
   {%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
 
-  <ul class="grid grid--uniform grid--view-items">
+  <ul class="CustmSlideList">
     {% for product in collection.products limit: product_limit %}
-      <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+      <li class="CustomGridView">
         {% include 'product-card-grid', max_height: max_height %}
       </li>
     {% else %}

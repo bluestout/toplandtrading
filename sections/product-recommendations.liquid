@@ -5,11 +5,12 @@
         {%- if section.settings.heading != blank -%}
           <div class="section-header text-center">
             <h2>{{ section.settings.heading | escape }}</h2>
+            <p>{{section.settings.subheading }}</p>
           </div>
         {%- endif -%}
-        <ul class="grid grid--uniform grid--view-items">
+        <ul class="RecommendationPro">
           {%- for product in recommendations.products -%}
-            <li class="grid__item small--one-half medium-up--one-quarter">
+            <li class="RecommendationProList">
               {% include 'product-card-grid', max_height: 250 %}
             </li>
           {%- endfor -%}
@@ -99,6 +100,52 @@
         "da": "Overskrift",
         "de": "Überschrift",
         "en": "Heading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "En-tête",
+        "hi": "शीर्षक",
+        "it": "Heading",
+        "ja": "見出し",
+        "ko": "제목",
+        "ms": "Tajuk",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      },
+      "default": {
+        "da": "Du vil muligvis også synes om",
+        "de": "Das könnte Ihnen auch gefallen",
+        "en": "You may also like",
+        "es": "También te puede interesar",
+        "fi": "Saatat pitää myös näistä",
+        "fr": "Vous pourriez aimer également",
+        "hi": "आप शायद इसे भी पसंद करें",
+        "it": "Potrebbero interessarti anche",
+        "ja": "あなたへのおすすめ",
+        "ko": "회원님도 좋아할 것입니다.",
+        "ms": "Anda juga mungkin sukakan",
+        "nb": "Kanskje du også liker",
+        "nl": "Wellicht vindt je  dit ook leuk",
+        "pt-BR": "Talvez você também goste de",
+        "pt-PT": "Também poderá gostar de",
+        "sv": "Du kanske också gillar",
+        "th": "คุณอาจจะชอบ",
+        "zh-CN": "您可能还喜欢",
+        "zh-TW": "您也可能喜歡"
+      }
+    },
+{
+      "type": "text",
+      "id": "subheading",
+      "label": {
+        "da": "Overskrift",
+        "de": "Überschrift",
+        "en": "Sub Heading",
         "es": "Título",
         "fi": "Otsake",
         "fr": "En-tête",

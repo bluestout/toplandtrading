@@ -1,0 +1,8 @@
+<div class="MenuContainer">
+  <label>By Collection</label>
+  <ul>
+ {% for link in linklists["collections"].links %}
+    <li><a href="{{link.url}}">{{link.title}}</a></li>
+    {% endfor %}
+  </ul>
+</div>

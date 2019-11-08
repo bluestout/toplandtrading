@@ -15,7 +15,7 @@
   {%- assign limit = 16 -%}
 {% endif %}
 
-{% paginate collection.products by limit %}
+{% paginate collection.products by 30 %}
 
 <div data-section-id="{{ section.id }}" data-section-type="collection-template" class="cst_collectionTemp">
   <header class="collection-header">
@@ -81,7 +81,7 @@
             <div class="CSTfilters-toolbar__item-wrapper">
               <div class="cstIR filters-toolbar__item-child PaginationManage">
                 <label class="filters-toolbar__label select-label">Items per page</label>
-                 <div class="filters-toolbar__input-wrapper select-group">
+                <div class="filters-toolbar__input-wrapper select-group">
                    <select class="filters-toolbar__input CustomFilter">
                     <option value="{{collection.url}}?view=12">12</option>
                     <option value="{{collection.url}}?view=20">20</option>
@@ -89,7 +89,7 @@
                     <option value="{{collection.url}}?view=40">40</option>
                     <option value="{{collection.url}}?view=50">50</option>
                   </select> {% include 'icon-chevron-down' %}
-                </div> 
+                </div>
               </div>
               {% if section.settings.tags_enable %}
                 {% unless collection.all_tags.size == 0 %}

@@ -93,7 +93,7 @@
     
     
     
-    <div class="">
+    <div class="cstmFeatclm">
      {% for block in section.blocks %}
     
       <div class="grid__item medium-up--one-third text-center">
@@ -109,7 +109,8 @@
     
     
   </div>
-
+  <a class="MoreMobLink" href="{{section.settings.more_link}}">{{section.settings.more_label}}</a>
+  
   {% if section.blocks.size == 0 %}
     {% include 'no-blocks' %}
   {% endif %}
@@ -234,6 +235,7 @@
         "zh-TW": "附圖片的文字欄"
       }
     },
+
     {
       "type": "select",
       "id": "align_text",
@@ -308,8 +310,33 @@
             "zh-TW": "置中"
           }
         }
+
       ]
-    }
+    },
+{
+      "type": "text",
+      "id": "more_label",
+      "label": {
+        "da": "See more for mobile",
+        "de": "See more for mobile",
+        "en": "See more for mobile"
+      },
+      "default": {
+        "da": "Learn More about us",
+        "de": "Learn More about us",
+        "en": "Learn More about us"
+      }
+    },
+{
+          "type": "url",
+          "id": "more_link",
+          "label": {
+            "da": "Link",
+            "de": "Link",
+            "en": "Link",
+            "es": "Link"
+          }
+        }
   ],
   "blocks": [
     {
@@ -444,56 +471,6 @@
             "th": "<p>แชร์โพสต์บล็อก สินค้า หรือโปรโมชันกับลูกค้าของคุณ ใช้ข้อความนี้เพื่ออธิบายสินค้า แชร์รายละเอียดเกี่ยวกับความพร้อมจำหน่ายและสไตล์ หรือเป็นพื้นที่เพื่อจัดแสดงรีวิวล่าสุด หรือว่าคำถามที่พบบ่อย</p>",
             "zh-CN": "<p>与您的客户分享博客文章、产品或促销信息。使用此文本描述产品、分享有关供货情况和风格的详细信息，或将此文本作为显示最近评论或常见问题解答的区域。</p>",
             "zh-TW": "<p>與顧客分享部落格貼文、產品或宣傳活動。請使用這段文字描述商品、分享庫存和樣式的詳細資訊，或顯示近期評論及常見問題。</p>"
-          }
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": {
-            "da": "Knapetiket",
-            "de": "Button-Name",
-            "en": "Button label",
-            "es": "Etiqueta de botón",
-            "fi": "Painikkeen merkintä",
-            "fr": "Texte du bouton",
-            "hi": "बटन लेबल",
-            "it": "Etichetta pulsante",
-            "ja": "ボタンラベル",
-            "ko": "버튼 레이블",
-            "ms": "Label butang",
-            "nb": "Knappetikett",
-            "nl": "Knoplabel",
-            "pt-BR": "Etiqueta do botão",
-            "pt-PT": "Etiqueta do botão",
-            "sv": "Knappetikett",
-            "th": "ป้ายกำกับปุ่ม",
-            "zh-CN": "按钮标签",
-            "zh-TW": "按鈕標籤"
-          }
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": {
-            "da": "Knaplink",
-            "de": "Button-Link",
-            "en": "Button link",
-            "es": "Enlace de botón",
-            "fi": "Painikkeen linkki",
-            "fr": "Lien du bouton",
-            "hi": "बटन लिंक",
-            "it": "Link pulsante",
-            "ja": "ボタンリンク",
-            "ko": "버튼 링크",
-            "ms": "Pautan butang",
-            "nb": "Kobling for knapp",
-            "nl": "Knoplink",
-            "pt-BR": "Link do botão",
-            "pt-PT": "Ligação do botão",
-            "sv": "Knapplänk",
-            "th": "ลิงก์ของปุ่ม",
-            "zh-CN": "按钮链接",
-            "zh-TW": "按鈕連結"
           }
         }
       ]

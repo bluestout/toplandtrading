@@ -1211,8 +1211,8 @@ theme.MobileNav = (function() {
   function init() {
     cacheSelectors();
 
-    cache.$mobileNavToggle.on('click', toggleMobileNav);
-    cache.$subNavToggleBtn.on('click.subNav', toggleSubNav);
+    //cache.$mobileNavToggle.on('click', toggleMobileNav);
+    //cache.$subNavToggleBtn.on('click.subNav', toggleSubNav);
 
     // Close mobile nav when unmatching mobile breakpoint
     enquire.register(mediaQuerySmall, {
@@ -1224,13 +1224,13 @@ theme.MobileNav = (function() {
     });
   }
 
-  function toggleMobileNav() {
-    if (cache.$mobileNavToggle.hasClass(classes.mobileNavCloseIcon)) {
-      closeMobileNav();
-    } else {
-      openMobileNav();
-    }
-  }
+//   function toggleMobileNav() {
+//     if (cache.$mobileNavToggle.hasClass(classes.mobileNavCloseIcon)) {
+//       closeMobileNav();
+//     } else {
+//       openMobileNav();
+//     }
+//   }
 
   function cacheSelectors() {
     cache = {
@@ -4296,6 +4296,7 @@ theme.Product = (function() {
           this._setCartQuantity(cart.item_count);
           this._setCartCountBubble(cart.item_count);
           this._showCartPopup();
+          $(".CartMobileMenuCount b").html(cart.item_count);
         }.bind(this)
       );
     },
@@ -4814,7 +4815,7 @@ theme.ProductRecommendations = (function() {
     var recommendationsSectionUrl =
       '/recommendations/products?&section_id=product-recommendations&product_id=' +
       productId +
-      '&limit=4';
+      '&limit=999';
 
     $.get(recommendationsSectionUrl).then(
       function(section) {

@@ -4,7 +4,8 @@
 
 {% section 'product-template' %}
 {% section 'product-recommendations' %}
-
+{% section "custom-product-field" %}
+{% comment %}
 {% if collection %}
   <div class="text-center return-link-wrapper page-width">
     <a href="{{ collection.url }}" class="btn btn--secondary btn--has-icon-before return-link">
@@ -13,7 +14,7 @@
     </a>
   </div>
 {% endif %}
-
+{% endcomment %}
 <script>
   // Override default values of shop.strings for each template.
   // Alternate product templates can change values of

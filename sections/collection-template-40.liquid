@@ -15,7 +15,7 @@
   {%- assign limit = 16 -%}
 {% endif %}
 
-{% paginate collection.products by limit %}
+{% paginate collection.products by 40 %}
 
 <div data-section-id="{{ section.id }}" data-section-type="collection-template" class="cst_collectionTemp">
   <header class="collection-header">
@@ -89,7 +89,7 @@
                     <option value="{{collection.url}}?view=40">40</option>
                     <option value="{{collection.url}}?view=50">50</option>
                   </select> {% include 'icon-chevron-down' %}
-                </div> 
+                </div>
               </div>
               {% if section.settings.tags_enable %}
                 {% unless collection.all_tags.size == 0 %}

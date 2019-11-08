@@ -1,29 +1,51 @@
-<div class="page-width">
-  <div class="grid">
-    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
-      <div class="section-header text-center">
-        <h1>{{ page.title }}</h1>
-      </div>
+  {% comment %}
+<div class="section-header text-center">
+    <h1>{{ page.title }}</h1>
+</div>
+  {% endcomment %}
 
+
+
+<div class="grid">            
+    <div class="grid__item medium-up--one-half cntct_left">
+     <img src="https://cdn.shopify.com/s/files/1/0276/5632/3151/files/hero-contact.png">
+    </div>    
+    <div class="grid__item medium-up--one-half contct_ryt">
       {% if page.content.size > 0 %}
         <div class="rte">
           {{ page.content }}
         </div>
       {% endif %}
+            
+      <div class="hwcnhlp">
+          <h1>How can we help?</h1>
+          <p>Get in touch. We’ll be glad to hear from you and help with any inquiry you might have</p>
+         <address>
+            <p><span class="tlicon-email"></span> <b>sales@toplandtrading.com</b></p>
+            <p><span class="tlicon-phone"></span> <b>(360) 671-2116</b></p>
+            <p><span class="tlicon-location"></span> 
+                <b>1640 Jill’s Ct.<br>
+                  Irongate Business Park<br>
+                  Bellingham, WA 98226<br>
+                  f: (360) 676-7817
+                </b>
+              </p>
+         </address>
+      </div>
 
       <div class="contact-form form-vertical">
         {%- assign formId = 'ContactForm' -%}
         {% form 'contact', id: formId %}
           {% include 'form-status', form_id: formId %}
 
-          <div class="grid grid--half-gutters">
-            <div class="grid__item medium-up--one-half">
+          <div class="cntctFrmMain">
+            <div class="grid__item medium-up--one-whole cntctFrm">
               <label for="{{ formId }}-name">{{ 'contact.form.name' | t }}</label>
-              <input type="text" id="{{ formId }}-name" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+              <input placeholder="Enter your name" type="text" id="{{ formId }}-name" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
             </div>
-            <div class="grid__item medium-up--one-half">
+            <div class="grid__item medium-up--one-whole cntctFrm">
               <label for="{{ formId }}-email">{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
-              <input
+              <input placeholder="Enter your email address"
                 type="email"
                 id="{{ formId }}-email"
                 name="contact[email]"
@@ -45,18 +67,38 @@
                 </span>
               {%- endif -%}
             </div>
-          </div>
-
-          <label for="{{ formId }}-phone">{{ 'contact.form.phone' | t }}</label>
-          <input type="tel" id="{{ formId }}-phone" name="contact[phone]" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
-
+       
+         <div class="grid__item medium-up--one-whole cntctFrm">
+          <label for="{{ formId }}-subject">Subject</label>
+          <input placeholder="Enter mesage subject" type="text" id="{{ formId }}-subject" name="contact[subject]"  value="{% if form[subject] %}{{ form[subject] }}{% elsif customer %}{{ customer.subject }}{% endif %}">
+        </div>
+        
+        <div class="grid__item medium-up--one-whole cntctFrm">
           <label for="{{ formId }}-message">{{ 'contact.form.message' | t }}</label>
-          <textarea rows="10" id="{{ formId }}-message" name="contact[body]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
-
+          <textarea placeholder="Message" rows="10" id="{{ formId }}-message" name="contact[body]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        </div>
+        
+        <div class="sbmtbtnC">
           <input type="submit" class="btn" value="{{ 'contact.form.submit' | t }}">
+        </div>  
 
         {% endform %}
       </div>
-    </div>
-  </div>
+     </div>
+      
+       <div class="addrzmobile">
+         <address>
+            <p><span class="tlicon-email"></span> <b>sales@toplandtrading.com</b></p>
+            <p><span class="tlicon-phone"></span> <b>(360) 671-2116</b></p>
+            <p><span class="tlicon-location"></span> 
+                <b>1640 Jill’s Ct.<br>
+                  Irongate Business Park<br>
+                  Bellingham, WA 98226<br>
+                  f: (360) 676-7817
+                </b>
+              </p>
+         </address>
+      </div> 
+      
+    </div>    
 </div>

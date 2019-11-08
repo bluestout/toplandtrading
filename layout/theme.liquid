@@ -42,6 +42,7 @@
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'Custom.css' | asset_url | stylesheet_tag }}
   {{ 'font-style.css' | asset_url | stylesheet_tag }}
+   {{ 'jquery-ui.css' | asset_url | stylesheet_tag }}
   {{ 'font-demo.css' | asset_url | stylesheet_tag }}
   <script>
     var theme = {
@@ -97,12 +98,12 @@
   <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
   <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'jquery-ui.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'Custom.js' | asset_url }}" defer="defer"></script>
-   <script src="{{ 'font-demo.js' | asset_url }}" defer="defer"></script>
   {{ content_for_header }}
 </head>
 
-<body class="template-{{ request.page_type | handle }}">
+<body class="template-{{ request.page_type | handle }} {% if template contains '.faq' %} CustomFAQ {% elsif template contains ".contact" %} CustomContact {% elsif template contains ".security" %} CustomSecure{% endif%}">
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 

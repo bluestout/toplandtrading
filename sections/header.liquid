@@ -72,7 +72,7 @@
         {%- assign logo_classes = 'medium-up--one-quarter logo-align--left' -%}
       {% endif %}
 
-      <div class="grid__item {{ logo_classes }}">
+      <div class="grid__item Cst_logo {{ logo_classes }}">
         {% comment %}
           Use the uploaded logo from theme settings if enabled.
           Site name gets precedence with H1 tag on homepage, div on other pages.
@@ -118,12 +118,23 @@
         </nav>
       {% endif %}
 
-      <div class="grid__item {% if section.settings.align_logo == 'left' %}medium-up--one-quarter{% else %}medium-up--two-fifths{% endif %} text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
+      <div class="grid__item cst_hdrIcons {% if section.settings.align_logo == 'left' %}medium-up--one-quarter{% else %}medium-up--two-fifths{% endif %} text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
         <div class="site-header__icons-wrapper">
+          {% unless linklists[section.settings.main_linklist] == blank %}
+            <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
+              <span class="tlicon-mobile-menu"></span> <b>Menu</b>
+              {% include 'icon-close' %}
+            </button>
+          {% endunless %}
+          {% if section.settings.logo %}
+<a class="mobileLogo" href="{{ routes.root_url }}"><img src="{{ section.settings.logo | img_url: '300x300' }}" /></a>
+{% else %}
+<a class="site-header__logo-link" href="{{ routes.root_url }}">{{ shop.name }}</a>
+{% endif %}
           <div class="site-header__search site-header__icon">
             {% include 'search-form' %}
           </div>
-
+<div class="searchndCart">
           <button type="button" class="btn--link site-header__icon site-header__search-toggle js-drawer-open-top">
             <span class="tlicon-search"></span> {% comment %} {% include 'icon-search' %} {% endcomment %}
             <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
@@ -137,7 +148,7 @@
               <span class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
             </div>
           </a>
-          
+          </div>
           {% if shop.customer_accounts_enabled %}
             {% if customer %}
               <a href="/account/logout" class="site-header__icon site-header__account">
@@ -171,127 +182,56 @@
             {% endform %}
           {% endif %}
 
-          {% unless linklists[section.settings.main_linklist] == blank %}
-            <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
-              {% include 'icon-hamburger' %}
-              {% include 'icon-close' %}
-            </button>
-          {% endunless %}
+          
         </div>
 
       </div>
     </div>
 
-    <nav class="mobile-nav-wrapper medium-up--hide" role="navigation">
-      <ul id="MobileNav" class="mobile-nav">
-        {% for link in linklists[section.settings.main_linklist].links %}
-          {%- assign outerLoopIndex = forloop.index -%}
-
-          <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
-            {% if link.links != blank %}
-              {% capture child_list_handle %}{{ link.handle }}-{{ outerLoopIndex }}{% endcapture %}
-              <button type="button" class="btn--link js-toggle-submenu mobile-nav__link{% if link.child_active %} mobile-nav__link--active{% endif %}" data-target="{{ child_list_handle }}" data-level="1" aria-expanded="false">
-                <span class="mobile-nav__label">{{ link.title | escape }}</span>
-                <div class="mobile-nav__icon">
-                  {% include 'icon-chevron-right' %}
-                </div>
-              </button>
-              <ul class="mobile-nav__dropdown" data-parent="{{ child_list_handle }}" data-level="2">
-                <li class="visually-hidden" tabindex="-1" data-menu-title="2">
-                  {{- link.title }} {{ 'layout.navigation.menu' | t -}}
-                </li>
-                <li class="mobile-nav__item border-bottom">
-                  <div class="mobile-nav__table">
-                    <div class="mobile-nav__table-cell mobile-nav__return">
-                      <button class="btn--link js-toggle-submenu mobile-nav__return-btn" type="button" aria-expanded="true" aria-label="{{ link.title }}">
-                        {% include 'icon-chevron-left' %}
-                      </button>
-                    </div>
-                    <span class="mobile-nav__sublist-link mobile-nav__sublist-header mobile-nav__sublist-header--main-nav-parent">
-                      <span class="mobile-nav__label">{{ link.title | escape }}</span>
-                    </span>
-                  </div>
-                </li>
-
-                {% for childlink in link.links %}
-                  <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
-                    {% if childlink.links != blank %}
-                      {% capture grandchild_list_handle %}{{ childlink.handle }}-{{ outerLoopIndex }}-{{ forloop.index }}{% endcapture %}
-                      <button type="button" class="btn--link js-toggle-submenu mobile-nav__link mobile-nav__sublist-link" data-target="{{ grandchild_list_handle }}" aria-expanded="false">
-                        <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
-                        <div class="mobile-nav__icon">
-                          {% include 'icon-chevron-right' %}
-                        </div>
-                      </button>
-                      <ul class="mobile-nav__dropdown" data-parent="{{ grandchild_list_handle }}" data-level="3">
-                        <li class="visually-hidden" tabindex="-1" data-menu-title="3">
-                          {{- childlink.title }} {{ 'layout.navigation.menu' | t -}}
-                        </li>
-                        <li class="mobile-nav__item border-bottom">
-                          <div class="mobile-nav__table">
-                            <div class="mobile-nav__table-cell mobile-nav__return">
-                              <button type="button" class="btn--link js-toggle-submenu mobile-nav__return-btn" data-target="{{ child_list_handle }}" aria-expanded="true" aria-label="{{ childlink.title }}">
-                                {% include 'icon-chevron-left' %}
-                              </button>
-                            </div>
-                            <a href="{{ childlink.url }}"
-                              class="mobile-nav__sublist-link mobile-nav__sublist-header"
-                              {% if childlink.current %} aria-current="page"{% endif %}
-                            >
-                              <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
-                            </a>
-                          </div>
-                        </li>
-                        {% for grandchildlink in childlink.links %}
-                          <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
-                            <a href="{{ grandchildlink.url }}"
-                              class="mobile-nav__sublist-link"
-                              {% if grandchildlink.current %} aria-current="page"{% endif %}
-                            >
-                              <span class="mobile-nav__label">{{ grandchildlink.title | escape }}</span>
-                            </a>
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    {% else %}
-                      <a href="{{ childlink.url }}"
-                        class="mobile-nav__sublist-link"
-                        {% if childlink.current %} aria-current="page"{% endif %}
-                      >
-                        <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
-                      </a>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% else %}
-              <a href="{{ link.url }}"
-                class="mobile-nav__link{% if link.active %} mobile-nav__link--active{% endif %}"
-                {% if link.current %} aria-current="page"{% endif %}
-              >
-                <span class="mobile-nav__label">{{ link.title | escape }}</span>
-              </a>
-            {% endif %}
-          </li>
-        {% endfor %}
-        {% if shop.enabled_currencies.size > 1 %}
-          <li class="mobile-nav__item border-top">
-            {% form 'currency', class: "currency-selector" %}
-              <label for="CurrencySelectorMobile" class="currency-selector__label">{{ 'general.currency.dropdown_label' | t }}</label>
-              <div class="currency-selector__input-wrapper select-group">
-                <select name="currency" id="CurrencySelectorMobile" class="currency-selector__dropdown" aria-describedby="a11y-refresh-page-message a11y-selection-message" data-currency-selector>
-                  {% for currency in shop.enabled_currencies %}
-                    <option value="{{currency.iso_code}}"{% if currency == cart.currency %} selected="true"{% endif %}>{{currency.iso_code}}</option>
-                  {% endfor %}
-                </select>
-                {% include 'icon-chevron-down' %}
-              </div>
-            {% endform %}
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
-  </header>
+    <div class="mobile_nav-fixed"> 
+		<div class="close"> <span class="tlicon-x"></span> </div>
+		<ul class="menu" id="mobile_menu">
+          <li class="CartMenuSTatic"> 
+		    <span class="tlicon-cart"></span> 
+			 <a href="/cart" class="CartMobileMenuCount">Cart <b>{{cart.item_count}}</b></a> 
+		    <span class="tlicon-caret-right"></span> 
+		 </li>
+          {% for link in linklists[section.settings.main_linklist].links %}
+		  
+		 
+          {% if link.links != blank %}
+		  <li class="mobile-mega-menu-parent{% if link.active %} activeMenu{% endif %}"> 
+            <b>{{link.title}}</b><span class="tlicon-caret-bottom"></span>
+			<ul class="mobile-mega-menu">
+              {% for childlink in link.links %}
+			   <li class="{% if childlink.active %} activeSubMenu{% endif %}">  <a href="{{childlink.url}}" class="">{{childlink.title}}</a>  </li>
+              {% endfor %}
+            </ul>  
+		 </li>
+          {%else%}
+           <li class="NotSubchild {% if link.active %} activeMenu{% endif %}"> 
+		    <a href="{{link.url}}" class="">{{link.title}}</a> 
+		 </li>
+          {% endif%}
+          {% endfor %}
+		</ul>		
+        <div class="menuLogin"> 
+          {% if customer %}
+          <ul class="CustomerExist">
+            <li><a href="/account/">Account</a></li>
+            <li><a href="#">Order History</a></li>
+            <li><a href="#">My Addresses</a></li>
+            <li><a href="#">Profile Settings</a></li>
+          </ul>
+          <a href="/account/logout" class="cst_AfterLogin">Logout</a>
+          {% else %}
+		  <a href="/account/login" class="cst_login">Login</a>
+          <a href="/account/register" class="cst_creatAc">Create Account</a>
+          {% endif %}
+		  
+         </div>
+  </div>
+</header>
 
 </div>
 

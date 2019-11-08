@@ -23,5 +23,281 @@ $(document).ready(function(){
    $("#shopify-section-header").removeClass("FixedHeader");
    }
 })
+  /***************** Quantity Box ON COLLECTION AND HOMEPAGE PAGE **************************/
+    $('.BothIcons .qtyplus').click(function(){
+ var valuepluss = $(this).attr("max");
+     
+     var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
+     
+  if(val_qty >= 0 &&  val_qty < valuepluss)
+  {
+        val_qty = val_qty + 1 ;
+  }
+
+    $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
+
+    });
+
+     $('.BothIcons .qtyminus').click(function(){
+ var valueplus = $(this).attr("min");
+     
+     var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
+  if(val_qty > 1)
+  {
+        val_qty = val_qty - 1 ;
+  }
+
+    $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
+
+    });
  
+ /***************** Quantity Box ON PRODUCT PAGE **************************/
+    $('.product-form .qtyplus').click(function(){
+   
+ var valuepluss = $(this).attr("max");
+     
+     var val_qty = parseInt($(this).prev(".product-form__input").val());
+      
+  if(val_qty >= 0 &&  val_qty < valuepluss)
+  {
+        val_qty = val_qty + 1 ;
+  }
+
+    $(this).prev(".product-form__input").val(val_qty);
+
+    });
+
+     $('.product-form .qtyminus').click(function(){
+ var valueplus = $(this).attr("min");
+     
+     var val_qty = parseInt($(this).next(".product-form__input").val());
+  if(val_qty > 1)
+  {
+        val_qty = val_qty - 1 ;
+  }
+
+    $(this).next(".product-form__input").val(val_qty);
+
+    });
+  
+  /********************** CART PAGE QUANIITY CHANGE **********************/
+  $('body').on('click', '.qtypluscart', function() {
+      console.log("Title");
+ var valuepluss = $(this).attr("max");
+     
+     var val_qty = parseInt($(this).prev(".cart__qty-input").val());
+      console.log(val_qty);
+  if(val_qty >= 0 &&  val_qty < valuepluss)
+  {
+        val_qty = val_qty + 1 ;
+  }
+
+    $(this).prev(".cart__qty-input").val(val_qty);
+     var getline = $(this).parents(".cart__qty").attr("data-line");
+     console.log(getline);
+    $.ajax({
+      type: 'POST',
+      url: '/cart/change.js',
+      data:  'quantity=' + val_qty + '&line=' + getline,
+      dataType: 'json',
+
+      success: function(data) 
+      {
+        if(data.item_count > 0){
+          $('#CartCount> span').html(data.item_count) ;        
+
+        } else {
+          $('#CartCount> span').html(data.item_count) ;         
+        }
+
+        $.ajax({
+          type: "GET",
+          url: "/cart",
+          dataType: 'html',
+
+          success: function(data) 
+          {
+            console.log("syncCart");
+            // console.log(data);
+            var minicartdata=$(data).find('.CustomCartTemp').html();
+            console.log(minicartdata);
+            $('.CustomCartTemp').html(minicartdata);
+          }
+        })
+      }
+    })
+    });
+$('body').on('click', '.qtyminuscart', function() {
+       console.log("CArtClick");
+ var valueplus = $(this).attr("min");
+     
+     var val_qty = parseInt($(this).next(".cart__qty-input").val());
+  if(val_qty > 1)
+  {
+        val_qty = val_qty - 1 ;
+  }
+
+    $(this).next(".cart__qty-input").val(val_qty);
+ var getline = $(this).parents(".cart__qty").attr("data-line");
+     console.log(getline);
+    $.ajax({
+      type: 'POST',
+      url: '/cart/change.js',
+      data:  'quantity=' + val_qty + '&line=' + getline,
+      dataType: 'json',
+
+      success: function(data) 
+      {
+        if(data.item_count > 0){
+          $('#CartCount> span').html(data.item_count) ;        
+
+        } else {
+          $('#CartCount> span').html(data.item_count) ;         
+        }
+
+        $.ajax({
+          type: "GET",
+          url: "/cart",
+          dataType: 'html',
+
+          success: function(data) 
+          {
+            console.log("syncCart");
+            // console.log(data);
+            var minicartdata=$(data).find('.CustomCartTemp').html();
+            console.log(minicartdata);
+            $('.CustomCartTemp').html(minicartdata);
+          }
+        })
+      }
+    })
+    });
+  /*********************** Accordion On Product Page *******************/
+  $( "#accordionCustom" ).accordion({
+      collapsible: true,heightStyle: "content"
+  });
+ $( ".CustomFootMob" ).accordion({
+      collapsible: true,heightStyle: "content"
+ });
+  /************************** Slider For Homepage Product*******************/
+  if ($(window).width() < 748) {
+
+    $('.CustomProductListing ul').slick({
+  slidesToShow: 2,
+     dots: true,
+  slidesToScroll: 2
+});
+  }
+  else{
+   $('.CustomProductListing ul').slick({
+  slidesToShow: 4,
+     dots: true,
+  slidesToScroll: 4
+});
+  }
+ /*************** RELATED PRODUCT SLIDER *****************/
+  setTimeout(function(){
+  if ($(window).width() < 748) {
+   $(".RecommendationPro").slick({
+  slidesToShow: 1,
+     dots: true,
+  slidesToScroll: 1
+});
+    }
+    else{
+  $(".RecommendationPro").slick({
+  slidesToShow: 4,
+     dots: true,
+  slidesToScroll: 4
+});
+    }
+   $(".RecommendationPro .CustomLoop").slick({dots: true});
+  
+     }, 2000);
+  /*********************** HOMEPAGE MOBILE SHOW HIDE **********************/
+  $(".tsmnlShwall a").click(function(){
+    
+  $(".RightBgSect").css("display","block");
+    $(this).hide();
+  
+  })
+  /*******************************FAQ ************************************/
+  $( "#accordionFaq" ).accordion({
+      collapsible: true, heightStyle: "content"
+    });
+  /*********************************** CART NOTE  ****************************/
+  $(".CustomCheckNote").click(function(){
+ if ($('input.CustomCheckNote').is(':checked')) {
+   $(".cart-note").show();
+    $(".cart-note textarea").text("");
+       $(".cart-note textarea").val("");
+       $(".cart-note textarea").html("");
+   $(this).parents(".EnableNot").addClass("activeNote");
+   $()
+ }
+    else{
+  
+       $(".cart-note").hide();
+      $(".cart-note textarea").text("");
+       $(".cart-note textarea").val("");
+       $(".cart-note textarea").html("");
+       $(this).parents(".EnableNot").removeClass("activeNote");
+    }
+  })
+  
+  /****************************PRODUCT IMAGE SLIDER FOR MOBILE *********************/
+  $(".mobileImageSlider").slick();
+  /******************SLIDER GRID PRODUCTS **************************************/
+  $(".CustomLoop").slick({dots: true});
+  /***************************** ADD TO CART ON GRID PRODUCT *********************/
+  $(".AjaxCartBtn").click(function(){
+  var GetQuant = $(this).prev(".CustomQunt").children(".QuantityBox").val();
+  var IdVar = $(this).prev(".CustomQunt").children(".QuantityBox").attr("data-id");
+$.ajax({
+type: 'POST',
+    url: '/cart/add.js',
+    data: 'quantity=' + GetQuant + '&id=' + IdVar,
+    dataType: 'json',
+    success: function(line_item) { 
+      location.href="/cart";
+    },
+    error: function(XMLHttpRequest, textStatus) {
+      Shopify.onError(XMLHttpRequest, textStatus);
+    }
+  });
+
+  })
+  /*********************************MENU MOBILE ******************************/
+  $(".js-mobile-nav-toggle").click(function(){
+  $("body").addClass("ActiveMenu");
+  })
+  $(".tlicon-x").click(function(){
+  $("body").removeClass("ActiveMenu");
+  })
+  $(".tlicon-caret-bottom").click(function(){
+  $(this).parents(".mobile-mega-menu-parent").toggleClass("subchildactive");
+  })
+  $(".activeSubMenu").parents(".mobile-mega-menu").parents(".mobile-mega-menu-parent").addClass("ActiveMenu");
+  $(".mobile-mega-menu-parent").click(function(){
+  
+  $(this).children(".mobile-mega-menu").toggleClass("parentActive");
+  })
+  /********************** ITEM SHOW ON COLLECTION PAGE ***********************/
+  
+var GetCurrentUrl = window.location.href;
+  var origin   = window.location.origin;
+
+  $(".CustomFilter").change(function(){
+  var GetSelected = $(this).val();
+ window.location.href = GetSelected;
+  })
+  var Getselectedvalue = $(".CustomFilter").val();
+ 
+   
+  $(".CustomFilter option").each(function(){
+  var geteachval = $(this).val();
+    if (GetCurrentUrl.indexOf(geteachval) >= 0){
+    $('.CustomFilter').val(geteachval); 
+    }
+  })
 })
