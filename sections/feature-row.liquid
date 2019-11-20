@@ -42,14 +42,18 @@
 {% endcomment %}
   
   
-  <div class="feature-row">
+  <div class="feature-row cst_featrow">
      <div class="feature-row__item">
         <div class="feat_imgWrap1">
           <img src="{{ section.settings.image | img_url: 'original' }}">
         </div>  
         <div class="feat_imgWrap23">
-          <img class="ft_img2" src="{{ section.settings.image_2 | img_url: 'original' }}">
-          <img class="ft_img3" src="{{ section.settings.image_3 | img_url: 'original' }}">
+          <div class="cst_ftmain">
+            <img class="ft_img2" src="{{ section.settings.image_2 | img_url: 'original' }}">
+          </div>
+          <div class="cst_ftmain">
+            <img class="ft_img3" src="{{ section.settings.image_3 | img_url: 'original' }}">
+          </div>
         </div>
      </div>  
     {% if section.settings.layout == 'left' %}

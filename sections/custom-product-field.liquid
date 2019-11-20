@@ -15,21 +15,28 @@
 
     <ul class="CustomListFields">
       <li>
-      <img src="{{section.settings.image | img_url : "original" }}" />
+      <div class="clfimg">
+        <img src="{{section.settings.image | img_url : "original" }}" />
+        </div>  
         <h3 Class="">{{section.settings.title}}</h3>
         <p>{{section.settings.description}}</p>
       </li>
+      
       <li>
-      <img src="{{section.settings.image_1 | img_url : "original"}}" />
+      <div class="clfimg">
+        <img src="{{section.settings.image_1 | img_url : "original"}}" />
+      </div>  
         <h3 Class="">{{section.settings.title_1}}</h3>
         <p>{{section.settings.description_1}}</p>
       </li>
-      <li>
-      <img src="{{section.settings.image_2 | img_url : "original"}}" />
+      
+      <li>        
+        <div class="clfimg">
+         <img src="{{section.settings.image_2 | img_url : "original"}}" />
+        </div>  
         <h3 Class="">{{section.settings.title_2}}</h3>
         <p>{{section.settings.description_2}}</p>
-      </li>
-      
+      </li>      
     </ul>
   </div>
 </div>

@@ -180,14 +180,23 @@ $('body').on('click', '.qtyminuscart', function() {
       collapsible: true,heightStyle: "content"
  });
   /************************** Slider For Homepage Product*******************/
-  if ($(window).width() < 748) {
+  if ($(window).width() < 749) {
 
     $('.CustomProductListing ul').slick({
-  slidesToShow: 2,
-     dots: true,
-  slidesToScroll: 2
-});
+      slidesToShow: 1,
+         dots: true,
+      slidesToScroll: 1
+    });
   }
+  
+    else if ($(window).width() < 1023) {
+   $(".CustomProductListing ul").slick({
+  slidesToShow: 3,
+     dots: true,
+  slidesToScroll: 3
+});
+    }
+  
   else{
    $('.CustomProductListing ul').slick({
   slidesToShow: 4,
@@ -197,11 +206,25 @@ $('body').on('click', '.qtyminuscart', function() {
   }
  /*************** RELATED PRODUCT SLIDER *****************/
   setTimeout(function(){
-  if ($(window).width() < 748) {
+  if ($(window).width() < 475) {
    $(".RecommendationPro").slick({
   slidesToShow: 1,
      dots: true,
   slidesToScroll: 1
+});
+    }
+     else if ($(window).width() < 749) {
+   $(".RecommendationPro").slick({
+  slidesToShow: 2,
+     dots: true,
+  slidesToScroll: 2
+});
+    }
+    else if ($(window).width() < 1023) {
+   $(".RecommendationPro").slick({
+  slidesToShow: 3,
+     dots: true,
+  slidesToScroll: 3
 });
     }
     else{
@@ -299,5 +322,64 @@ var GetCurrentUrl = window.location.href;
     if (GetCurrentUrl.indexOf(geteachval) >= 0){
     $('.CustomFilter').val(geteachval); 
     }
+  })
+  
+  /**************************BG FIXED IMAGE SLIDER *********************************/
+  if ($(window).width() > 749) {
+    $('.CustomisedSlides').slick({
+      slidesToShow: 1,
+         dots: true,
+      slidesToScroll: 1
+    });
+  }
+  
+  /************************** MOBILE AJAX GRID PRODUCT**************************************/
+  $(".AjaxCartBtnGrid").click(function(){
+  var quntityGet = $(this).prev(".grid_quantBox").children(".gridQuant").val();
+  var IdGet = $(this).prev(".grid_quantBox").children(".gridQuant").attr("data-idGrid");
+    $.ajax({
+type: 'POST',
+    url: '/cart/add.js',
+    data: 'quantity=' + quntityGet + '&id=' + IdGet,
+    dataType: 'json',
+    success: function(line_item) { 
+      location.href="/cart";
+    },
+    error: function(XMLHttpRequest, textStatus) {
+      Shopify.onError(XMLHttpRequest, textStatus);
+    }
+  });
+  })
+  /************************** MOBILE AJAX GRID Qunatity Manage PRODUCT**************************************/
+ $('.qtyplusgrid').click(function(){
+   
+ var valuepluss = $(this).attr("max");
+     
+     var val_qty = parseInt($(this).prev(".gridQuant").val());
+      
+  if(val_qty >= 0 &&  val_qty < valuepluss)
+  {
+        val_qty = val_qty + 1 ;
+  }
+
+    $(this).prev(".gridQuant").val(val_qty);
+
+    });
+
+     $('.qtyminusgrid').click(function(){
+ var valueplus = $(this).attr("min");
+     
+     var val_qty = parseInt($(this).next(".gridQuant").val());
+  if(val_qty > 1)
+  {
+        val_qty = val_qty - 1 ;
+  }
+
+    $(this).next(".gridQuant").val(val_qty);
+
+    });
+  /*************************** MOBILE MENU CLICK ***********************************/
+  $(".mobileOverlay").click(function(){
+  $("body.ActiveMenu").removeClass("ActiveMenu");
   })
 })

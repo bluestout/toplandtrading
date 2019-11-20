@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'tlicon';
   src:
-    url('tlicon.ttf?y7g9ft') format('truetype'),
-    url('tlicon.woff?y7g9ft') format('woff'),
-    url('tlicon.svg?y7g9ft#tlicon') format('svg');
+    url('tlicon1.ttf') format('truetype'),
+    url('tlicon1.woff') format('woff'),
+    url('tlicon1.svg') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;

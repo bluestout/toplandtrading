@@ -465,6 +465,7 @@ theme.Images = (function() {
    */
   function loadImage(path) {
     new Image().src = path;
+    
   }
 
   /**
@@ -479,8 +480,10 @@ theme.Images = (function() {
 
     if (callback) {
       callback(imageUrl, image, element); // eslint-disable-line callback-return
+      
     } else {
       element.src = imageUrl;
+      
     }
   }
 
@@ -761,6 +764,7 @@ slate.Variants = (function() {
         type: 'variantImageChange',
         variant: variant
       });
+      
     },
 
     /**
@@ -4490,12 +4494,23 @@ theme.Product = (function() {
     },
 
     _setActiveThumbnail: function(imageId) {
+    
       // If there is no element passed, find it by the current product image
       if (typeof imageId === 'undefined') {
         imageId = $(
           this.selectors.productImageWraps + ':not(.hide)',
           this.$container
         ).data('image-id');
+      
+        $(".ZoomEffectCustom a").each(function(){
+      var ImageIdCustom = $(this).attr("data-id");
+        if(ImageIdCustom == imageId ){
+        $(this).css("display","block");
+        }
+        else{
+        $(this).css("display","none");
+        }
+      })
       }
 
       var $thumbnailWrappers = $(
@@ -4527,6 +4542,16 @@ theme.Product = (function() {
     },
 
     _switchImage: function(imageId) {
+      
+      $(".ZoomEffectCustom a").each(function(){
+      var ImageIdCustom = $(this).attr("data-id");
+        if(ImageIdCustom == imageId ){
+        $(this).css("display","block");
+        }
+        else{
+        $(this).css("display","none");
+        }
+      })
       var $newImage = $(
         this.selectors.productImageWraps + "[data-image-id='" + imageId + "']",
         this.$container

@@ -153,10 +153,12 @@
       {% when 5 %}
         {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
       {% endcase %}
-    <div class="Coll_Left medium-up--one-fifth">
+    
+    <div class="Coll_Left">
       {% include "collection-sidebar" %}
     </div>
-<div class="Coll_Right">
+    
+	<div class="Coll_Right">
       <ul class="grid grid--uniform{% if collection.products_count > 0 %} grid--view-items{% endif %}">
         {% for product in collection.products %}
           <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
@@ -249,6 +251,8 @@
       {% include 'pagination' %}
     {% endif %}
     </div>
+    
+    
   </div>
 </div>
 

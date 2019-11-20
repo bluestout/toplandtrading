@@ -38,11 +38,20 @@
     <img class="grid-view-item__image" src="{{ product.featured_image.src | img_url: image_size, scale: 2 }}" alt="{{ product.featured_image.alt }}" style="max-width: {{ max_height | times: product.featured_image.aspect_ratio }}px;">
   </noscript>
 
-  <div class="h4 grid-view-item__title product-card__title" aria-hidden="true"><a href="{{product.url}}">{{ product.title }}</a></div>
-
+ <div class="title_price">
+  <div class="h4 grid-view-item__title product-card__title" aria-hidden="true">
+    <a href="{{product.url}}">{{ product.title }}</a></div>
   {% include 'product-price', variant: product.selected_or_first_available_variant %}
- 
-  <div class="AjaxAddCArt">
+     </div> 
+ <div class="MobileFormat">
+   <div class="grid_quantBox">
+                <input type='button' value='<' class='qtyminusgrid' field='quantity' min="1" />
+                <input data-idGrid="{{product.variants.first.id}}" type="text" name="quantity" value="1"  class="gridQuant" data-quantity-input>
+                <input type='button' value='>' class='qtyplusgrid' field='quantity' max="{{product.variants.first.inventory_quantity}}" />     
+           </div>
+   <div class="AjaxCartBtnGrid">Add to cart</div>
+  </div>
+  <div class="AjaxAddCArt DesktopFormat">
     <div class="CustomQunt">           
     <input data-id="{{product.variants.first.id}}" type="text"  name="quantity" value="1"  class="QuantityBox" data-quantity-input>
     <div class="BothIcons">

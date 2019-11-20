@@ -11,10 +11,17 @@
            <h2>Order summary</h2>
            <p>{% if cart.item_count > 1 %}{{cart.item_count}} Items {%else%} {{cart.item_count}} Item {%endif%}total</p>
          </div>
+       
          <div class="calship">
              <p> Shipping cost will be determined after order is packed and weighed for shipment</p>
-             <p class="hwclclt"> <a href="#"> <span class="tlicon-help"></span> How is it calculated?</a></p>
+             <p class="hwclclt"> <a href="#"> <span class="tlicon-help"></span> <b>How is it calculated?</b></a></p>
          </div>
+       
+        <div class="itemscartContent">
+             <p class="ttlitems"> 13 Items</p>
+             <p class="itc_clps"> <a href="#">Collapse cart content</a> <span class="tlicon-caret-bottom"></span></p>
+         </div>
+       
           <div class="gotocheckout{% if section.settings.cart_notes_enable %} {% endif %}">
 
             {%- assign cartDiscounts = 'template ' | split: ' ' -%}
