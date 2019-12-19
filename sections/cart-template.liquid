@@ -18,7 +18,7 @@
          </div>
        
         <div class="itemscartContent">
-             <p class="ttlitems"> 13 Items</p>
+             <p class="ttlitems"> {{cart.item_count}}{% if cart.item_count > 1 %} Items{%else%} Item{%endif%}</p>
              <p class="itc_clps"> <a href="#">Collapse cart content</a> <span class="tlicon-caret-bottom"></span></p>
          </div>
        

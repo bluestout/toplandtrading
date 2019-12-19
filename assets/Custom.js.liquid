@@ -104,10 +104,12 @@ $(document).ready(function(){
       success: function(data) 
       {
         if(data.item_count > 0){
-          $('#CartCount> span').html(data.item_count) ;        
+          $('.ttlitems').html(data.item_count) ;    
+           $('#CartCount> span').html(data.item_count) ;  
 
         } else {
-          $('#CartCount> span').html(data.item_count) ;         
+          $('.ttlitems').html(data.item_count) ;    
+           $('#CartCount> span').html(data.item_count) ;  
         }
 
         $.ajax({
@@ -149,10 +151,12 @@ $('body').on('click', '.qtyminuscart', function() {
       success: function(data) 
       {
         if(data.item_count > 0){
-          $('#CartCount> span').html(data.item_count) ;        
+          $('.ttlitems').html(data.item_count) ;  
+          $('#CartCount> span').html(data.item_count) ;
 
         } else {
-          $('#CartCount> span').html(data.item_count) ;         
+          $('.ttlitems').html(data.item_count) ;   
+          $('#CartCount> span').html(data.item_count) ;
         }
 
         $.ajax({
@@ -382,4 +386,21 @@ type: 'POST',
   $(".mobileOverlay").click(function(){
   $("body.ActiveMenu").removeClass("ActiveMenu");
   })
+  /*************************** MOBILE CONTENT TOGGLE ***************************/
+  $(".itc_clps a").click(function(){
+    $(this).toggleClass("ContentShow");
+    if($(this).hasClass("ContentShow")){
+    $(this).html("Show cart Content");
+    }
+    else{
+    $(this).html("Collapse cart content");
+    }
+  $(".CartLeft").toggle();
+    })
+  /**************** SCROLL UPTO RELATED PRODUCR ON PDP *************************/
+  $(".LinkRelated").on('click',function() {
+    $('html, body').animate({
+        'scrollTop' : $(".product-recommendations__inner").position().top
+    });
+});
 })
