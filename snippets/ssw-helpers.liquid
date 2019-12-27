@@ -1,0 +1,12 @@
+{% capture ssw_login_helper %}{% render 'ssw-login-helper' %}{% endcapture %}
+{% unless ssw_login_helper contains 'Liquid error' %}
+	{{ ssw_login_helper }}
+{% endunless %}
+{% capture ssw_fave_helper %}{% render 'ssw-fave-helper' %}{% endcapture %}
+{% unless ssw_fave_helper contains 'Liquid error' %}
+	{{ ssw_fave_helper }}
+{% endunless %}
+{% capture ssw_reward_helper %}{% render 'ssw-reward-helper' %}{% endcapture %}
+{% unless ssw_reward_helper contains 'Liquid error' %}
+	{{ ssw_reward_helper }}
+{% endunless %}

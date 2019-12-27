@@ -1,0 +1,90 @@
+        window.addEventListener('sswoauthcallback', function (e) {
+            if (e.detail && e.detail.service == 'gplus') {
+ssw.ajax({
+      type: 'POST',
+      url: sswProxyUrl + '/lite2/auth/gcallback',
+      data: {'_sid': ssw.cookie('hesid'), 'hash_key': ssw.cookie('hash_key'), 'verify_token': ssw.cookie('ssw_verify_token')},
+      success: function (response) {
+        sswSocialLogin = 1;
+        if(typeof response.service_id !== 'undefined'){
+           service_id = response.service_id;
+        }
+        if (ssw.isEmptyObject(response)) {
+          onOpenForm();
+        }else if(response.termsSignup || response.acceptMarketing){
+          showAcceptTermsForm(response);
+        } else if (response.state != 'enabled') {
+          if (response.password && response.email) {
+            var shopifyLogin = new ShopifyLogin();
+            shopifyLogin.preLogin(response.email, response.password);
+            if (response.account_activation_token) {
+              shopifyLogin.login({
+                customer_id: response.customer_id,
+                token: response.account_activation_token,
+                verified: response.verified,
+        				service: 'gplus',
+                customer: {
+                  'password': response.password,
+                  'password_confirmation': response.password
+                }
+              });
+            } else {
+              shopifyLogin.login({
+                verified: response.verified,
+                service: 'gplus'
+              });
+            }
+          } else {
+            targetSEMModal(response, 'gplus');
+          }
+        } else {
+          if (!response.password && response.email) {
+            targetSEMModal(response, 'gplus');
+          } else {
+            if (response.password) {
+              var shopifyLogin = new ShopifyLogin();
+              shopifyLogin.preLogin(response.email, response.password);
+              shopifyLogin.login({
+                verified: response.verified,
+                service: 'gplus'
+              });
+            } else {
+              addMessage('#login_modal .login-failed', "sswLangs.t('already_registered_to_social_service2', [response.email])", 'warning');
+              ssw('#login_modal').sswModal();
+            }
+          }
+        }
+      },
+      dataType: 'json'
+    });
+                }
+        });
+        var gplusData = {};
+        var gplusClicked = false;
+                        ssw(document).on('click', '.ssw-gconnect', function(){
+          onSubmitForm();
+if( gplusClicked )
+    return;
+  gplusClicked = true;
+
+var path = HE_DOMAIN + '/lite2/auth/gconnect?_sid=' + ssw.cookie("hesid") + '&shop=' + encodeURIComponent(Shopify.shop);
+path += sswIsWebView() && ('&oauth_redirect_uri=' + encodeURIComponent(location.href));
+if (sswIsWebView()) {
+  location.href = path;
+} else {
+ssw.oauthpopup({
+  path: HE_DOMAIN + '/lite2/auth/gconnect?_sid=' + ssw.cookie("hesid") + '&shop=' + Shopify.shop,
+  windowOptions: window.screen.width > 470 ? 'width=400,height=550' : null,
+  callback: function () {
+    gplusClicked = false;
+    sswDispatchEvent('sswoauthcallback', {
+      detail: {
+        service: 'gplus',
+      },
+      bubbles: true,
+      cancellable: false
+    });
+  }
+});
+}
+});

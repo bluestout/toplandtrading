@@ -53,7 +53,7 @@ $(document).ready(function(){
  
  /***************** Quantity Box ON PRODUCT PAGE **************************/
     $('.product-form .qtyplus').click(function(){
-   
+    $(".Qunatity_alert").hide();
  var valuepluss = $(this).attr("max");
      
      var val_qty = parseInt($(this).prev(".product-form__input").val());
@@ -71,10 +71,14 @@ $(document).ready(function(){
  var valueplus = $(this).attr("min");
      
      var val_qty = parseInt($(this).next(".product-form__input").val());
-  if(val_qty > 1)
+  if(val_qty > valueplus)
   {
         val_qty = val_qty - 1 ;
+     $(".Qunatity_alert").hide();
   }
+       else{
+       $(".Qunatity_alert").show();
+       }
 
     $(this).next(".product-form__input").val(val_qty);
 

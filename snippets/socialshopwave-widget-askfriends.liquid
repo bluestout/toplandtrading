@@ -1,0 +1,20 @@
+{% if template contains 'product' and product %}
+  <div id="widget-askfriends-html">
+  </div>
+  <script type="text/javascript">
+    sswRun(function(){
+      var data = {
+        'module': 'service',
+        'name': 'AskFriends',
+        'url': location.href,
+        '_sid': sswCookie('hesid'),
+        'hash_key': sswCookie('hash_key'),
+        'page': 'product'
+      };
+
+      ssw.get(sswProxyUrl + '/lite2/core/widget/index', data, function(response){
+        ssw('#widget-askfriends-html').html(response);
+      });
+    })
+  </script>
+{% endif %}

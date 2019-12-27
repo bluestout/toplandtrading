@@ -1,0 +1,54 @@
+{% assign ssw_review_enabled = 1 %}
+{% if shop.metafields.ssw['review_enabled'] %}
+  {% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] %}
+{% endif %}
+{% if ssw_review_enabled == 1 %}
+  {% assign ssw_count_rate = '0' %}
+  {% assign ssw_avg_rate = '0' %}
+  {% assign ssw_rate_data_key = product.id | append: '_rate_data' %}
+  {% assign ssw_unite_reviews = 0 %}
+  {% if shop.metafields.ssw['unite_reviews'] %}
+    {% assign ssw_unite_reviews = shop.metafields.ssw['unite_reviews'] %}
+  {% endif %}
+  {% if ssw_unite_reviews == 1 %}
+    {% if shop.metafields.ssw['unite_product_ids'] %}
+      {% assign ssw_unite_product_ids = shop.metafields.ssw['unite_product_ids'] | split: ',' %}
+      {% assign unite_product_id = product.id | downcase %}
+      {% if ssw_unite_product_ids contains unite_product_id %}
+        {% assign ssw_unite_rate_data_key = product.id | append: '_unite_rate_data' %}
+        {% if product.metafields.ssw[ssw_unite_rate_data_key] %}
+          {% assign ssw_rate_data_key = ssw_unite_rate_data_key %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+  {% if product.metafields.ssw[ssw_rate_data_key] %}
+    {% assign ssw_rate_data = product.metafields.ssw[ssw_rate_data_key] | split: '_' %}
+    {% assign ssw_count_rate = ssw_rate_data[0] %}
+    {% assign ssw_avg_rate = ssw_rate_data[1] %}
+  {% endif %}
+  <div class="ssw-widget-avg-rate-listing ssw-stars ssw-stars-large {% if ssw_count_rate == '0' %}ssw-hide{% endif %}" >
+    {% assign ssw_j = ssw_avg_rate | floor %}
+    {% for i in (1..ssw_j) %}
+      <i class="ssw-icon-star"></i>
+    {% endfor %}
+    {% assign ssw_rate_last_star = 5 | minus:ssw_avg_rate %}
+    {% assign ssw_y = ssw_rate_last_star | floor %}
+    {% assign ssw_x = ssw_avg_rate | minus:ssw_j %}
+    {% if ssw_x > 0.74 %}
+      <i class="ssw-icon-star"></i>
+    {% else %}
+      {% if ssw_x > 0.24 %}
+        <i class="ssw-icon-star-half-alt"></i>
+      {% else %}
+        {% if ssw_x > 0 %}
+          {% assign ssw_y = ssw_y | plus:1 %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    {% for i in (1..ssw_y) %}
+      <i class="ssw-icon-star-empty"></i>
+    {% endfor %}
+    <span class="ssw-review-count"> ({{ssw_count_rate}}) </span>
+  </div>
+{% endif %}

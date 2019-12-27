@@ -35,10 +35,6 @@
   {%- endif -%}
 
   {% include 'social-meta-tags' %}
-
-
-
-
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'Custom.css' | asset_url | stylesheet_tag }}
   {{ 'font-style.css' | asset_url | stylesheet_tag }}
@@ -103,9 +99,17 @@
   <script src="{{ 'jquery.fancybox.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'Custom.js' | asset_url }}" defer="defer"></script>
   {{ content_for_header }}
+
+
+
+
 </head>
 
 <body class="template-{{ request.page_type | handle }} {% if template contains '.faq' %} CustomFAQ {% elsif template contains ".contact" %} CustomContact {% elsif template contains ".security" %} CustomSecure{% endif%}">
+{% capture the_snippet_content %}{% render 'socialshopwave-helper' %}{% endcapture %}
+            {% unless the_snippet_content contains 'Liquid error' %}
+              {{ the_snippet_content }}
+            {% endunless %}
 
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
@@ -135,7 +139,7 @@
 
   {% section 'header' %}
 
-  <div class="page-container" id="PageContainer">
+  <div class="page-container {%if template contains "collection" %} CustomApptemp {%endif%}" id="PageContainer">
 
     <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
       {{ content_for_layout }}
@@ -156,5 +160,20 @@
     <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
     <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>
   </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

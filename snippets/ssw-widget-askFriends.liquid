@@ -1,0 +1,9 @@
+{% comment %} cod for include:  '{% render  'ssw-widget-askFriends' with product.url %}' {% endcomment %}
+{% assign product_url = ssw-widget-askFriends %}
+
+<div class="ssw-fb-custom-btn">
+  <a data-type="listing" data-href="{{ shop.url }}{{ product_url }}" data-title="{{ 'socialshopwave.ask_your_friends' | t }}" class="ssw-ask-friends-btn" href="javascript:void(0)">
+    <i></i>
+    {{ 'socialshopwave.ask_your_friends' | t }}
+  </a>
+</div>

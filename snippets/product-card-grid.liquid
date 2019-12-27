@@ -1,4 +1,7 @@
 <div class="grid-view-item{% unless product.available %} grid-view-item--sold-out{% endunless %} product-card">
+  {% comment %} BoostCommerce product item JSON data {% endcomment %}
+  {% include 'bc-sf-filter-json', product: product %}
+
   
     <span class="visually-hidden">{{ product.title }}</span>
  
@@ -12,7 +15,12 @@
   {% endunless %}
 
   <div class="CustomDivImagewrap">
-    
+
+    {% capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with product.id %}{% endcapture %}
+    {% unless the_snippet_fave_icon contains 'Liquid error' %}
+    {{ the_snippet_fave_icon }}
+    {% endunless %}
+
       <div {% if product.images.size > 1 %}class="CustomSliderGrid"{%endif %}>
        {% if product.images.size > 1 %}
         <div class="CustomLoop">
@@ -41,6 +49,7 @@
  <div class="title_price">
   <div class="h4 grid-view-item__title product-card__title" aria-hidden="true">
     <a href="{{product.url}}">{{ product.title }}</a></div>
+   <div class="CollMeta">{{ product.metafields["global"]["pro_description"] }}</div>
   {% include 'product-price', variant: product.selected_or_first_available_variant %}
      </div> 
  <div class="MobileFormat">

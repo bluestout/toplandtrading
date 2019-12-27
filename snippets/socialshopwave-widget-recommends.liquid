@@ -1,0 +1,85 @@
+{% if template contains 'product' and product and shop.customer_accounts_enabled %}
+  {% assign ssw_review_enabled = 1 %}
+  {% if shop.metafields.ssw['review_enabled'] %}
+    {% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] %}
+  {% endif %}
+  {% if ssw_review_enabled %}
+    {% assign ssw_new_widget = 0 %}
+    {% if socialshopwave-widget-recommends %}
+      {% assign ssw_new_widget = socialshopwave-widget-recommends %}
+    {% endif %}
+    <div id="ssw-widget-recommends-html" {% if ssw_new_widget != 0 %}class="ssw-new-widget"{% endif %}></div>
+    <script type="text/javascript" defer>
+      if (typeof sswWidgetRecommendsInterval == 'undefined') {
+        var sswWidgetRecommendsInterval = setInterval(function () {
+          if (typeof userChecked != 'undefined' && userChecked) {
+            clearInterval(sswWidgetRecommendsInterval);
+            var data = {
+              'product_id': {{ product.id }},
+              '_sid': sswCookie('hesid'),
+              'new_widget': {{ ssw_new_widget }}
+            };
+            ssw.get(sswProxyUrl + '/lite2/review/index', data, function (response) {
+              var tmpDiv = ssw(document.createElement('div')).html(response);
+              var tmpScripts = ssw(document.createElement('div'));
+              tmpDiv.find('script').appendTo(tmpScripts);
+              ssw('#ssw-widget-recommends-html').html(tmpDiv.html());
+              ssw('body').append(tmpScripts.html());
+              if (ssw('#site-body').length) {
+                ssw('#recommend_modal').appendTo('#site-body');
+              } else {
+                ssw('#recommend_modal').appendTo('body');
+              }
+            });
+          }
+        }, 300);
+      }
+    </script>
+    {% unless ssw_review_rich_snippet_code %}
+    {% assign ssw_review_enabled = 1 %}
+    {% if shop.metafields.ssw['review_enabled'] %}
+      {% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] %}
+    {% endif %}
+    {% assign ssw_unite_reviews = 0 %}
+    {% if shop.metafields.ssw['unite_reviews'] %}
+      {% assign ssw_unite_reviews = shop.metafields.ssw['unite_reviews'] %}
+    {% endif %}
+    {% assign ssw_count_rate = '0' %}
+    {% assign ssw_avg_rate = '0' %}
+    {% assign ssw_rate_data_key = product.id | append: '_rate_data' %}
+    {% if ssw_unite_reviews == 1 %}
+      {% if shop.metafields.ssw['unite_product_ids'] %}
+        {% assign ssw_unite_product_ids = shop.metafields.ssw['unite_product_ids'] | split: ',' %}
+        {% assign unite_product_id = product.id | downcase %}
+        {% if ssw_unite_product_ids contains unite_product_id %}
+          {% assign ssw_unite_rate_data_key = product.id | append: '_unite_rate_data' %}
+          {% if product.metafields.ssw[ssw_unite_rate_data_key] %}
+            {% assign ssw_rate_data_key = ssw_unite_rate_data_key %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    {% if product.metafields.ssw[ssw_rate_data_key] %}
+      {% assign ssw_rate_data = product.metafields.ssw[ssw_rate_data_key] | split: '_' %}
+      {% assign ssw_count_rate = ssw_rate_data[0] %}
+      {% assign ssw_avg_rate = ssw_rate_data[1] %}
+    {% endif %}
+    {% if ssw_review_enabled and ssw_count_rate != '0' %}
+      <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "Product",
+        "name": {{ product.title | json }},
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "{{ ssw_avg_rate }}",
+          "bestRating": "5",
+          "worstRating": "1",
+          "ratingCount": "{{ ssw_count_rate }}"
+        }
+      }
+      </script>
+    {% endif %}
+    {% endunless %}
+  {% endif %}
+{% endif %}

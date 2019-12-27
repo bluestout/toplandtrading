@@ -1,0 +1,34 @@
+{% if template contains 'product' and product %}
+  <div id="widget-fave-html">
+  </div>
+  <script type="text/javascript" defer>
+    if(typeof sswWidgetFaveInterval == 'undefined'){
+      var sswWidgetFaveInterval = setInterval(function(){
+        if(typeof userChecked != 'undefined' && userChecked){
+          clearInterval(sswWidgetFaveInterval);
+          var data = {
+            'module': 'feed',
+            'name': 'fave',
+            'product_id': {{ product.id }},
+            'variant_id': {{ product.selected_or_first_available_variant.id }},
+            'first_variant_id': {{ product.variants.first.id }},
+            '_sid': sswCookie('hesid'),
+            'hash_key': sswCookie('hash_key'),
+            'page' : 'product'
+          };
+
+          if (sswCookie('mail_id')) {
+            data.resource_id = sswCookie('mail_id');
+            data.resource_type = 'mail';
+          }
+
+          ssw.get(sswProxyUrl + '/lite2/core/widget/index', data, function(response){
+            ssw('#widget-fave-html').html(response);
+            if(response)
+              window._sswFaveNotSync = true;
+          });
+        }
+      }, 300);
+    }
+  </script>
+{% endif %}

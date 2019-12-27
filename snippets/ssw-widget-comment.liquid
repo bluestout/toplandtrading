@@ -1,0 +1,37 @@
+{% if shop.customer_accounts_enabled %}
+  {% assign obj_id = false %}
+  {% assign parent_id = false %}
+  {% if template contains 'product' and product and product.id %}
+    {% assign obj_id = product.id %}
+    {% assign type = 'product' %}
+    {% elsif template contains 'article' and article and article.id %}
+    {% assign obj_id = article.id %}
+    {% assign type = 'article' %}
+    {% assign parent_id = blog.id %}
+    {% elsif template contains 'page' and page %}
+    {% assign obj_id = page.id %}
+    {% assign type = 'page' %}
+  {% endif %}
+  {% if obj_id %}
+    <div id="widget-comment-html2"></div>
+    <script type="text/javascript">
+      if (typeof sswWidgetCommentsInterval2 == 'undefined') {
+        var sswWidgetCommentsInterval2 = setInterval(function () {
+          if (typeof userChecked != 'undefined' && userChecked) {
+            clearInterval(sswWidgetCommentsInterval2);
+            var data = {
+              'parent_id': '{{ parent_id }}',
+              'object_type': '{{ type }}',
+              'object_id': {{ obj_id }},
+              '_sid': sswCookie('hesid')
+            };
+            ssw.get(sswProxyUrl + '/lite2/comment', data, function (response) {
+              ssw('#widget-comment-html2').html(response);
+            });
+          }
+        }, 300);
+      }
+    </script>
+  {% endif %}
+
+{% endif %}

@@ -1,6 +1,6 @@
 development:
   password: 07b8fc2ea4f6ee5646332bdbe522ccfb
-  theme_id: "78323220559"
+  theme_id: "80103505999"
   store: top-land-trading-development.myshopify.com
   ignore_files:
     - config/settings_data.json

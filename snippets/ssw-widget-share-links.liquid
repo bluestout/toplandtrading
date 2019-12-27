@@ -1,0 +1,39 @@
+{% assign campaign_id = ssw-widget-share-links %}
+{% if campaign_id %}
+  <div class="ssw-widget-share-links-html-{{ campaign_id }}"
+       id="ssw-widget-share-links-html-{{ campaign_id }}-{{ product.id }}" data-title="{{ product.title|strip_html }}"
+       data-handle="{{ product.handle }}"
+       data-images="{{ product.featured_image | product_img_url: lightbox_image_size }}"
+       data-campaign-id="{{ campaign_id }}"></div>
+{% else %}
+  <div class="ssw-widget-share-links-html-{{ campaign_id }}" id="ssw-widget-share-links-html-{{ product.id }}"
+       data-title="{{ product.title|strip_html }}" data-handle="{{ product.handle }}"
+       data-images="{{ product.featured_image | product_img_url: lightbox_image_size }}"></div>
+{% endif %}
+<script type="text/javascript" defer>
+  (function () {
+    var _sswAddEventListener = window.addEventListener;
+    if(typeof sswAddEventListener === 'function'){
+      _sswAddEventListener = sswAddEventListener;
+    }
+    _sswAddEventListener('sswsharingjsloaded', function () {
+      var callback;
+      var campaign_id = {% if campaign_id %}{{ campaign_id }}{% else %}0{% endif %};
+      callback = function (ssw) {
+        if (campaign_id && ssw.usercheckResponse.sharing && ssw.usercheckResponse.sharing.campaign_ids && ssw.usercheckResponse.sharing.campaign_ids.indexOf(campaign_id) !== -1) {
+          var ogimg = ssw("meta[property='og:image:secure_url']").attr("content");
+          if (!ogimg || ogimg.length <= 0) {
+            ogimg = ssw('img')[0].src;
+          }
+          sswLoadCampaignShareLinks(campaign_id, ssw.usercheckResponse.sharing.campaigns[ssw.usercheckResponse.sharing.campaign_ids.indexOf(campaign_id)].campaign_type, {
+            product_id: '{{ product.id }}',
+            handle: '{{  product.handle }}',
+            location: location.pathname,
+            ogimg: ogimg
+          });
+        }
+      };
+      sswUserChecked(callback);
+    });
+  })();
+</script>
