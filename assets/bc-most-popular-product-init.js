@@ -1,1 +1,0 @@
-var bcMpParams = { settings: { isCollectionPage: true, showOnCollectionPage: true } }; var bcPopularProduct = new BCPopularProduct(); bcPopularProduct.init(bcSfFilterParams,bcMpParams);

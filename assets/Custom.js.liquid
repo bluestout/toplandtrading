@@ -53,7 +53,8 @@ $(document).ready(function(){
  
  /***************** Quantity Box ON PRODUCT PAGE **************************/
     $('.product-form .qtyplus').click(function(){
-    $(".Qunatity_alert").hide();
+   
+   $(".Qunatity_alert").hide();
  var valuepluss = $(this).attr("max");
      
      var val_qty = parseInt($(this).prev(".product-form__input").val());
@@ -74,9 +75,9 @@ $(document).ready(function(){
   if(val_qty > valueplus)
   {
         val_qty = val_qty - 1 ;
-     $(".Qunatity_alert").hide();
+           $(".Qunatity_alert").hide();
   }
-       else{
+ else{
        $(".Qunatity_alert").show();
        }
 
