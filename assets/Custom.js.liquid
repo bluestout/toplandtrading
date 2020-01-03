@@ -24,6 +24,7 @@ $(document).ready(function(){
    }
 })
   /***************** Quantity Box ON COLLECTION AND HOMEPAGE PAGE **************************/
+  /*****because of filtering app please goe bc-sf-filter.js for collection page***************/
     $('.BothIcons .qtyplus').click(function(){
  var valuepluss = $(this).attr("max");
      
@@ -52,9 +53,9 @@ $(document).ready(function(){
     });
  
  /***************** Quantity Box ON PRODUCT PAGE **************************/
+ 
     $('.product-form .qtyplus').click(function(){
-   
-   $(".Qunatity_alert").hide();
+    $(".Qunatity_alert").hide();
  var valuepluss = $(this).attr("max");
      
      var val_qty = parseInt($(this).prev(".product-form__input").val());
@@ -75,9 +76,9 @@ $(document).ready(function(){
   if(val_qty > valueplus)
   {
         val_qty = val_qty - 1 ;
-           $(".Qunatity_alert").hide();
+     $(".Qunatity_alert").hide();
   }
- else{
+       else{
        $(".Qunatity_alert").show();
        }
 
@@ -282,6 +283,7 @@ $('body').on('click', '.qtyminuscart', function() {
   /******************SLIDER GRID PRODUCTS **************************************/
   $(".CustomLoop").slick({dots: true});
   /***************************** ADD TO CART ON GRID PRODUCT *********************/
+  /***********because of filtering app, go bc-sf-filter.js*************/
   $(".AjaxCartBtn").click(function(){
   var GetQuant = $(this).prev(".CustomQunt").children(".QuantityBox").val();
   var IdVar = $(this).prev(".CustomQunt").children(".QuantityBox").attr("data-id");
@@ -343,6 +345,7 @@ var GetCurrentUrl = window.location.href;
   }
   
   /************************** MOBILE AJAX GRID PRODUCT**************************************/
+  /***********because of filtering app, go bc-sf-filter.js*************/
   $(".AjaxCartBtnGrid").click(function(){
   var quntityGet = $(this).prev(".grid_quantBox").children(".gridQuant").val();
   var IdGet = $(this).prev(".grid_quantBox").children(".gridQuant").attr("data-idGrid");
@@ -360,6 +363,7 @@ type: 'POST',
   });
   })
   /************************** MOBILE AJAX GRID Qunatity Manage PRODUCT**************************************/
+  /*************because of filtering app , go bc-sf-filter.js********************/
  $('.qtyplusgrid').click(function(){
    
  var valuepluss = $(this).attr("max");

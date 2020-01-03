@@ -1,0 +1,14 @@
+{% if shop.customer_accounts_enabled %}
+  {% assign ssw_fave_enabled = 1 %}
+  {% if shop.metafields.ssw['fave_enabled'] %}
+    {% assign ssw_fave_enabled = shop.metafields.ssw['fave_enabled'] %}
+  {% endif %}
+  {% if ssw_fave_enabled == 1 %}
+    {% assign productId = ssw-widget-favebtn %}
+    <div class="ssw-faveappbtn ssw-faveappbtn-counter ssw-faveappbtn2 ssw-fave-btn ssw-wishlist-element sswfavebtn{{ productId }} ssw-not-synch"
+         data-count="..." data-pending="0" data-product-id="{{ productId }}"
+         data-params='{"product_id":"{{ productId }}","event":"fave","page":"product_profile"}'>
+      <i class="ssw-icon-heart-o"></i>{{ 'socialshopwave.fave' | t }}
+    </div>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,13 @@
+{% unless customer %}
+<div class='ssw-social-login-widget'>
+  <div class="ssw-socialconnect">
+    {% render  'ssw-social-buttons' %}
+    <div class="ssw-simple-login ssw-social-btn">
+      <a title="{{ 'socialshopwave.log_in' | t }}" href="javascript://" data-toggle="ssw-modal" data-target="#login_modal" onclick="trackShopStats('login_popup_view', 'all')">
+        <i class="ssw-icon-at"></i>
+        <span>{{ 'socialshopwave.social_login_simple' | t }}</span>
+      </a>
+    </div>
+  </div>
+</div>
+{% endunless %}

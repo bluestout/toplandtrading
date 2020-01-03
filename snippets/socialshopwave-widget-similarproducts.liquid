@@ -1,0 +1,23 @@
+{% if template contains 'product' and product %}
+<div id="widget-similar-products-html"></div>
+<script type="text/javascript">
+  if(typeof sswWidgetSimilarProductsInterval == 'undefined'){
+    var sswWidgetSimilarProductsInterval = setInterval(function(){
+      if(typeof sswJqLoaded != 'undefined' && sswJqLoaded){
+        clearInterval(sswWidgetSimilarProductsInterval);
+        var data = {
+          'module': 'product',
+          'name': 'SimilarProducts',
+          'product_id': {{ product.id }},
+          'hash_key': sswCookie('hash_key'),
+          '_sid': sswCookie('hesid')
+        };
+
+        ssw.get(sswProxyUrl + '/lite2/core/widget/index', data, function(response){
+          ssw('#widget-similar-products-html').html(response);
+        });
+      }
+    }, 300);
+  }
+</script>
+{% endif %}

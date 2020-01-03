@@ -1,0 +1,38 @@
+<div class="ssw-listings-widget" id="ssw-widget-listing-html{{ ssw-widget-listing }}">
+  <div class="ssw-preloader"><span class="ssw-spin ssw-loader"></span></div>
+</div>
+<script type="text/javascript" defer>
+  function loadSswWidgetListing($, id){
+    clearInterval(loadSswWidgetListingInterval[id]);
+    var data = {
+      'widget_id': id,
+      'hash_key': sswCookie('hash_key'),
+      '_sid': sswCookie('hesid')
+    };
+    {% if template contains 'product' and product %}
+    data.product_id = {{ product.id }};
+    {% endif %}
+
+    $.get(sswProxyUrl + '/lite2/get-listing', data, function(response){
+      $('#ssw-widget-listing-html' + data.widget_id).css('opacity', 0);
+      $('#ssw-widget-listing-html' + data.widget_id).html(response);
+      $('#ssw-widget-listing-html' + data.widget_id).animate({
+        'opacity' : 1
+      }, 400);
+    });
+  }
+  function loadListing(id) {
+    loadSswWidgetListingInterval[id] = setInterval(function(){
+      if(typeof userChecked != 'undefined' && userChecked && typeof sswJqLoaded != 'undefined' && sswJqLoaded){
+        clearInterval(loadSswWidgetListingInterval[id]);
+        loadSswWidgetListing(ssw, id);
+      }
+    },50);
+  }
+  var loadSswWidgetListingInterval_int = setInterval(function() {
+    if(typeof loadSswWidgetListingInterval != 'undefined') {
+      loadListing({{ ssw-widget-listing }});
+      clearInterval(loadSswWidgetListingInterval_int);
+    }
+  }, 100);
+</script>

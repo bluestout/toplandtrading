@@ -2072,9 +2072,8 @@ label.cart__qty-label {
 .CustomProductListing .AjaxAddCArt.DesktopFormat {
   display: flex;
 }
-/*************************************************/
+
 /******************11-12-19 stj *******************/
-/*************************************************/
 .grid.myaccount {
   margin: 100px 0;
 }
@@ -2084,7 +2083,6 @@ label.cart__qty-label {
 .CustomCartTemp table tr td.cart__removed-product {
     display: none;
 }
-
 /******************25-12-19 stj *******************/
 .dimensions_desc p {
     font-size: 13px;
@@ -2093,7 +2091,98 @@ label.cart__qty-label {
    min-width: 26px!important;
    min-height: 26px!important;
 }
-
+.CustomApptemp header.collection-header {
+    background: #fff;
+}
+.CustomApptemp .collection-hero__image {
+    background-position: left;
+    background-size: contain;
+}
+.CustomApptemp .collection-hero__title-wrapper::before {
+    display: none;
+}
+.CustomApptemp .collection-hero__title {
+    font-size: 38px;
+    color: #000;
+}
+.CustomApptemp #bc-sf-filter-wrapper {
+    padding: 0 0 120px;
+}
+.CustomApptemp #bc-sf-filter-products .grid-view-item {
+    position: relative;
+    background: #fff;
+}
+.CustomApptemp .bc-sf-filter-option-block .bc-sf-filter-block-title h3 {
+    font-family: Lato,sans-serif;
+    text-transform: capitalize;
+    font-weight: normal;
+    width: 100%;     cursor: pointer;
+    position: relative;
+}
+.CustomApptemp .bc-sf-filter-option-block .bc-sf-filter-block-title h3>span:before {
+    position: absolute;
+    right: 0;
+    top: 8px;
+    transform: rotate(-135deg);
+    border: solid #7b7b7b;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 2px;
+}
+.CustomApptemp .bc-sf-filter-option-block .bc-sf-filter-block-title h3>span.up:before {
+   top: 5px;
+   border-color: #7b7b7b;
+   transform: rotate(45deg);
+}
+.CustomApptemp .bc-sf-filter-option-block .bc-sf-filter-block-content .bc-sf-filter-option-range-amount {
+    margin-bottom: 8px;
+}
+.CustomApptemp .bc-sf-filter-selection-wrapper .bc-sf-filter-selected-items .selected-item {
+    text-transform: capitalize;
+}
+.CustomApptemp .bc-sf-filter-block-content .noUi-connect {
+    box-shadow: inset 0 0 3px rgb(254, 82, 82);
+   background: #fe5252;
+}
+.CustomApptemp .grid-view-item__title {
+    font-family: lato;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    padding: 0 20px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.CustomApptemp .grid-view-item .price {
+    padding: 12px 20px;
+}
+.CustomApptemp .price__regular .price-item {
+    color: #000;
+    font-weight: 600;
+}
+.CustomApptemp #bc-sf-filter-products .price__sale {
+    display: none;
+    color: #fe5252;
+}
+.CustomApptemp #bc-sf-filter-right {
+    padding: 0 0 0 20px;
+}
+.CustomApptemp .grid__item {
+    padding-left: 15px;
+}
+.CustomApptemp .bc-sf-filter-block-content .bc-sf-filter-option-range-amount input {
+    text-align: center;
+    font-size: 13px;
+}
+.CustomApptemp .qview-button-wrapper.qview-button-wrapper--has-overlay {
+    background: none;
+}
+.CustomApptemp #bc-sf-filter-tree-mobile button {
+    background: #fe5252;
+    border-radius: 4px;
+}
 p.Qunatity_alert {
     color: #c70505;    
     float: left;
@@ -2109,6 +2198,12 @@ p.Qunatity_alert img {
     font-size: 13px;
     padding: 10px 20px 20px;
 }
+.cart__product-information .CollMeta p {/*FS add*/
+    font-size: 13px;
+    padding: 10px 0px 10px;
+}
+
+
 
 /*************************************************/
 /******************@Animation *******************/
@@ -2199,6 +2294,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media (max-width:1199px) {
+ .CustomApptemp .qview-button.qview-button--rounded-none.qview-button--mobile-always_show.qview-button--mobile-top_right {
+    display: none !important;
+ }
   .mm_rimgs a h3 {
     font-size: 14px;
   }
@@ -2533,8 +2631,6 @@ input[type=number]::-webkit-outer-spin-button {
   .tsmnlShwall a {
     display: block;
   }  
-
-
 }
 
 @media (max-width:767px) {
@@ -2542,6 +2638,22 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media (max-width:749px) {
+  ul.pro_fixed .ssw-faveiticon {
+    position: unset;
+    font-size: 20px;
+    margin: 0;
+    display: inline-block;
+    float: left;
+  }
+  .CustomApptemp #bc-sf-filter-wrapper {
+    padding: 0 0 80px;
+  }
+  .CustomApptemp #Collection {
+    padding: 0 10px;
+	}
+  .CustomApptemp .grid__item {
+    padding: 0 6px;
+	}
   .product-recommendations__inner .section-header h2 {
     font-size: 22px;
   }

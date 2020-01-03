@@ -149,11 +149,11 @@
       <div class="product-single__meta">
         <div class="CollectionName">Collection: <span>{{collection.title}}</span></div>
          <h1 class="product-single__title">{{ product.title }}</h1>
-          <div class="dimensions_desc">{{ product.metafields["global"]["pro_description"] }}</div>
+        <div class="dimensions_desc">{{ product.metafields["global"]["pro_description"] }}</div>
           <div class="product__price">
             {% include 'product-price', variant: current_variant %}
           </div>
-
+        
           {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
             <div class="product__policies rte">
               {%- if shop.taxes_included -%}
@@ -232,13 +232,24 @@
                 {{ form | payment_button }}
               {% endif %}
             </div>
-            <p class="Qunatity_alert" style="display:none;"><img src="https://cdn.shopify.com/s/files/1/0276/5632/3151/files/info_icon_2eaa469f-5f9a-407a-a27d-b0d6121ed550.png">Minimum order is {{ product.metafields["global"]["pro_quantity"] }} pcs. Please adjust the amount accordingly.</p>
+        <p class="Qunatity_alert" style="display:none;"><img src="https://cdn.shopify.com/s/files/1/0276/5632/3151/files/info_icon_2eaa469f-5f9a-407a-a27d-b0d6121ed550.png">Minimum order is {{ product.metafields["global"]["pro_quantity"] }} pcs. Please adjust the amount accordingly.</p>
           {% endform %}
+        
         </div>
       
         
       <ul class="pro_fixed">
-        <li> <span class="tlicon-heart"></span> Add to Favorites</li>
+        <li> 
+          {% comment %} 
+          <span class="tlicon-heart"></span>
+          {% endcomment %}
+
+          {% capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with product.id %}{% endcapture %}
+          {% unless the_snippet_fave_icon contains 'Liquid error' %}
+          {{ the_snippet_fave_icon }}
+          {% endunless %} 
+          
+          Add to Favorites</li>
         <li> <span class="tlicon-email"></span> Email to a friend</li>
         <li> <span class="tlicon-phone"></span> Help? get in touch</li>
       </ul>

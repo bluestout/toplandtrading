@@ -6028,7 +6028,7 @@ $toolbar-height-small: 46px;
 
 .filters-toolbar__item-wrapper {
   @include display-flexbox();
-  @include flex(1 1 33%);
+  @include flex(1 1 100%);/*FS change 33%*/
 
   @include media-query($small) {
     @include justify-content(space-between);

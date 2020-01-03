@@ -1,0 +1,31 @@
+{% comment %} Please don’t update this content {% endcomment %}
+
+{% layout none %}
+{% paginate collection.products by 50 %}
+  {
+    "products":
+      [
+        {% for product in collection.products %}
+          {
+            "id":{{ product.id }},
+            
+            "metafields":[
+              
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_pro_description = product.metafields.global["pro_description"] %}
+              {% if v_pro_description != blank %}
+                {
+                  "namespace": "global",
+                  "key": "pro_description",
+                  "value": {{ v_pro_description | json }}
+                },
+              {% endif %}
+        
+            ]
+          },
+        {% endfor %}
+      ]
+  }
+{% endpaginate %}

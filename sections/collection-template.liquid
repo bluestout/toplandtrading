@@ -1,12 +1,18 @@
-{% case section.settings.grid %}
+{% assign products_per_row = section.settings.grid | times: 1 %}
+
+{% case products_per_row %}
   {% when 2 %}
     {%- assign max_height = 530 -%}
+    {%- assign grid_item_width = 'medium-up--one-half' -%}
   {% when 3 %}
     {%- assign max_height = 345 -%}
+    {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
   {% when 4 %}
     {%- assign max_height = 250 -%}
+    {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
   {% when 5 %}
     {%- assign max_height = 195 -%}
+    {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
 {% endcase %}
 
 {% if section.settings.layout == 'grid' %}
@@ -17,12 +23,8 @@
 
 {% paginate collection.products by limit %}
 
-<div data-section-id="{{ section.id }}" data-section-type="collection-template" class="cst_collectionTemp">
+<div data-section-id="{{ section.id }}" data-section-type="collection-template">
   <header class="collection-header">
-    {%- assign is_filter_by_available = false -%}
-    {%- if section.settings.tags_enable and collection.all_tags.size > 0 -%}
-      {%- assign is_filter_by_available = true -%}
-    {%- endif -%}
 
     {% if section.settings.show_collection_image and collection.image %}
       <div class="collection-hero">
@@ -35,232 +37,146 @@
           <div class="collection-hero__image" style="background-image: url({{ collection.image | img_url: '2048x600', crop: 'top' }});"></div>
         </noscript>
         <div class="collection-hero__title-wrapper">
-          <h1 class="collection-hero__title page-width">
-            <span role="text">
-              <span class="visually-hidden">{{ 'collections.general.collection_label' | t }}: </span>
-              {{ collection.title }}
-            </span>
-          </h1>
+          <h1 id="bc-sf-filter-collection-header" class="collection-hero__title page-width">{{ collection.title }}</h1>
         </div>
       </div>
-      {% if is_filter_by_available == false and section.settings.sort_enable == false %}
-        <div class="page-width">
-          <span class="filters-toolbar__product-count">{{ 'collections.general.items_with_count' | t: count: collection.products_count }}</span>
-        </div>
-      {% endif %}
+
       {% if collection.description != blank %}
-        <div class="rte collection-description page-width">
+        <div id="bc-sf-filter-collection-description" class="rte collection-description page-width">
           {{ collection.description }}
         </div>
       {% endif %}
     {% else %}
       <div class="page-width">
         <div class="section-header text-center">
-          <h1>
-            <span role="text">
-              <span class="visually-hidden">{{ 'collections.general.collection_label' | t }}: </span>
-              {{ collection.title }}
-            </span>
-          </h1>
+          <h1 id="bc-sf-filter-collection-header">{{ collection.title }}</h1>
           {% if collection.description != blank %}
-            <div class="rte">
+            <div id="bc-sf-filter-collection-description" class="rte">
               {{ collection.description }}
             </div>
           {% endif %}
-          {% if is_filter_by_available == false and section.settings.sort_enable == false %}
-            <span class="filters-toolbar__product-count">{{ 'collections.general.items_with_count' | t: count: collection.products_count }}</span>
-          {% endif %}
         </div>
       </div>
     {% endif %}
 
-    {% if is_filter_by_available or section.settings.sort_enable %}
-      <div class="CstFilter filters-toolbar-wrapper{% if is_filter_by_available %} filters-toolbar--has-filter{% endif %}">
-        <div class="page-width">          
-          <div class="CSTfilters-toolbar">
-            <div class="CSTfilters-toolbar__item-wrapper">
-              <div class="cstIR filters-toolbar__item-child PaginationManage">
-                <label class="filters-toolbar__label select-label">Items per page</label>
-                 <div class="filters-toolbar__input-wrapper select-group">
-                   <select class="filters-toolbar__input CustomFilter">
-                    <option value="{{collection.url}}?view=12">12</option>
-                    <option value="{{collection.url}}?view=20">20</option>
-                    <option value="{{collection.url}}?view=30">30</option>
-                    <option value="{{collection.url}}?view=40">40</option>
-                    <option value="{{collection.url}}?view=50">50</option>
-                  </select> {% include 'icon-chevron-down' %}
-                </div> 
+    <div class="filters-toolbar-wrapper">
+      <div class="page-width">
+        <div class="filters-toolbar">
+          <div class="filters-toolbar__item-wrapper">
+            <div class="filters-toolbar__item-child" id="bc-sf-filter-top-show-limit"></div>
+            {% if section.settings.sort_enable %}
+              <div class="filters-toolbar__item-child" id="bc-sf-filter-top-sorting">
+                {% include 'bc-sf-filter-skeleton', width: 2 %}
               </div>
-              {% if section.settings.tags_enable %}
-                {% unless collection.all_tags.size == 0 %}
-                  <div class="cstIR filters-toolbar__item-child">
-                    <label class="filters-toolbar__label select-label" for="FilterTags">{{ 'collections.filters.title_tags' | t }}</label>
-                    <div class="filters-toolbar__input-wrapper select-group">
-                      <select class="filters-toolbar__input hidden" name="FilterTags" id="FilterTags" aria-describedby="a11y-refresh-page-message a11y-selection-message">
-                        <option value="{{ collection.url }}">{{ 'collections.filters.all_tags' | t }}</option>
-                        {% for tag in collection.all_tags %}
-                          {%- assign new_url = tag | link_to_tag: tag | split: 'href="' | last | split: '"' | first -%}
-                          <option value="{{ new_url }}"{% if current_tags contains tag %} selected="selected"{% endif %}>{{ tag }}</option>
-                        {% endfor %}
-                      </select>
-                      {% include 'icon-chevron-down' %}
-                    </div>
-                  </div>
-                {% endunless %}
-              {% endif %}
-
-              {% if section.settings.sort_enable %}
-                <div class="cstIR filters-toolbar__item-child">
-                  {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-                  <label class="filters-toolbar__label select-label" for="SortBy">{{ 'collections.sorting.title' | t }}</label>
-                  <div class="filters-toolbar__input-wrapper select-group">
-                    <select name="sort_by" id="SortBy"
-                      class="filters-toolbar__input hidden"
-                      aria-describedby="a11y-refresh-page-message a11y-selection-message"
-                      data-default-sortby="{{ collection.default_sort_by }}"
-                    >
-                      {%- for option in collection.sort_options -%}
-                        <option value="{{ option.value }}" {% if option.value == sort_by %}selected="selected"{% endif %}>{{ option.name }}</option>
-                      {%- endfor -%}
-                    </select>
-                    {% include 'icon-chevron-down' %}
-                  </div>
-                </div>
-              {% endif %}
-            </div>
-
-            {%comment%}
-            <div class="filters-toolbar__item filters-toolbar__item--count">
-              <span class="filters-toolbar__product-count">{{ 'collections.general.items_with_count' | t: count: collection.products_count }}</span>
-            </div>
-            {%endcomment%}
-            
+            {% endif %}
           </div>
+          <div class="filters-toolbar__item filters-toolbar__item--count">
+            <span class="filters-toolbar__product-count" id="bc-sf-filter-total-product">
+              {% include 'bc-sf-filter-skeleton', width: 2 %}
+            </span>
+          </div>
+
         </div>
       </div>
-    {% endif %}
+    </div>
   </header>
 
   <div class="page-width" id="Collection">
-    {% if section.settings.layout == 'grid' %}
-      {% case section.settings.grid %}
-      {% when 2 %}
-        {%- assign grid_item_width = 'medium-up--one-half' -%}
-      {% when 3 %}
-        {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
-      {% when 4 %}
-        {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
-      {% when 5 %}
-        {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
-      {% endcase %}
-    
-    <div class="Coll_Left">
-      {% include "collection-sidebar" %}
+    <div id="bc-sf-filter-tree-mobile">
+      {% include 'bc-sf-filter-skeleton', type: 'button' %}
     </div>
-    
-	<div class="Coll_Right">
-      <ul class="grid grid--uniform{% if collection.products_count > 0 %} grid--view-items{% endif %}">
-        {% for product in collection.products %}
-          <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
-            {% include 'product-card-grid', max_height: max_height %}
-          </li>
-        {% else %}
-          {% comment %}
-          Add default products to help with onboarding for collections/all only.
-
-          The onboarding styles and products are only loaded if the
-          store has no products.
-          {% endcomment %}
-          {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-            <li class="grid__item">
-              <div class="grid grid--uniform">
-                {% for i in (1..limit) %}
-                  <div class="grid__item {{ grid_item_width }}">
-                    <div class="grid-view-item">
-                      <a href="#" class="grid-view-item__link">
-                        <div class="grid-view-item__image">
-                          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-                        </div>
-                        <div class="h4 grid-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
-                        <div class="grid-view-item__meta">
-                          <span class="product-price__price">$19.99</span>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-            </li>
-          {% else %}
-            {%- assign is_empty_collection = true -%}
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% else %}
-      <ul class="list-view-items">
-        {% for product in collection.products %}
-          <li class="list-view-item">
-            {% include 'product-card-list', product: product %}
-          </li>
-        {% else %}
-
-          {% comment %}
-          Add default products to help with onboarding for collections/all only.
-
-          The onboarding styles and products are only loaded if the
-          store has no products.
-          {% endcomment %}
-          {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0%}
-            {% for i in (1..4) %}
-              <li class="list-view-item">
-                <a href="#" class="list-view-item__link">
-                  <div class="list-view-item__image-column">
-                    <div class="list-view-item__image-wrapper">
-                      <div class="list-view-item__image">
-                        {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
-                        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="list-view-item__title-column">
-                    <div class="list-view-item__title">{{ 'homepage.onboarding.product_title' | t }}</div>
-                  </div>
-
-                  <div class="list-view-item__price-column">
-                    <span class="product-price__price">$19.99</span>
-                  </div>
-                </a>
-              </li>
-            {% endfor %}
-          {% else %}
-            {%- assign is_empty_collection = true -%}
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    {% if is_empty_collection %}
-      <div class="grid__item small--text-center">
-        <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
+    <div id="bc-sf-filter-wrapper">
+      <div id="bc-sf-filter-tree">
+        {% include 'bc-sf-filter-tree-placeholder' %}
       </div>
-    {% endif %}
+      <div id="bc-sf-filter-right">
+        {% if section.settings.layout == 'grid' %}
 
-    {% if paginate.pages > 1 %}
-      {% include 'pagination' %}
-    {% endif %}
+          <div id="bc-sf-filter-products" class="grid grid--uniform{% if collection.products_count > 0 %} grid--view-items{% endif %}" data-bc-sort="{{ collection.default_sort_by }}">
+            {% for product in collection.products %}
+              <div class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+                {% include 'product-card-grid', max_height: max_height %}
+              </div>
+            {% endfor %}
+          </div>
+
+        {% else %}
+
+          <div id="bc-sf-filter-products" data-bc-sort="{{ collection.default_sort_by }}">
+            <ul class="list-view-items">
+              {% for product in collection.products %}
+                <li href="{{ product.url | within: collection }}" class="list-view-item">
+                  {% include 'product-card-list', product: product %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+        {% endif %}
+
+        <div id="bc-sf-filter-bottom-pagination">
+          {% if paginate.pages > 1 %}
+            {% include 'pagination' %}
+          {% endif %}
+        </div>
+        <div id="bc-sf-filter-load-more"></div>
+      </div>
     </div>
-    
+
+     {% comment %} start-bc-most-popular-template {% endcomment %}    
+        <div class="bc-sf-most-popular-products-wrapper bc-sf-widget-slider-wrapper">
+          <div class="bc-sf-most-popular-products bc-sf-widget-products owl-carousel"></div>
+        </div>        
+      {% comment %} end-bc-most-popular-template {% endcomment %}
+
+      {% comment %} start-bc-recently-viewed-template {% endcomment %}
+        <div class="bc-sf-recent-products-wrapper bc-sf-widget-slider-wrapper">
+          <div class="bc-sf-recent-products bc-sf-widget-products owl-carousel"></div>
+        </div>
+      {% comment %} end-bc-recently-viewed-template {% endcomment %}
     
   </div>
 </div>
 
 {% endpaginate %}
 
+<script>
+  // Declare bcSfFilterConfig variable
+  var bcSfFilterConfig = {
+    label: {
+      sorting: {% assign temp = 'collections.sorting.title' | t  %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Sorting" {% endunless %},
+      sorting_best_selling: {% assign temp = collection.sort_options[1].name %} {% unless temp == nil %} {{ temp | json }} {% else %} "Best Selling" {% endunless %},
+      sorting_featured: {% assign temp = collection.sort_options[0].name %} {% unless temp == nil %} {{ temp | json }} {% else %} "Featured" {% endunless %},
+      sorting_title_ascending: {% assign temp = collection.sort_options[2].name %} {% unless temp == nil %} {{ temp | json }} {% else %} "Alphabetically, A-Z" {% endunless %},
+      sorting_title_descending: {% assign temp = collection.sort_options[3].name %} {% unless temp == nil %} {{ temp | json }} {% else %} "Alphabetically, Z-A" {% endunless %},
+      sorting_price_ascending: {% assign temp = collection.sort_options[4].name %} {% unless temp == nil %} {{ temp | json }} {% else %} "Lowest Price" {% endunless %},
+      sorting_price_descending: {% assign temp = collection.sort_options[5].name %} {% unless temp == nil %} {{ temp | json }} {% else %} "Highest Price" {% endunless %},
+      sorting_date_ascending: {% assign temp = collection.sort_options[6].name %} {% unless temp == nil  %} {{ temp | json }} {% else %} "Date, Old to New" {% endunless %},
+      sorting_date_descending: {% assign temp = collection.sort_options[7].name %} {% unless temp == nil  %} {{ temp | json }} {% else %} "Date, New to Old" {% endunless %},
+      sorting_relevance: {% assign temp = 'collections.sorting.relevance' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Relevance" {% endunless %},
 
+      sale: {{ 'products.product.on_sale' | t | json }},
+      sale_price: {{ 'products.product.sale_price' | t | json }},
+      sold_out: {{ 'products.product.sold_out' | t | json }},
+      vendor: {{ 'products.product.vendor' | t |json }},
+      regular_price: {{ 'products.product.regular_price' | t | json }},
+      items_with_count_one: {{ 'collections.general.items_with_count.one' | t | json}},
+      items_with_count_other: {{ 'collections.general.items_with_count.other' | t | json }},
+      current_page: {{ 'general.pagination.current_page' | t | json }},
+    },
+    custom: {
+      products_per_page: {% if limit %} {{ limit | json }} {% else %} 24 {% endif %},
+      products_per_row: {% if products_per_row %} {{ products_per_row }} {% else %} 4 {% endif %},
+      product_grid_class: {% if grid_item_width %} 'grid__item {{ grid_item_width }}' {% else %} 'grid__item small--one-half medium-up--one-quarter' {% endif %},
+      max_height: {% if max_height %} {{ max_height | json }} {% else %} 250 {% endif %},
+      vendor_enable: {% if section.settings.show_vendor %} {{ section.settings.show_vendor | json }} {% else %} false {% endif %},
+      layout: {% if section.settings.layout %} {{ section.settings.layout | json }} {% else %} "grid" {% endif %}
+    }
+  };
+</script>
 
 {% schema %}
+
 {
   "name": {
     "da": "Kollektionssider",

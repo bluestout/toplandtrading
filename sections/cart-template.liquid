@@ -117,6 +117,7 @@
                           <a href="{{ item.url }}" class="cart__product-title" data-cart-item-title>
                             {{ item.product.title }}
                           </a>
+                          <div class="CollMeta">{{ item.product.metafields["global"]["pro_description"] }}</div>
                         </div>
 
                         {%- assign variant_options = 'template ' | split: ' ' -%}

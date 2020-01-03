@@ -1,0 +1,149 @@
+{% if template contains 'product' and product %}
+  {% assign ssw_review_enabled = 1 %}
+  {% if shop.metafields.ssw['review_enabled'] %}
+    {% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] %}
+  {% endif %}
+  {% assign ssw_questions_enabled = 0 %}
+  {% if shop.metafields.ssw['questions_enabled'] %}
+    {% assign ssw_questions_enabled = shop.metafields.ssw['questions_enabled'] %}
+  {% endif %}
+  {% assign ssw_unite_reviews = 0 %}
+  {% if shop.metafields.ssw['unite_reviews'] %}
+    {% assign ssw_unite_reviews = shop.metafields.ssw['unite_reviews'] %}
+  {% endif %}
+  <div id="ssw-avg-rate-profile-html" data-product-id="{{ product.id }}">
+    {% if ssw_review_enabled == 1 %}
+      {% assign ssw_count_rate = '0' %}
+      {% assign ssw_avg_rate = '0' %}
+      {% assign ssw_rate_data_key = product.id | append: '_rate_data' %}
+      {% if ssw_unite_reviews == 1 %}
+        {% if shop.metafields.ssw['unite_product_ids'] %}
+          {% assign ssw_unite_product_ids = shop.metafields.ssw['unite_product_ids'] | split: ',' %}
+          {% assign unite_product_id = product.id | downcase %}
+          {% if ssw_unite_product_ids contains unite_product_id %}
+            {% assign ssw_unite_rate_data_key = product.id | append: '_unite_rate_data' %}
+            {% if product.metafields.ssw[ssw_unite_rate_data_key] %}
+              {% assign ssw_rate_data_key = ssw_unite_rate_data_key %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+      {% if product.metafields.ssw[ssw_rate_data_key] %}
+        {% assign ssw_rate_data = product.metafields.ssw[ssw_rate_data_key] | split: '_' %}
+        {% assign ssw_count_rate = ssw_rate_data[0] %}
+        {% assign ssw_avg_rate = ssw_rate_data[1] %}
+      {% endif %}
+
+      <div class="ssw-stars ssw-stars-large">
+        {% if ssw_count_rate == '0' %}
+          {% for i in (1..5) %}
+            <i class="ssw-icon-star-empty"></i>
+          {% endfor %}
+        {% else %}
+          {% assign ssw_j = ssw_avg_rate | floor %}
+          {% for i in (1..ssw_j) %}
+            <i class="ssw-icon-star"></i>
+          {% endfor %}
+          {% assign ssw_rate_last_star = 5 | minus:ssw_avg_rate %}
+          {% assign ssw_y = ssw_rate_last_star | floor %}
+          {% assign ssw_x = ssw_avg_rate | minus:ssw_j %}
+          {% if ssw_x > 0.74 %}
+            <i class="ssw-icon-star"></i>
+          {% else %}
+            {% if ssw_x > 0.24 %}
+              <i class="ssw-icon-star-half-alt"></i>
+            {% else %}
+              {% if ssw_x > 0 %}
+                {% assign ssw_y = ssw_y | plus:1 %}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+          {% for i in (1..ssw_y) %}
+            <i class="ssw-icon-star-empty"></i>
+          {% endfor %}
+        {% endif %}
+        <span class="ssw-review-count">
+              {% if ssw_count_rate == '0' %}
+                {{ 'socialshopwave.write_a_review' | t }}
+              {% else %}
+                {% if ssw_count_rate == '1' %}
+                  {{ 'socialshopwave.quantity_review2' | t: ssw_count_rate: ssw_count_rate }}
+                {% else %}
+                  {{ 'socialshopwave.quantity_reviews2' | t: ssw_count_rate: ssw_count_rate }}
+                {% endif %}
+              {% endif %}
+            </span>
+      </div>
+    {% endif %}
+    {% if ssw_questions_enabled == 1 %}
+      <div class="ssw-question-count">
+        {% if ssw_review_enabled == 1 %}<span class="ssw-rq-divider">|</span>{% endif %}
+        <span>
+          {% assign ssw_question_count_key = product.id | append: '_question_count' %}
+          {% assign ssw_question_count = 0 %}
+          {% if product.metafields.ssw[ssw_question_count_key] %}
+            {% assign ssw_question_count = product.metafields.ssw[ssw_question_count_key] %}
+          {% endif %}
+          {% if ssw_question_count == 0 %}
+            <i class="ssw-icon-chat"></i>{{ 'socialshopwave.ask_question' | t }}
+            {% else %}
+            {% if ssw_question_count == 1 %}
+              <i class="ssw-icon-chat"></i>{{ 'socialshopwave.quantity_question' | t: ssw_question_count: ssw_question_count }}
+                {% else %}
+              <i class="ssw-icon-chat"></i>{{ 'socialshopwave.quantity_questions' | t: ssw_question_count: ssw_question_count }}
+            {% endif %}
+          {% endif %}
+          </span>
+      </div>
+    {% endif %}
+    <div class="ssw-clearfix"></div>
+  </div>
+  <script type="text/javascript" defer>
+    if (typeof sswAvgRateProfileCheckInterval == 'undefined') {
+      var sswAvgRateProfileCheckInterval = setInterval(function () {
+        if (typeof userChecked != 'undefined' && userChecked) {
+          clearInterval(sswAvgRateProfileCheckInterval);
+          ssw('#ssw-avg-rate-profile-html .ssw-stars').click(function () {
+            if (ssw('#ssw-widget-recommends-html').length > 0) {
+              ssw('html, body').scrollTop(ssw("#ssw-widget-recommends-html").offset().top - 40);
+              if (ssw('.ssw-nav > li[data-content="#ssw-reviews-content"]').length) {
+                ssw('.ssw-nav > li[data-content="#ssw-reviews-content"]').click();
+                if (ssw("#add_recommend").length) {
+                  ssw("#add_recommend").click();
+                }
+              }
+            }
+          });
+          ssw('#ssw-avg-rate-profile-html .ssw-question-count').click(function () {
+            if (ssw('#ssw-widget-recommends-html').length > 0) {
+              ssw('html, body').scrollTop(ssw("#ssw-widget-recommends-html").offset().top - 40);
+              if (ssw('.ssw-nav > li[data-content="#ssw-questions-content"]').length) {
+                ssw('.ssw-nav > li[data-content="#ssw-questions-content"]').click();
+                if (ssw("a.ssw-ask-question-link.btn.button").length) {
+                  ssw("a.ssw-ask-question-link.btn.button").click();
+                }
+              }
+            }
+          });
+        }
+      }, 200);
+    }
+  </script>
+  {% assign ssw_review_rich_snippet_code = 1 %}
+  {% if ssw_review_enabled != 0 and ssw_count_rate != '0' %}
+    <script type="application/ld+json" defer>
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ ssw_avg_rate }}",
+        "bestRating": "5",
+        "worstRating": "1",
+        "reviewCount": "{{ ssw_count_rate }}"
+      }
+    }
+    </script>
+  {% endif %}
+{% endif %}
