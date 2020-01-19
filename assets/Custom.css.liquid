@@ -865,6 +865,7 @@ ul.CustomLogoList li p {
 .listinghding {
   font-size: 38px;
 }
+
 .CustomCollectionLIstingNew .collection-grid-item:hover .CollBlockHover {
   position: absolute;
   display: block;
@@ -876,6 +877,20 @@ ul.CustomLogoList li p {
 .CustomCollectionLIstingNew .collection-grid-item__title {
   font-size: 32px;
 }
+/*FS ADD*/
+.CustomCollectionLIstingNew .collection-grid-item {
+  overflow: hidden;     margin-bottom: 15px;
+}
+.CustomCollectionLIstingNew .collection-grid-item__overlay {
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+.CustomCollectionLIstingNew .collection-grid-item:hover .collection-grid-item__overlay {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+} 
+
 .collExplrArw {
   font-size: 14px;
   display: block;
@@ -2005,6 +2020,7 @@ label.cart__qty-label {
   max-width: 120px;
   width: 100%;
   text-align: center;
+  z-index: 100;/*FS add*/
 }
 .AjaxAddCArt input.QuantityBox {
   border: none;
@@ -2021,6 +2037,7 @@ label.cart__qty-label {
   display: flex;
   align-items: center;
   padding: 0 2px 0 0;
+  z-index: 100;/*FS add*/
 }
 .BothIcons {
   float: right;
@@ -2078,7 +2095,7 @@ label.cart__qty-label {
   margin: 100px 0;
 }
 .CustomCartTemp table tr td.cart__final-price {
-    display: none;
+    //display: none;/*FS removed*/
 }
 .CustomCartTemp table tr td.cart__removed-product {
     display: none;

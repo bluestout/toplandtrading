@@ -1,0 +1,173 @@
+<!-- Do not edit this code -->
+<div id="ssw-page" class="ssw-page ssw-clearfix">
+      <div class="ssw-page-loading">
+        <span class="ssw-spin ssw-loader"></span>
+      </div>
+    </div>
+    <script type="text/javascript" defer>
+      if (typeof sswPageInterval == 'undefined') {
+        var sswPageInterval = setInterval(function () {
+          if (typeof sswJqLoaded != 'undefined' && sswJqLoaded) {
+            clearInterval(sswPageInterval);
+            var path_name = window.location.pathname;
+            var data = '_sid=' + sswCookie('hesid') + '&hash_key=' + sswCookie('hash_key');
+            var ssw_substr = '/pages/';
+            var ssw_index = path_name.indexOf(ssw_substr) + ssw_substr.length;
+            var ssw_request_url = sswProxyUrl + '/lite2/' + path_name.substr(ssw_index);
+
+            sswUserChecked(function () {
+              ssw.post(ssw_request_url, data, 'html').done(function (response) {
+                ssw('#ssw-page').css('opacity', 0);
+                ssw('#ssw-page').html(response).animate({
+                  opacity: "1"
+                }, 50, function () {
+                  if (typeof window.afterSswPageLoadedCallback === 'function') {
+                    window.afterSswPageLoadedCallback(response);
+                  }
+                });
+              });
+            });
+           
+          }
+        }, 300);
+      }
+    </script>
+<!-- Do not edit this code end -->
+
+<!-- Javascript (customization) -->
+<script>
+	sswRun(function() {
+    	var awaitFaveItems = setInterval(function() {
+        	if (ssw('.ssw-fave-list .ssw-fave-item').length) {
+                ssw('#ssw-fave-page-lists-wrapper').prepend(ssw('<a href="#" class="ajax-cartAdd-all">Add all to cart</a>'));
+              	ssw('.ssw-fave-list .ssw-fave-item').each(function(index, element) { // Add quantity counter to all products carts
+                  	var renderCount = '<div class="CustomQunt">' +        
+                    '<input data-id="" type="text" name="quantity" value="1" class="QuantityBox" data-quantity-input="">' +
+                      '<div class="BothIcons">' +
+                        '<input type="button" value=">" class="qtyplus" field="quantity" max="10000">' +
+                        '<input type="button" value="<" class="qtyminus" field="quantity" min="1">' +
+                      '</div>' +
+                    '</div>'
+                  	var getFaveItemUrl = ssw(element).find('.ssw-fave-product-avatar').attr('href')
+                  	ssw(element).find('.ssw-fave-product-actions').addClass('AjaxAddCArt')
+                	ssw(element).find('.ssw-fave-product-actions').prepend(ssw(renderCount))
+                    getProductMetafields(ssw(element), getFaveItemUrl);
+                });
+                ssw(document.body).on('click', '.qtyplus', function(event) { // Bind click to plus button
+                  	event.preventDefault();
+                  	var getQuantity = parseInt(ssw(this).parents('.CustomQunt').find('input[type="text"]').val());
+                  	getQuantity++
+                    ssw(this).parents('.CustomQunt').find('input[type="text"]').val(getQuantity);
+                });
+                ssw(document.body).on('click', '.qtyminus', function(event) { // Bind click to minus button
+                  	event.preventDefault();
+                  	var getQuantity = parseInt(ssw(this).parents('.CustomQunt').find('input[type="text"]').val());
+                    if (getQuantity > 0) {
+                      getQuantity--
+                      ssw(this).parents('.CustomQunt').find('input[type="text"]').val(getQuantity);
+                    }
+                });
+                ssw(document.body).on('click', '.ssw-fave-add-to-cart', function(event) { // Bind click to add to cart button
+                  	event.preventDefault();
+                  	var getQuantity = ssw(this).prev().find('input[type="text"]').val();
+                    var getProductId = ssw(this).prev().find('input[type="text"]').attr('data-id');
+                    ssw.post('/cart/add.js', {
+                      items: [
+                        {
+                          quantity: getQuantity,
+                          id: getProductId,
+                        }
+                      ]
+                    });
+                    setTimeout(function() {
+                      window.location.href = '/cart';
+                    }, 1500)
+                });
+              	ssw(document.body).on('click', '.ajax-cartAdd-all', function(event) {
+                  	event.preventDefault();
+                	collectProductCartData();
+                })
+            	clearInterval(awaitFaveItems);
+            }
+        }, 1000);
+        function getProductMetafields(element, faveItemUrl) { // Function to get product metafields
+        	ssw.get(faveItemUrl + '?view=ssw-custom-product', function(response) {
+              	var savedMetafieldsText = ssw(response).find('.dimensions_desc').text();
+              	var savedProductVariantId = ssw(response).find('.product-form__variants').selected().val();
+              	element.find('.CustomQunt input[type="text"]').attr('data-id', savedProductVariantId)
+            	element.find('.ssw-fave-product-title').after(('<div class="CollMeta"><p>' + savedMetafieldsText + '</p></div>'));
+            })
+        };
+      	function collectProductCartData() { // Function to collect all products and add them to cart
+          	var data = {
+              items: []
+            }
+        	ssw('.ssw-fave-list .ssw-fave-item').each(function(index, element) {
+              	var getElemVariantId = ssw(element).find('.CustomQunt input[type="text"]').attr('data-id');
+                var getElemQuantity = ssw(element).find('.CustomQunt input[type="text"]').val();
+            	data.items.push({quantity: getElemQuantity, id: getElemVariantId,})
+            })
+            ssw.post('/cart/add.js', data, function(response) {});
+            setTimeout(function() {
+            	window.location.href = '/cart';
+            }, 1500)
+        }
+    })
+</script>
+<!-- Javascript (customization) end -->
+
+
+<!-- Css (customization) -->
+<style>
+  .ajax-cartAdd-all {
+    border: 2px solid #fe5252;
+    border-radius: 4px;
+    padding: 6px 26px;
+    color: #fe5252 !important;
+    float: right;
+  }
+  .ssw-fave-item {
+    background: #fff;
+  }
+  .ssw-fave-product-avatar {
+    background-size: 100%;
+    background-position: top;
+    height: 280px;
+  }
+  #ssw-fave-page-side-bar .ssw-fave-item .ssw-fave-product-title {
+    height: auto;
+    margin: 0;
+  }
+  .CollMeta p {
+    padding-top: 5px;
+    padding-left: 0;
+  }
+  .ssw-fave-product-price {
+    font-size: 16px;
+  }
+  .ssw-fave-product-price del {
+    color: #636f7a;
+  }
+  #ssw-fave-page-side-bar .ssw-fave-item .ssw-fave-product-info {
+    text-align: left;
+    padding-left: 30px;
+  }
+  .CustomQunt input[type='text'] {
+    cursor: text;
+  }
+  .ssw-fave-add-to-cart {
+    font-size: 14px !important;
+    border-radius: 0 4px 4px 0 !important;
+    background: #fe5252 !important;
+    color: #fff !important;
+    padding: 10px !important;
+    cursor: pointer !important;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    margin-left: 0 !important;
+    height: auto !important;
+    display: block !important;
+  }
+</style>
+<!-- css (customization) end -->

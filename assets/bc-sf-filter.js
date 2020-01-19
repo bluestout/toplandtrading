@@ -4,9 +4,11 @@ var bcSfFilterSettings = {
       limit: bcSfFilterConfig.custom.products_per_page,
       // Optional
       loadProductFirst: true,
+      rangeStyle: 'style2',
       styleScrollToTop: 'style2',
       defaultDisplay: bcSfFilterConfig.custom.layout,
-      showPlaceholderProductList: true
+      showPlaceholderProductList: true,
+      decimalPriceRange: 2
   },
 };
 
@@ -19,6 +21,13 @@ var bcSfFilterTemplate = {
   'productGridItemHtml': '<div class="grid__item grid__item--collection-template {{itemGridWidthClass}}">' +
                               '<script class="bc-sf-filter-product-script" data-id="bc-product-json-{{itemId}}" type="application/json">{{itemJson}}</script>' +
                               '<div class="grid-view-item {{itemSoldOutClass}} product-card">' +
+                              /*FS added for wishlist icon*/
+                              '<div class="ssw-faveiticon sswfaveicon{{itemId}}" style="z-index: 100;">' +
+                                '<i data-product-id="{{itemId}}" data-count="0" class="ssw-icon-heart-o ssw-fave-icon ssw-wishlist-element ssw-not-synch"' +
+                                  'data-params="{"product_id":"{{itemId}}","event":"fave_button","page":"product_profile"}"></i>' +
+                                '<span class="faves-count">...</span>' +
+                              '</div>' + 
+
   									'<a class="grid-view-item__link grid-view-item__image-container full-width-link" href="{{itemUrl}}">' +
                                   		'<span class="visually-hidden">{{itemTitle}}</span>' +
   									'</a>' +
@@ -29,9 +38,9 @@ var bcSfFilterTemplate = {
   									'{{itemMeta}}' +
                                     '{{itemPrice}}' +
   								  '</div>' +
-  								  
+  								  '{{itemAddToCart}}' +
                               '</div>' +
-                              '{{itemAddToCart}}' +
+                              
                           '</div>',
 
   // List Template
@@ -334,6 +343,126 @@ function buildImageStyle(data) {
   return imageStyle;
 }
 
+
+BCSfFilter.prototype.buildFilterOptionGeneralRangeSlider = function(sliderId, amountId, currentMin, currentMax, rangeMin, rangeMax, data) {
+  var self = this;
+  var slider = document.getElementById(sliderId);
+  var sliderRange = data.hasOwnProperty('sliderRange') && data.sliderRange !== null ? parseInt(data.sliderRange) : 4;
+  // BC-Custom
+  var sliderStep = data.hasOwnProperty('sliderStep') && data.sliderStep !== null ? parseFloat(data.sliderStep) : 1;
+  var sliderDelimiter = data.hasOwnProperty('sliderDelimiter') && data.sliderDelimiter !== null ? data.sliderDelimiter : '';
+  var filterOptionRangeClass = this.class.filterOptionRange; // bc-sf-filter-option-range
+  // Case: Slider is divided into multiple ranges
+  var rangeDecimals = data.filterType.indexOf('price') > -1 ? this.getSettingValue('general.decimalPriceRange') : 0;
+  if (sliderStep <= 0.1) rangeDecimals = 1;
+  if (sliderStep <= 0.01) rangeDecimals = 2;
+  if (sliderStep <= 0.001) rangeDecimals = 3;
+  
+  
+  if (((rangeMax - rangeMin < sliderStep) || rangeMin == null || rangeMax == null) && this.getSettingValue('general.oneValueRangeSlider')) {
+    rangeMin -= 0.0001, rangeMax += 0.0001;
+    noUiSlider.create(slider, {
+      start: [currentMin, currentMax],
+      connect: true, // Display a colored bar between the handles
+      behaviour: 'tap', // Move handle on tap, bar is draggable
+      animate: true,
+      animationDuration: 300,
+      step: sliderStep,
+      range: {
+        'min': rangeMin,
+        'max': rangeMax
+      }
+    });
+    jQ(slider).attr('disabled', ' disabled');
+  } else {
+    // BC-Custom
+    rangeMin = parseFloat(rangeMin.toFixed(rangeMin));
+    rangeMax = parseFloat(rangeMax.toFixed(rangeDecimals));
+    // Case: Slider is divided into multiple ranges
+    if (sliderRange > 0) {
+      var rangeArr = [];
+      for (var i = 0; i < sliderRange; i++) {
+        rangeArr.push(i * (100 / sliderRange));
+      }
+      rangeArr.push(100);
+      noUiSlider.create(slider, {
+        start: [currentMin, currentMax],
+        connect: true, // Display a colored bar between the handles
+        behaviour: 'tap', // Move handle on tap, bar is draggable
+        animate: true,
+        animationDuration: 300,
+        step: sliderStep,
+        range: {
+          'min': rangeMin,
+          'max': rangeMax
+        },
+        pips: {
+          mode: 'positions',
+          values: rangeArr,
+          density: sliderRange,
+          format: wNumb({
+            decimals: rangeDecimals,
+            thousand: sliderDelimiter,
+            edit: function(value) {
+              return parseFloat(value);
+            }
+          })
+        }
+      });
+      if (!this.getSettingValue('general.enableSliderRuler')) jQ('#' + sliderId).addClass('no-ruler');
+      jQ('#' + sliderId).addClass('has-pips');
+      slider.noUiSlider.on('update', function() {
+        var last_pips = jQ('#' + sliderId + ' .noUi-pips').find('.noUi-marker').last();
+        if (last_pips.hasClass('noUi-marker-normal')) {
+          last_pips.removeClass('noUi-marker-normal');
+          last_pips.addClass('noUi-marker-large');
+          last_pips.after('<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">' + Math.ceil(rangeMax) + '</div>');
+        }
+      });
+      // Case: Slider doesn't have range
+    } else {
+      noUiSlider.create(slider, {
+        start: [currentMin, currentMax],
+        connect: true, // Display a colored bar between the handles
+        behaviour: 'tap', // Move handle on tap, bar is draggable
+        animate: true,
+        animationDuration: 300,
+        step: sliderStep,
+        range: {
+          'min': rangeMin,
+          'max': rangeMax
+        }
+      });
+    }
+    // Slide event
+    this.slideEvent(sliderId, amountId, rangeMin, rangeMax, data);
+    // onChange event for textboxes
+    // When the Range has two textboxes (style1)
+    if (this.getSettingValue('general.rangeStyle') == 'style1') {
+      var amountMin = filterOptionRangeClass + '-amount-min', amountMax = filterOptionRangeClass + '-amount-max';
+      // Format value for display
+      var displayValue = this.customizeDisplayRangeValue(currentMin, currentMax, data.filterType, data);
+      var displayMin = displayValue[0], displayMax = displayValue[1];
+      jQ('#' + amountId).find('.' + amountMin).val(displayMin);
+      jQ('#' + amountId).find('.' + amountMax).val(displayMax);
+      // onChange event
+      jQ('#' + amountId).on('change', '.' + amountMin, function() {
+        var minValue = jQ(this).val();
+        var maxValue = jQ('#' + amountId + ' .' + amountMax).val();
+        slider.noUiSlider.set([minValue, maxValue]);
+      });
+      jQ('#' + amountId).on('change', '.' + amountMax, function() {
+        var maxValue = jQ(this).val();
+        var minValue = jQ('#' + amountId + ' .' + amountMin).val();
+        slider.noUiSlider.set([minValue, maxValue]);
+      });
+    }
+    // Set event
+    this.setRangeValueEvent(sliderId, rangeMin, rangeMax, data);
+  }
+};
+
+
 BCSfFilter.prototype.buildProductListItem = function(data) {
   /*** Prepare data ***/
   var images = data.images_info;
@@ -396,16 +525,16 @@ function buildPrice(data, onSale, priceVaries) {
     onSaleClass = onSale ? ' price--on-sale' : '';
 
   priceHtml += '<dl class="price' + onSaleClass + '" data-price>';
-  if (bcSfFilterConfig.custom.vendor_enable) {
-    priceHtml += '<div class="price__vendor">';
-    priceHtml += '<dt>';
-    priceHtml += '<span class="visually-hidden">' + bcSfFilterConfig.label.vendor + '</span>';
-    priceHtml += '</dt>';
-    priceHtml += '<dd>';
-    priceHtml += data.vendor;
-    priceHtml += '</dd>';
-    priceHtml += '</div>';
-  }
+  // if (bcSfFilterConfig.custom.vendor_enable) {
+  //   priceHtml += '<div class="price__vendor">';
+  //   priceHtml += '<dt>';
+  //   priceHtml += '<span class="visually-hidden">' + bcSfFilterConfig.label.vendor + '</span>';
+  //   priceHtml += '</dt>';
+  //   priceHtml += '<dd>';
+  //   priceHtml += data.vendor;
+  //   priceHtml += '</dd>';
+  //   priceHtml += '</div>';
+  // }
   priceHtml += '<div class="price__regular">';
   priceHtml += '<dt>';
   priceHtml += '<span class="visually-hidden visually-hidden--inline">' + bcSfFilterConfig.label.regular_price + '</span>';

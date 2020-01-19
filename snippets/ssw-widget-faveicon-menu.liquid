@@ -1,36 +1,15 @@
 {% if shop.customer_accounts_enabled %}
-    {% assign ssw_fave_enabled = 1 %}
-    {% if shop.metafields.ssw['fave_enabled'] %}
-        {% assign ssw_fave_enabled = shop.metafields.ssw['fave_enabled'] %}
-    {% endif %}
-    {% if ssw_fave_enabled == 1 %}
-        <a class="ssw-link-fave-menu" href="/pages/wishlist">
-            <i class="ssw-icon-heart"></i>
-            <span class="ssw-counter-fave-menu">0</span>
-        </a>
-        <script defer>
-          sswRun(function(){
-            ssw( document ).ready(function() {
-
-              var intervalID = setInterval(function(){
-                if(ssw("#ssw-fave-item-count .ssw-count").text().length !=0 ){
-                  var count = ssw("#ssw-fave-item-count .ssw-count").text();
-                  ssw(".ssw-counter-fave-menu").text(count);
-                  clearInterval(intervalID);
-                }
-              },1000);
-
-            });
-
-            ssw(document).on('sswproductfaveafter', function(){
-              var count = ssw("#ssw-fave-item-count .ssw-count").text();
-              ssw(".ssw-counter-fave-menu").text(count);
-            });
-            ssw(document).on('sswproductunfaveafter', function(){
-              var count = ssw("#ssw-fave-item-count .ssw-count").text();
-              ssw(".ssw-counter-fave-menu").text(count);
-            });
-          });
-        </script>
-    {% endif %}
+	{% assign ssw_fave_enabled = 1 %}
+	{% if shop.metafields.ssw['fave_enabled'] %}
+		{% assign ssw_fave_enabled = shop.metafields.ssw['fave_enabled'] %}
+	{% endif %}
+	{% if ssw_fave_enabled == 1 %}
+		<a class="ssw-link-fave-menu ssw-link-fave-menu-hide-count" href="/pages/wishlist">
+			<i class="ssw-icon-heart-o"></i>
+			<span class="ssw-counter-fave-menu" style="display: none">0</span>
+		</a>
+		<script defer>
+			var sswFaveCounterMenuLoaded = true;
+		</script>
+	{% endif %}
 {% endif %}

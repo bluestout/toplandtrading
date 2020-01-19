@@ -447,6 +447,7 @@
     "email_address": "Email address",
     "password": "Password",
     "forgot_password": "Forgot password?",
-    "give_a_title_for_review": "Give a title for review"
+    "give_a_title_for_review": "Give a title for review",
+    "share_button": "Post"
   }
 }

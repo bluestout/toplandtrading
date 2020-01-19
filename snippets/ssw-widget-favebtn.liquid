@@ -5,10 +5,14 @@
   {% endif %}
   {% if ssw_fave_enabled == 1 %}
     {% assign productId = ssw-widget-favebtn %}
-    <div class="ssw-faveappbtn ssw-faveappbtn-counter ssw-faveappbtn2 ssw-fave-btn ssw-wishlist-element sswfavebtn{{ productId }} ssw-not-synch"
+    <div class="ssw-faveappbtn ssw-faveappbtn-hidden-count ssw-faveappbtn-counter ssw-faveappbtn2 ssw-fave-btn ssw-wishlist-element sswfavebtn{{ productId }} ssw-fave-btn-default ssw-not-synch"
          data-count="..." data-pending="0" data-product-id="{{ productId }}"
          data-params='{"product_id":"{{ productId }}","event":"fave","page":"product_profile"}'>
-      <i class="ssw-icon-heart-o"></i>{{ 'socialshopwave.fave' | t }}
+      <div class="ssw-fave-btn-content">
+          <i class="ssw-icon-heart-o"></i>
+          {{ 'socialshopwave.fave' | t }}
+      </div>
+      <div class="ssw-fave-btn-counter"></div>
     </div>
   {% endif %}
 {% endif %}
