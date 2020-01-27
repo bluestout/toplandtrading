@@ -5143,4 +5143,3 @@ theme.init = function() {
   onLoadHideLazysizesAnimation();
 };
 
-$(theme.init);
