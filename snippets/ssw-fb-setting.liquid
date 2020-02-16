@@ -36,13 +36,20 @@
           if (!response.password && response.email) {
             targetSEMModal(response, 'Facebook');
           } else {
-            if (response.password) {
-              var shopifyLogin = new ShopifyLogin();
-              shopifyLogin.preLogin(response.email, response.password);
-              shopifyLogin.login();
+            if (response.email) {
+              if (response.password) {
+                var shopifyLogin = new ShopifyLogin();
+                shopifyLogin.preLogin(response.email, response.password);
+                shopifyLogin.login();
+              } else {
+                addMessage('#login_modal .login-failed', "sswLangs.t('already_registered_to_social_service2', [response.email])", 'warning');
+                ssw('#login_modal').sswModal();
+              }
             } else {
-              addMessage('#login_modal .login-failed', "sswLangs.t('already_registered_to_social_service2', [response.email])", 'warning');
-              ssw('#login_modal').sswModal();
+              onOpenForm();
+              ssw('#service_id').val(response.service_id);
+              ssw('.ssw-modal').sswModal('hide');
+              ssw('#set-email-modal').sswModal();
             }
           }
         }

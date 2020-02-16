@@ -5,11 +5,7 @@
 {% if ssw_review_enabled == 1 %}
   {% assign ssw_count_rate = 0 %}
   {% assign ssw_avg_rate = 0 %}
-  {% if product.metafields.ssw.review %}
-    {% assign ssw_rate_data_key = 'review' %}
-  {% else %}
-    {% assign ssw_rate_data_key = product.id | append: '_rate_data' %}
-  {% endif %}
+  {% assign ssw_rate_data_key = 'review' %}
   {% assign ssw_unite_reviews = 0 %}
   {% if shop.metafields.ssw['unite_reviews'] %}
     {% assign ssw_unite_reviews = shop.metafields.ssw['unite_reviews'] %}
@@ -19,27 +15,22 @@
       {% assign ssw_unite_product_ids = shop.metafields.ssw['unite_product_ids'] | split: ',' %}
       {% assign unite_product_id = product.id | downcase %}
       {% if ssw_unite_product_ids contains unite_product_id %}
-        {% if product.metafields.ssw.unite_review %}
-          {% assign ssw_rate_data_key = 'unite_review' %}
-        {% else %}
-          {% assign ssw_unite_rate_data_key = product.id | append: '_unite_rate_data' %}
-          {% if product.metafields.ssw[ssw_unite_rate_data_key] %}
-            {% assign ssw_rate_data_key = ssw_unite_rate_data_key %}
-          {% endif %}
-        {% endif %}
+        {% assign ssw_rate_data_key = 'unite_review' %}
       {% endif %}
     {% endif %}
   {% endif %}
   {% if product.metafields.ssw[ssw_rate_data_key] %}
-    {% if ssw_rate_data_key contains 'rate_data' %}
-      {% assign ssw_rate_data = product.metafields.ssw[ssw_rate_data_key] | split: '_' %}
-      {% assign ssw_count_rate = ssw_rate_data[0] | plus: 0 %}
-      {% assign ssw_avg_rate = ssw_rate_data[1] | plus: 0 %}
-    {% else %}
-      {% assign ssw_count_rate = product.metafields.ssw[ssw_rate_data_key].count | plus: 0 %}
-      {% assign ssw_avg_rate = product.metafields.ssw[ssw_rate_data_key].avg | plus: 0 %}
+    {% assign ssw_count_rate = product.metafields.ssw[ssw_rate_data_key].count | plus: 0 %}
+    {% assign ssw_avg_rate = product.metafields.ssw[ssw_rate_data_key].avg | plus: 0 %}
+    {% assign ssw_product_id = product.id %}
+    {% if product.metafields.ssw[ssw_rate_data_key].product_id %}
+      {% assign ssw_product_id = product.metafields.ssw[ssw_rate_data_key].product_id | plus: 0 %}
+    {% endif %}
+    {% if ssw_product_id != product.id  %}
+      {% assign ssw_count_rate  = 0 %}
     {% endif %}
   {% endif %}
+
   <div class="ssw-widget-avg-rate-listing ssw-stars ssw-stars-large {% if ssw_count_rate == 0 %}ssw-hide{% endif %}" >
     {% assign ssw_j = ssw_avg_rate | floor %}
     {% for i in (1..ssw_j) %}

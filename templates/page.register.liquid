@@ -172,10 +172,25 @@
                   <span style="margin-left: 3%; color: #F00;">Enter this fields.</span>
                 </div>
             </div>
-
             <div class="grid__item medium-up--one-whole cntctFrm">
-              <label for="{{ formId }}-state">State / Province / Region<span aria-hidden="true">*</span></label>
-              <select id="{{ formId }}-state" name="contact[state province region]" required>
+              <label for="{{ formId }}-region">State / Province / Region<span aria-hidden="true">*</span></label>
+              <input 
+                type="text"
+                id="{{ formId }}-region"
+                name="contact[state province region]"
+                autocorrect="off"
+                autocapitalize="off"
+                value="{% if form.region %}{{ form.region }}{% elsif customer %}{{ customer.region }}{% endif %}"
+                required
+                >
+                <div id="div-{{ formId }}-region" class="cntRegError cntRegError_Hide">
+                  <label></label>
+                  <span style="margin-left: 3%; color: #F00;">Enter this fields.</span>
+                </div>
+            </div>
+            <div class="grid__item medium-up--one-whole cntctFrm">
+              <label for="{{ formId }}-country">Country<span aria-hidden="true">*</span></label>
+              <select id="{{ formId }}-country" name="contact[country]" required>
                 <option value="Afghanistan">Afghanistan</option>
 <option value="Algeria">Algeria</option>
 <option value="Andorra">Andorra</option>
@@ -389,7 +404,7 @@
 <option value="Two Sicilies">Two Sicilies</option>
 <option value="Uganda">Uganda</option>
 <option value="Ukraine">Ukraine</option>
-<option value="United States of America">United States of America (USA)</option>
+<option value="United States of America" selected>United States</option>
 <option value="Union of Soviet Socialist Republics">Union of Soviet Socialist Republics</option>
 <option value="United Arab Emirates">United Arab Emirates</option>
 <option value="United Kingdom">United Kingdom</option>
@@ -608,6 +623,13 @@ $(document).ready(function(){
     {
       $('#div-{{ formId }}-city').removeClass('cntRegError_Hide');
       $('#div-{{ formId }}-city').addClass('cntRegError_Show');
+    }
+
+    temp = $('#{{ formId }}-region').val();
+    if(temp.length == 0)
+    {
+      $('#div-{{ formId }}-region').removeClass('cntRegError_Hide');
+      $('#div-{{ formId }}-region').addClass('cntRegError_Show');
     }
 
     temp = $('#{{ formId }}-zipcode').val();
