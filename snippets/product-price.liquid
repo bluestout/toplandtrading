@@ -23,7 +23,17 @@
       </dd>
     </div>
   {% endif %}
-
+  <div class="price__sale">
+    <dt>
+      <span class="visually-hidden visually-hidden--inline">{{ 'products.product.sale_price' | t }}</span>
+    </dt>
+    <dd>
+      <span class="price-item price-item--sale" data-sale-price>
+        {{ money_price }}
+      </span>
+      {% comment %} <span class="price-item__label" aria-hidden="true">{{ 'products.product.on_sale' | t }}</span> {% endcomment %}
+    </dd>
+  </div>
   <div class="price__regular">
     <dt>
       <span class="visually-hidden visually-hidden--inline">{{ 'products.product.regular_price' | t }}</span>
@@ -46,17 +56,7 @@
       {% endif %}
     </dd>
   </div>
-  <div class="price__sale">
-    <dt>
-      <span class="visually-hidden visually-hidden--inline">{{ 'products.product.sale_price' | t }}</span>
-    </dt>
-    <dd>
-      <span class="price-item price-item--sale" data-sale-price>
-        {{ money_price }}
-      </span>
-      <span class="price-item__label" aria-hidden="true">{{ 'products.product.on_sale' | t }}</span>
-    </dd>
-  </div>
+  
   <div class="price__unit">
     <dt>
       <span class="visually-hidden visually-hidden--inline">{{ 'products.product.unit_price_label' | t }}</span>

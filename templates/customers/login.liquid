@@ -55,7 +55,8 @@
             <input type="submit" class="btn" value="{{ 'customer.login.sign_in' | t }}">
 
             <p>
-              {{ 'layout.customer.create_account' | t | customer_register_link }}
+              {% comment %} {{ 'layout.customer.create_account' | t | customer_register_link }} {% endcomment %}
+              <a href="/pages/create-an-account" id="customer_register_link">Create account</a>
             </p>
           </div>
 

@@ -542,9 +542,33 @@ p.ColHOvBtn {
   font-family: lato;
   letter-spacing: unset;
 }
+/*FS remove
 .CustomProductListing .price .price__regular .price-item {
   color: #000;     font-weight: 600;
+}*/
+/*FS add*/
+.CustomProductListing .price .price__sale , 
+.CustomProductListing .price .price__regular  {
+  font-size: 18px;
+  line-height: 32px;
+  color: #000;
 }
+/*FS add*/
+.CustomProductListing .price .price__regular
+{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/*FS add*/
+.CustomProductListing .price--on-sale .price__regular .price-item
+{
+  opacity: 0.5;
+  color: #000000;
+  font-size: 14px;
+}
+
+
+
 .CustomProductListing .slick-list {
   margin: 0 10px;
 }
@@ -1379,6 +1403,26 @@ ul.CustomListFields li p {
 .RecommendationProList .price__regular {
   color: #ec0000;
 }
+/*FS add*/
+.RecommendationProList .price .price__sale , 
+.RecommendationProList .price .price__regular  {
+  font-size: 18px;
+  line-height: 32px;
+  color: #000;
+}
+/*FS add*/
+.RecommendationProList .price .price__regular
+{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/*FS add*/
+.RecommendationProList .price--on-sale .price__regular .price-item
+{
+  opacity: 0.5;
+  color: #000000;
+  font-size: 14px;
+}
 /**************stj 05-11-19*****************/
 body.template-cart {
   background: #fff;
@@ -2175,14 +2219,37 @@ label.cart__qty-label {
 .CustomApptemp .grid-view-item .price {
     padding: 12px 20px;
 }
+/*FS remove
 .CustomApptemp .price__regular .price-item {
     color: #000;
     font-weight: 600;
 }
+*/
 .CustomApptemp #bc-sf-filter-products .price__sale {
     display: none;
     color: #fe5252;
 }
+/*FS add*/
+.CustomApptemp #bc-sf-filter-products .price .price__sale , 
+.CustomApptemp .price .price__regular  {
+  font-size: 18px;
+  line-height: 32px;
+  color: #000;
+}
+/*FS add*/
+.CustomApptemp .price .price__regular
+{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+/*FS add*/
+.CustomApptemp .price--on-sale .price__regular .price-item
+{
+  opacity: 0.5;
+  color: #000000;
+  font-size: 14px;
+}
+
 .CustomApptemp #bc-sf-filter-right {
     padding: 0 0 0 20px;
 }
@@ -2490,6 +2557,7 @@ input.news {
     margin-right: 1% !important;
     font-size: 14px !important;
 }
+
 @media only screen and (max-width: 986px) {
   .cst_cntUserRegPageouter .cntRegError label {
     padding: 0;

@@ -1,0 +1,37 @@
+{% if shop.customer_accounts_enabled and shop.metafields.ssw['review_enabled'] == 1 and shop.metafields.ssw.settings.reviews_widget_enabled == 1 %}
+  {% if shop.metafields.ssw.settings.reviews_tab_position == 'left' %}
+    {% assign direction = 'left' %}
+    {% assign tab_position = 'ssw-left-top' %}
+  {% else %}
+    {% assign direction = 'right' %}
+    {% assign tab_position = 'ssw-right-top' %}
+  {% endif %}
+  <div id="ssw-widget-review-bar" class="ssw-reviews-widget {{ tab_position }}" data-direction="{{ direction }}">
+    <div class="ssw-review-side-backdrop"></div>
+    <div class="ssw-reviews-caption {{ tab_position }}" data-direction="{{ direction }}">
+      <div class="ssw-reviews-caption__element">
+        <span class="ssw-mobile-hidden"><i class="ssw-icon-star" style="font-size: 16px;"></i>{{ "socialshopwave.reviews" | t }}</span>
+        <span class="ssw-mobile-visible"><i class="ssw-icon-star"></i></span>
+      </div>
+    </div>
+    <div class="ssw-reviews-wlist {{ tab_position }}">
+    </div>
+  </div>
+  <script type="text/javascript" defer>
+    if(typeof sswReviewBarInterval == 'undefined'){
+      var sswReviewBarInterval = setInterval(function(){
+        if(typeof sswLibraryJsLoaded != 'undefined' && sswLibraryJsLoaded ) {
+          clearInterval(sswReviewBarInterval);
+          ssw.ajax({
+            url: sswProxyUrl + '/lite2/core/widget/index',
+            data: {'_sid': sswCookie('hesid'), 'module': 'recommendation', 'name': 'reviewsPopup'},
+            dataType: 'html',
+            success: function (response) {
+              ssw('#ssw-widget-review-bar').find('.ssw-reviews-wlist').append(response);
+            }
+          });
+        }
+      }, 300);
+    }
+  </script>
+{% endif %}

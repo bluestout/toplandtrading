@@ -1,0 +1,5 @@
+{% if shop.metafields.ssw.settings.login_gplus_client_id <> '' or shop.metafields.ssw.settings.our_gplus_app == nil or shop.metafields.ssw.settings.our_gplus_app == '' or shop.metafields.ssw.settings.our_gplus_app == 0 %}
+<meta name="google-signin-clientid" content="{{ shop.metafields.ssw.settings.login_gplus_client_id }}" />
+<meta name="google-signin-scope" content="profile email">
+<script src="https://apis.google.com/js/api:client.js"></script>
+{% endif %}

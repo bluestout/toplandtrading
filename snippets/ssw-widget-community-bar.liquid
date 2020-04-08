@@ -1,0 +1,45 @@
+{% if shop.metafields.ssw['community_enabled'] == 1 and shop.metafields.ssw.settings.community_toolbar == 1 and shop.customer_accounts_enabled %}
+  {% assign logo_type = shop.metafields.ssw.settings.community_logo_type %}
+  {% assign logo_text = shop.metafields.ssw.settings.community_logo_text %}
+  {% assign logo_url = shop.metafields.ssw.settings.community_logo_url %}
+
+  {% assign hide_mobile_class = "" %}
+  {% unless shop.metafields.ssw.community_mobile %}
+    {% assign hide_mobile_class = "ssw-mobile-hidden" %}
+  {% endunless %}
+  <div id="ssw-community-icon" class="logotype-{{ logo_type }} {{ hide_mobile_class }}">
+    <span class="ssw-mobile-visible"> {{ logo_text }}<i class="ssw-icon-up-open-big"></i></span>
+    <div class="ssw-logo-{{ logo_type }} ssw-mobile-hidden">
+      <i class="ssw-community-up-to-expand-icon ssw-icon-up-open-big"></i>
+      {% if logo_type == 'url' and logo_url %}
+        <img src="{{ logo_url }}" width="67px" height="67px">
+      {% else %}
+        {{ logo_text }}
+      {% endif %}
+    </div>
+  </div>
+  <script type="text/javascript" defer>
+    window.sswAddEventListener('sswjqueryload', function () {
+      var path_name = window.location.pathname;
+      var ssw_is_mobile = +/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (path_name.indexOf('pages/feed') == -1 && path_name.indexOf('pages/profile') == -1 && path_name.indexOf('pages/profile-edit') == -1) {
+        var data = {'_sid': sswCookie('hesid'), 'hash_key': sswCookie('hash_key'), 'module': 'feed', 'name': 'community', 'is_mobile': ssw_is_mobile };
+        {% if template contains 'product' and product %}
+        data.product_id = {{ product.id }};
+        {% endif %}
+        ssw.ajax({
+          url: sswProxyUrl + '/lite2/core/widget/index',
+          data: data,
+          dataType: 'html',
+          success: function (response) {
+            if (ssw('#site-body').length) {
+              ssw('#site-body').append(response);
+            } else {
+              ssw('body').append(response);
+            }
+          }
+        });
+      }
+    });
+  </script>
+{% endif %}

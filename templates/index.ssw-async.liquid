@@ -10,7 +10,6 @@
 
 <body>
 <div id="ssw-async-html">
-  {% render  'ssw-langs' with 1 %}
     <div id="ssw-discount-modal" class="ssw-modal ssw-fade" aria-hidden="true" role="modal">
         <div class="ssw-modal-dialog">
             <div class="ssw-modal-content">
@@ -24,26 +23,10 @@
             </div>
         </div>
     </div>
-  {% capture ssw_helpers %}{% render  'ssw-helpers' %}{% endcapture %}
+  {% capture ssw_helpers %}{% render 'ssw-helpers' %}{% endcapture %}
   {% unless ssw_helpers contains 'Liquid error' %}
     {{ ssw_helpers }}
   {% endunless %}
-  {% capture the_snippet_content %}{% render  'ssw-cart-modal' %}{% endcapture %}
-  {% unless the_snippet_content contains 'Liquid error' %}
-    {{ the_snippet_content }}
-  {% endunless %}
-  {% capture the_snippet_content %}{% render  'ssw-product-modal' %}{% endcapture %}
-  {% unless the_snippet_content contains 'Liquid error' %}
-    {{ the_snippet_content }}
-  {% endunless %}
-  {% if customer %}
-
-  {% else %}
-    {% capture the_snippet_content %}{% render  'ssw-suggest-login' %}{% endcapture %}
-    {% unless the_snippet_content contains 'Liquid error' %}
-      {{ the_snippet_content }}
-    {% endunless %}
-  {% endif %}
 </div>
 </body>
 </html>

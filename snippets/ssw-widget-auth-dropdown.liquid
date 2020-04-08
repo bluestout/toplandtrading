@@ -7,7 +7,8 @@
   {% else %}
     <span class="ssw-auth-dropdown">
           <span class="ssw-auth-dropdown-register">
-            <a href="/account/register">{{ 'socialshopwave.sign_up' | t }}</a>
+            {% comment %} <a href="/account/register">{{ 'socialshopwave.sign_up' | t }}</a> {% endcomment %}
+            <a href="/pages/create-an-account">{{ 'socialshopwave.sign_up' | t }}</a>
           </span>
           <span class="ssw-dropdown">
             <a href="javascript:void(0);" class="ssw-dropdown-toggle" data-toggle="ssw-dropdown">

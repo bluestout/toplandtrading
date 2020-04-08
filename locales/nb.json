@@ -448,6 +448,8 @@
     "password": "Password",
     "forgot_password": "Forgot password?",
     "give_a_title_for_review": "Give a title for review",
+    "leaving_review": "Posting...",
+    "leave_review": "Post",
     "share_button": "Post"
   }
 }

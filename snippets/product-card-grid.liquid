@@ -22,26 +22,26 @@
     {% endunless %}
 
       <div {% if product.images.size > 1 %}class="CustomSliderGrid"{%endif %}>
-       {% comment %} FS removed
+       
        {% if product.images.size > 1 %}
-        <div class="CustomLoop">
-          
-        {% for image in product.images %}
-         <a href="{{product.url}}">
-        <img src="{{image.src | img_url : "medium" }}" />
-           </a>
-        {% endfor %}
-          
-        </div>
+            <div class="CustomLoop">
+              
+              {% for image in product.images %}
+              <a href="{{product.url}}">
+              <img src="{{image.src | img_url : "medium" }}" />
+                </a>
+              {% endfor %}
+              
+            </div>
         {% else %}
-        <a href="{{product.url}}">
-        <img src="{{product.featured_image | img_url: "medium" }}">
-        </a>
+          <a href="{{product.url}}">
+          <img src="{{product.featured_image | img_url: "medium" }}">
+          </a>
         {% endif %} 
-        {% endcomment %}
-        <a href="{{product.url}}">
+ 
+        {% comment %} <a href="{{product.url}}">
         <img src="{{product.featured_image | img_url: "medium" }}">
-        </a>
+        </a> {% endcomment %}
     </div>
     <div class="placeholder-background placeholder-background--animation" data-image-placeholder></div>
   </div>

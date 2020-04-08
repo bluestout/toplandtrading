@@ -535,6 +535,17 @@ function buildPrice(data, onSale, priceVaries) {
   //   priceHtml += '</dd>';
   //   priceHtml += '</div>';
   // }
+  priceHtml += '<div class="price__sale">';
+  priceHtml += '<dt>';
+  priceHtml += '<span class="visually-hidden visually-hidden--inline">' + bcSfFilterConfig.label.sale_price + '</span>';
+  priceHtml += '</dt>';
+  priceHtml += '<dd>';
+  priceHtml += '<span class="price-item price-item--sale" data-sale-price>';
+  priceHtml += bcsffilter.formatMoney(data.price_min, bcsffilter.moneyFormat);
+  priceHtml += '</span> ';
+  //priceHtml += '<span class="price-item__label" aria-hidden="true">' + bcSfFilterConfig.label.sale + '</span>';
+  priceHtml += '</dd>';
+  priceHtml += '</div>';
   priceHtml += '<div class="price__regular">';
   priceHtml += '<dt>';
   priceHtml += '<span class="visually-hidden visually-hidden--inline">' + bcSfFilterConfig.label.regular_price + '</span>';
@@ -551,17 +562,6 @@ function buildPrice(data, onSale, priceVaries) {
     priceHtml += bcSfFilterConfig.label.sold_out;
   }
   priceHtml += '</span>';
-  priceHtml += '</dd>';
-  priceHtml += '</div>';
-  priceHtml += '<div class="price__sale">';
-  priceHtml += '<dt>';
-  priceHtml += '<span class="visually-hidden visually-hidden--inline">' + bcSfFilterConfig.label.sale_price + '</span>';
-  priceHtml += '</dt>';
-  priceHtml += '<dd>';
-  priceHtml += '<span class="price-item price-item--sale" data-sale-price>';
-  priceHtml += bcsffilter.formatMoney(data.price_min, bcsffilter.moneyFormat);
-  priceHtml += '</span> ';
-  priceHtml += '<span class="price-item__label" aria-hidden="true">' + bcSfFilterConfig.label.sale + '</span>';
   priceHtml += '</dd>';
   priceHtml += '</div>';
   priceHtml += '</dl>';
@@ -787,3 +787,18 @@ BCSfFilter.prototype.buildAdditionalElements = function(data, eventType) {
           });
       })
 };
+
+// Fix image url issue of swatch option
+function getFilePath(fileName, ext, version) {
+    var self = bcsffilter;
+    var ext = typeof ext !== 'undefined' ? ext : 'png';
+    var version = typeof version !== 'undefined' ? version : '1';
+    var prIndex = self.fileUrl.lastIndexOf('?');
+    if (prIndex > 0) {
+        var filePath = self.fileUrl.substring(0, prIndex);
+    } else {
+        var filePath = self.fileUrl;
+    }
+    filePath += fileName + '.' + ext + '?v=' + version;
+    return filePath;
+}

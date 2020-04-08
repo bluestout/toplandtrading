@@ -1,6 +1,6 @@
 {% if page.handle == 'collections' %}
   <div id="ssw-page" class="ssw-page ssw-clearfix">
-`    {% render  'ssw-widget-listing' with 1 %}
+    {% render 'ssw-widget-listing' %}
     <script type="text/javascript" defer>
       var collectionTrackerInterval = setInterval(function () {
         if (typeof trackShopStats == "function") {
@@ -13,7 +13,7 @@
 {% else %}
   {% if page.handle == 'share-review' %}
     <div id="ssw-page" class="ssw-page ssw-clearfix">
-      {% render  'ssw-widget-share-review' %}
+      {% render 'ssw-widget-share-review' %}
     </div>
   {% else %}
     <div id="ssw-page" class="ssw-page ssw-clearfix">
@@ -21,6 +21,18 @@
         <span class="ssw-spin ssw-loader"></span>
       </div>
     </div>
+     {% if page.handle == 'reviews' %}
+       {% if shop.metafields.ssw.reviews_stats %}
+         {% assign sswstats = shop.metafields.ssw.reviews_stats %}
+           <div itemscope itemtype="https://schema.org/Product">
+             <meta itemprop="name" content="{{ shop.name | escape }}"/>
+             <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+               <meta itemprop="ratingCount" content="{{ sswstats.count }}"/>
+               <meta itemprop="ratingValue" content="{{ sswstats.avg }}"/>
+             </div>
+           </div>
+       {% endif %}
+     {% endif %}
     <script type="text/javascript" defer>
       if (typeof sswPageInterval == 'undefined') {
         var sswPageInterval = setInterval(function () {

@@ -204,13 +204,6 @@
                 <input type='button' value='>' class='qtyplus' field='quantity' max="{{product.variants.first.inventory_quantity}}" />     
            </div>
             {% endif %}
-
-            <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden{% if section.settings.enable_payment_button %} product-form__error-message-wrapper--has-payment-button{% endif %}" data-error-message-wrapper role="alert">
-              <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
-              {% include 'icon-error' %}
-              <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
-            </div>
-
             <div class="product-form__item product-form__item--submit{% if section.settings.enable_payment_button %} product-form__item--payment-button{% endif %}{% if product.has_only_default_variant %} product-form__item--no-variants{% endif %}">
               <button type="submit" name="add"
                 {% unless current_variant.available %} aria-disabled="true"{% endunless %}
@@ -232,6 +225,13 @@
                 {{ form | payment_button }}
               {% endif %}
             </div>
+            <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden{% if section.settings.enable_payment_button %} product-form__error-message-wrapper--has-payment-button{% endif %}" data-error-message-wrapper role="alert">
+              <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+              {% include 'icon-error' %}
+              <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
+            </div>
+
+            
         <p class="Qunatity_alert" style="display:none;"><img src="https://cdn.shopify.com/s/files/1/0276/5632/3151/files/info_icon_2eaa469f-5f9a-407a-a27d-b0d6121ed550.png">Minimum order is {{ product.metafields["global"]["pro_quantity"] }} pcs. Please adjust the amount accordingly.</p>
           {% endform %}
         

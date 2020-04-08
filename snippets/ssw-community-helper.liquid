@@ -1,8 +1,8 @@
-{% capture ssw_widget_community_bar %}{% render  'ssw-widget-community-bar' %}{% endcapture %}
+{% capture ssw_widget_community_bar %}{% render 'ssw-widget-community-bar' %}{% endcapture %}
 {% unless ssw_widget_community_bar contains 'Liquid error' %}
 	{{ ssw_widget_community_bar }}
 {% endunless %}
-{% capture ssw_action_modal %}{% render  'ssw-action-modal' %}{% endcapture %}
+{% capture ssw_action_modal %}{% render 'ssw-action-modal' %}{% endcapture %}
 {% unless ssw_action_modal contains 'Liquid error' %}
 	{{ ssw_action_modal }}
 {% endunless %}<div id="ssw-users-offer-modal" class="ssw-modal ssw-fade" role="modal"><div class="ssw-modal-dialog"><div class="ssw-modal-content"><div class="ssw-modal-body"><button type="button" class="ssw-close" data-dismiss="ssw-modal" aria-hidden="true">&times;</button><div id="ssw-usersinfo"><div class="ssw-preloader"><span class="ssw-spin ssw-loader"></span></div></div></div></div></div></div><script type="text/javascript" defer>function showFollowPopup(){ssw('#ssw-users-offer-modal').sswModal('show');ssw.post(sswProxyUrl+'/lite2/user/getUsersFollow',{_sid:ssw.cookie('hesid'),hash_key:ssw.cookie('hash_key')},'html').done(function(response){ssw('#ssw-usersinfo').css('opacity',0);ssw('#ssw-usersinfo').html(response).animate({opacity:"1"},1000)});ssw('#ssw-users-offer-modal').unbind('click').bind('click',(function(e){if(ssw(e.target).hasClass('ssw-close'))ssw('#ssw-users-offer-modal').sswModal('hide')}));ssw('body').keyup(function(e){if(e.keyCode==27){ssw('#ssw-users-offer-modal').sswModal('hide')}});ssw('#ssw-users-offer-modal').on('hidden.ssw.modal',function(){ssw('#ssw-usersinfo').html('<div class="ssw-preloader"><span class="ssw-spin ssw-loader"></span></div>')})}</script>
