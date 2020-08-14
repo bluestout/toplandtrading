@@ -6,7 +6,7 @@
                 {% assign alt = image.alt | handle %}
                 {% assign title = item.variant.title | handle %}
 
-                {% if alt == title and image_found  == false %}
+                {% if alt == title and image_found == false %}
                   {% assign image_found = true %}
                   {% assign image_index = forloop.index0 %}
                 {% endif %}

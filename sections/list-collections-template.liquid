@@ -31,13 +31,13 @@
       {% endcase %}
       {% if section.settings.sort == 'products_low' or section.settings.sort == 'date' or section.settings.sort == 'alphabetical' %}
         {% for collection in collections %}
-          <li class="grid__item {{ grid_item_width }}">
+          <li class="{%if forloop.first %}FirstChildList {%else%}RestChilList{%endif%} grid__item {{ grid_item_width }}">
             {% include 'collection-grid-item', collection_image_size: image_size %}
           </li>
         {% endfor %}
       {% else %}
         {% for collection in collections reversed %}
-          <li class="grid__item {{ grid_item_width }}">
+          <li class="{%if forloop.first %} FirstChildList {%else%} RestChilList{%endif%} grid__item {{ grid_item_width }}">
             {% include 'collection-grid-item', collection_image_size: image_size %}
           </li>
         {% endfor %}

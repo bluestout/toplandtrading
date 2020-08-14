@@ -48,12 +48,12 @@
 
           <div class="cntctFrmMain">
             <div class="grid__item medium-up--one-whole cntctFrm">
-              <label for="{{ formId }}-name">{{ 'contact.form.name' | t }}</label>
-              <input placeholder="Enter your name" type="text" id="{{ formId }}-name" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+              <label for="{{ formId }}-name">{{ 'contact.form.name' | t }}<span aria-hidden="true">*</span></label>
+              <input required="required" placeholder="Enter your name" type="text" id="{{ formId }}-name" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
             </div>
             <div class="grid__item medium-up--one-whole cntctFrm">
               <label for="{{ formId }}-email">{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
-              <input placeholder="Enter your email address"
+              <input  required="required" placeholder="Enter your email address"
                 type="email"
                 id="{{ formId }}-email"
                 name="contact[email]"
@@ -77,13 +77,13 @@
             </div>
        
          <div class="grid__item medium-up--one-whole cntctFrm">
-          <label for="{{ formId }}-subject">Subject</label>
-          <input placeholder="Enter mesage subject" type="text" id="{{ formId }}-subject" name="contact[subject]"  value="{% if form[subject] %}{{ form[subject] }}{% elsif customer %}{{ customer.subject }}{% endif %}">
+          <label for="{{ formId }}-subject">Subject<span aria-hidden="true">*</span></label>
+          <input  required="required" placeholder="Enter mesage subject" type="text" id="{{ formId }}-subject" name="contact[subject]"  value="{% if form[subject] %}{{ form[subject] }}{% elsif customer %}{{ customer.subject }}{% endif %}">
         </div>
         
         <div class="grid__item medium-up--one-whole cntctFrm">
-          <label for="{{ formId }}-message">{{ 'contact.form.message' | t }}</label>
-          <textarea placeholder="Message" rows="10" id="{{ formId }}-message" name="contact[body]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          <label for="{{ formId }}-message">{{ 'contact.form.message' | t }}<span aria-hidden="true">*</span></label>
+          <textarea  required="required" placeholder="Message" rows="10" id="{{ formId }}-message" name="contact[body]">{% if form.body %}{{ form.body }}{% endif %}</textarea>
         </div>
         
         <div class="sbmtbtnC">

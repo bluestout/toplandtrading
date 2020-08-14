@@ -1,14 +1,13 @@
 {% if shop.customer_accounts_enabled %}
   {% if customer %}
-    {% capture the_snippet_auth %}{% render  'socialshopwave-widget-auth' %}{% endcapture %}
+    {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
     {% unless the_snippet_auth contains 'Liquid error' %}
     {{ the_snippet_auth }}
     {% endunless %}
   {% else %}
     <span class="ssw-auth-dropdown">
           <span class="ssw-auth-dropdown-register">
-            {% comment %} <a href="/account/register">{{ 'socialshopwave.sign_up' | t }}</a> {% endcomment %}
-            <a href="/pages/create-an-account">{{ 'socialshopwave.sign_up' | t }}</a>
+            <a href="/account/register">{{ 'socialshopwave.sign_up' | t }}</a>
           </span>
           <span class="ssw-dropdown">
             <a href="javascript:void(0);" class="ssw-dropdown-toggle" data-toggle="ssw-dropdown">
@@ -37,7 +36,7 @@
               <li class="ssw-divider"></li>
               <li>
                 <div class="ssw-socialconnect social_networks_icon_for_dropdown">
-                  {% capture ssw_social_buttons %}{% render  'ssw-social-buttons' %}{% endcapture %}
+                  {% capture ssw_social_buttons %}{% render 'ssw-social-buttons' %}{% endcapture %}
                   {% unless ssw_social_buttons contains 'Liquid error' %}
                   {{ ssw_social_buttons }}
                   {% endunless %}

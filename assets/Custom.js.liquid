@@ -25,7 +25,9 @@ $(document).ready(function(){
 })
   /***************** Quantity Box ON COLLECTION AND HOMEPAGE PAGE **************************/
   /*****because of filtering app please goe bc-sf-filter.js for collection page***************/
-    $('.BothIcons .qtyplus').click(function(){
+  $('body').on('click', '.BothIcons .qtyplus', function() {  
+ //$('.BothIcons .qtyplus').click(function(){
+      
  var valuepluss = $(this).attr("max");
      
      var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
@@ -38,8 +40,7 @@ $(document).ready(function(){
     $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
 
     });
-
-     $('.BothIcons .qtyminus').click(function(){
+$('body').on('click', '.BothIcons .qtyminus', function() { 
  var valueplus = $(this).attr("min");
      
      var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
@@ -53,8 +54,8 @@ $(document).ready(function(){
     });
  
  /***************** Quantity Box ON PRODUCT PAGE **************************/
- 
-    $('.product-form .qtyplus').click(function(){
+ $('body').on('click', '.product-form .qtyplus', function() { 
+   // $('.product-form .qtyplus').click(function(){
     $(".Qunatity_alert").hide();
  var valuepluss = $(this).attr("max");
      
@@ -68,8 +69,8 @@ $(document).ready(function(){
     $(this).prev(".product-form__input").val(val_qty);
 
     });
-
-     $('.product-form .qtyminus').click(function(){
+$('body').on('click', '.product-form .qtyminus', function() { 
+     //$('.product-form .qtyminus').click(function(){
  var valueplus = $(this).attr("min");
      
      var val_qty = parseInt($(this).next(".product-form__input").val());
@@ -186,6 +187,9 @@ $('body').on('click', '.qtyminuscart', function() {
   $( "#accordionCustom" ).accordion({
       collapsible: true,heightStyle: "content"
   });
+  $( "#accordionReviews" ).accordion({
+      collapsible: true,heightStyle: "content"
+  });
  $( ".CustomFootMob" ).accordion({
       collapsible: true,heightStyle: "content"
  });
@@ -216,7 +220,7 @@ $('body').on('click', '.qtyminuscart', function() {
   }
  /*************** RELATED PRODUCT SLIDER *****************/
   setTimeout(function(){
-  if ($(window).width() < 475) {
+  if ($(window).width() < 375) {
    $(".RecommendationPro").slick({
   slidesToShow: 1,
      dots: true,
@@ -399,7 +403,7 @@ type: 'POST',
   $(".itc_clps a").click(function(){
     $(this).toggleClass("ContentShow");
     if($(this).hasClass("ContentShow")){
-    $(this).html("Show cart Content");
+    $(this).html("Show cart content");
     }
     else{
     $(this).html("Collapse cart content");

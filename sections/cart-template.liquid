@@ -117,6 +117,9 @@
                           <a href="{{ item.url }}" class="cart__product-title" data-cart-item-title>
                             {{ item.product.title }}
                           </a>
+                          {%if item.product.metafields["global"]["pro_number"] != blank %}
+                          <div class="CollMetaItem"><span class="labelText">Item No.: </span>{{ item.product.metafields["global"]["pro_number"] }}</div>
+                          {%endif%}
                           <div class="CollMeta">{{ item.product.metafields["global"]["pro_description"] }}</div>
                         </div>
 

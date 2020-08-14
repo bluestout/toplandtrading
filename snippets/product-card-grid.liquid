@@ -53,7 +53,11 @@
 
  <div class="title_price">
   <div class="h4 grid-view-item__title product-card__title" aria-hidden="true">
-    <a href="{{product.url}}">{{ product.title }}</a></div>
+    <a href="{{product.url}}">{{ product.title }}</a>
+    <div class="Pricehome">
+    {% include 'product-price', variant: product.selected_or_first_available_variant %}
+    </div>
+   </div>
    <div class="CollMeta">{{ product.metafields["global"]["pro_description"] }}</div>
   {% include 'product-price', variant: product.selected_or_first_available_variant %}
      </div> 

@@ -1,3 +1,4 @@
+{% if content_for_header contains 'ssw-empty.js' or shop.metafields.ssw['manual_uninstall'] == 1 or shop.metafields.ssw['script_tags_allowed'] != 1 %}
 {% unless customer %}
 <div class='ssw-social-login-widget'>
     <div class="ssw-socialconnect">
@@ -11,3 +12,4 @@
     </div>
 </div>
 {% endunless %}
+{% endif %}

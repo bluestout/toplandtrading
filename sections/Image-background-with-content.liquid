@@ -1,4 +1,4 @@
-<div class="CustomBgSect" style="background-image:url('{{section.settings.image | img_url : 'original'}}')">
+<div class="CustomBgSect{%if template == "list-collections"%} ListSectionOn{%endif%}" style="background-image:url('{{section.settings.image | img_url : 'original'}}')">
 <div class="BgImage">
 <div class="page-width">  
   <div class="MainHeadBg">{{section.settings.title}}</div>

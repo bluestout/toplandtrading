@@ -3,4 +3,3 @@ development:
   theme_id: "80081092687"
   store: top-land-trading-development.myshopify.com
   ignore_files:
-    - config/settings_data.json

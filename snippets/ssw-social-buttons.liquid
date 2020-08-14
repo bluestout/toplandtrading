@@ -25,10 +25,6 @@
   <div class="ssw-tmconnect {{additional_class}}"><a title="{{ 'socialshopwave.sign_in_tumblr' | t }}" href="javascript://"><i class="ssw-icon-tumblr"></i>{% if shop.metafields.ssw.settings.social_button_view == 'icon_and_text' %}<span>{{ 'socialshopwave.social_login_tumblr' | t }}</span>{% endif %}</a></div>
   {% capture _ %}{% increment service_count %}{% endcapture %}
 {% endif %}
-{% if shop.metafields.ssw.settings.instagram_login == 1 %}
-  <div class="ssw-inconnect {{additional_class}}"><a title="{{ 'socialshopwave.sign_in_instagram' | t }}" href="javascript://"><i class="ssw-icon-instagram"></i>{% if shop.metafields.ssw.settings.social_button_view == 'icon_and_text' %}<span>{{ 'socialshopwave.social_login_instagram' | t }}</span>{% endif %}</a></div>
-  {% capture _ %}{% increment service_count %}{% endcapture %}
-{% endif %}
 {% if shop.metafields.ssw.settings.amazon_login == 1 %}
   <div class="ssw-azconnect {{additional_class}}"><a title="{{ 'socialshopwave.sign_in_amazon' | t }}" href="javascript://"><i class="ssw-icon-amazon"></i>{% if shop.metafields.ssw.settings.social_button_view == 'icon_and_text' %}<span>{{ 'socialshopwave.social_login_amazon' | t }}</span>{% endif %}</a></div>
   {% capture _ %}{% increment service_count %}{% endcapture %}

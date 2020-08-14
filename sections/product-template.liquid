@@ -194,7 +194,7 @@
                 {% else %}
                   <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
                 {% endif %}
-              {% endfor %}
+              {% endfor %} 
             </select>
 
             {% if section.settings.show_quantity_selector %}
@@ -250,8 +250,8 @@
           {% endunless %} 
           
           Add to Favorites</li>
-        <li> <span class="tlicon-email"></span> Email to a friend</li>
-        <li> <span class="tlicon-phone"></span> Help? get in touch</li>
+        <li> <span class="tlicon-email"></span><a href="mailto:{% if customer %}{{ customer.email }}{%endif%}?subject=look at this website&body={{product.url}}">Email to <br/>a friend</a></li>
+        <li> <span class="tlicon-phone"></span><a href="tel:{{section.settings.phone_id}}">Help?<br/> Get in touch</a></li>
       </ul>
       
       <div class="AccordionContain">
@@ -262,6 +262,12 @@
         </div>
       </div>
  <h3 class="LinkRelated">Often bought together</h3>
+        <div id="accordionReviews">
+        <h3>Product Reviews</h3>
+        <div>
+        testing description
+        </div>
+      </div>
       </div>
       
         {%- comment -%}
@@ -628,6 +634,42 @@
         "zh-TW": "顯示社群分享按鈕"
       },
       "default": true
+    },
+{
+        "type": "header",
+        "content": {
+          "da": "Tekst",
+          "de": "Text",
+          "en": "Information"
+        }
+      },
+{
+      "type": "text",
+      "id": "email_id",
+      "label": {
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Email Id"
+      },
+      "default": {
+        "da": "Tekstkolonner med billeder",
+        "de": "Textspalten mit Fotos",
+        "en": "Email Id"
+      }
+    },
+{
+      "type": "text",
+      "id": "phone_id",
+      "label": {
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Phone Number"
+      },
+      "default": {
+        "da": "Tekstkolonner med billeder",
+        "de": "Textspalten mit Fotos",
+        "en": "Phone Number"
+      }
     }
   ]
 }

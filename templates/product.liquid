@@ -62,5 +62,9 @@
       }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
   ]
-}
-</script>
+ {% capture ssw_rich_snippet %}{% render 'ssw-widget-avg-rate-rich', rich_snippet_type: 'json' %}{% endcapture %}
+ {% unless ssw_rich_snippet contains 'Liquid error' %}
+ {{ ssw_rich_snippet | strip }}
+ {% endunless %} 
+ } 
+ </script>
