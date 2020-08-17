@@ -21,10 +21,50 @@ $searchBoxMobileHeight: 50px;
 #bc-sf-filter-right {width: 80%; float: right;}
 #bc-sf-filter-right #bc-sf-filter-products {width: 100%; float: right; overflow: visible; height: auto !important;}
 @media screen and (max-width: 767px) {
-    #bc-sf-filter-tree {display: none; width: 100%; float: none;}
+    #bc-sf-filter-tree {
+        display: block !important; 
+        width: 80% !important; 
+        float: none;
+    	position: fixed;
+        top: 0;
+        left: -100%;
+      	padding: 15px;
+      	height: 100vh;
+      	background: #fff;
+      	z-index: 9999;
+        transition: all 0.3s linear;
+    	animation: fadeIn 0.3s linear none;
+      	overflow-y: auto;
+      	box-shadow: 15px 0px 20px rgba(0,0,0,0.2);
+    }
     #bc-sf-filter-right, #bc-sf-filter-right #bc-sf-filter-products {width: auto; float: none;}
     #bc-sf-filter-top-display-type span {display: none;}
     #bc-sf-filter-top-display-type .bc-sf-filter-display-item:nth-of-type(1) {margin-left: 0;}
+  	.filters-toolbar-wrapper{
+      margin-bottom: 15px;
+  	}
+  	.filters-toolbar__toggle{
+		display: table-cell;
+      	width: 20%;
+      	vertical-align: middle;
+      	cursor: pointer;
+    }
+    .filters-toolbar{
+      	display: table;
+    }
+    .filters-toolbar__item-wrapper{
+      	display: table-cell !important;
+      	width: 80%;
+      	vertical-align: middle;
+    }
+  .bc-sf-filter-selection-wrapper{
+  	display: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  	.filters-toolbar__toggle{
+		display: none;
+    }
 }
 /* Product */
 #bc-sf-filter-products .has-bc-quickview {overflow: hidden;}
@@ -46,14 +86,14 @@ $searchBoxMobileHeight: 50px;
     background-color: #f2f3f5!important;
     border: none!important;
 }
-.filters-toolbar__item-wrapper {
-    display: block!important;
-    text-align: right!important;
-}
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 768px) {
   .filters-toolbar-wrapper {
       margin-bottom: 15px!important;
       padding-top: 45px!important;
+  }
+  .filters-toolbar__item-wrapper {
+      display: block !important;
+      text-align: right !important;
   }
   .collection-hero {
       margin-bottom: 0!important;
@@ -122,4 +162,34 @@ $searchBoxMobileHeight: 50px;
 }
 .bc-quickview-btn-wrapper{
 	text-align: center;
+}
+#PageContainer{
+	transform: none	!important;
+}
+#bc-sf-filter-tree-mobile{
+	display: none;
+}
+#bc-sf-filter-tree .close{
+	text-align: right;
+  	cursor: pointer;
+}
+#bc-overlay{
+	display: none;
+}
+body.boost-open{
+  overflow: hidden;
+  #bc-sf-filter-tree{
+  	left: 0;
+  }
+  #bc-overlay{
+    display: block;
+  	position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: #00000020;
+    bottom: 0;
+    left: 0;
+    z-index: 9991;
+  }
 }

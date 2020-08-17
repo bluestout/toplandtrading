@@ -62,6 +62,9 @@
     <div class="filters-toolbar-wrapper">
       <div class="page-width">
         <div class="filters-toolbar">
+          <div class="filters-toolbar__toggle">
+            <span>Filter ></span>
+          </div>
           <div class="filters-toolbar__item-wrapper">
             <div class="filters-toolbar__item-child" id="bc-sf-filter-top-show-limit"></div>
             {% if section.settings.sort_enable %}
@@ -86,6 +89,7 @@
       {% include 'bc-sf-filter-skeleton', type: 'button' %}
     </div>
     <div id="bc-sf-filter-wrapper">
+      <div id="bc-overlay"></div>
       <div id="bc-sf-filter-tree">
         {% include 'bc-sf-filter-tree-placeholder' %}
       </div>
