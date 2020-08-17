@@ -90,10 +90,6 @@ $searchBoxMobileHeight: 50px;
   .filters-toolbar__item-child {
     display: inline-block;
     height: 40px;
-    float: right;
-  }
-  .filters-toolbar__item-child:last-child {
-      margin-right: 3rem;
   }
   #bc-sf-filter-top-show-limit label, #bc-sf-filter-top-sorting label {
     margin-right: 5px;
@@ -110,8 +106,20 @@ $searchBoxMobileHeight: 50px;
   }
 }
 @media screen and (max-width: 767px) {
-  #bc-sf-filter-top-show-limit, #bc-sf-filter-top-sorting {
-      float: left;
+  #bc-sf-filter-top-show-limit{
+  		float: left;
+  }
+  #bc-sf-filter-top-sorting {
+      float: right;
   }
 }
 .noUi-value-horizontal {margin-left: 3px!important;}
+.filters-toolbar__item-child{
+   display: inline-block;
+}
+.qview-button-wrapper{
+	display: none !important;
+}
+.bc-quickview-btn-wrapper{
+	text-align: center;
+}
