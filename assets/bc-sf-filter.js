@@ -802,7 +802,9 @@ BCSfFilter.prototype.buildAdditionalElements = function(data, eventType) {
     
     if(jQ(window).width() <= 767){
     	jQ('.filters-toolbar__label').html("Show");
-      	jQ("#bc-sf-filter-options-wrapper").prepend('<div class="close"> <span class="tlicon-x"></span> </div>');
+        if(jQ("#bc-sf-filter-options-wrapper").find(".close").length <= 0){
+          jQ("#bc-sf-filter-options-wrapper").prepend('<div class="close"> <span class="tlicon-x"></span> </div>');
+        }
     }
 };
 

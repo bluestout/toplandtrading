@@ -56,10 +56,17 @@ $searchBoxMobileHeight: 50px;
       	display: table-cell !important;
       	width: 80%;
       	vertical-align: middle;
+      	text-align: center;
     }
-  .bc-sf-filter-selection-wrapper{
-  	display: none;
-  }
+    .bc-sf-filter-selection-wrapper{
+      display: none;
+    }
+  	.filters-toolbar__item-child:first-child{
+      margin-right: 0px !important;
+    }
+    .filters-toolbar__input{
+      max-width: 100px;
+    }
 }
 @media screen and (min-width: 768px) {
   	.filters-toolbar__toggle{
@@ -147,7 +154,7 @@ $searchBoxMobileHeight: 50px;
 }
 @media screen and (max-width: 767px) {
   #bc-sf-filter-top-show-limit{
-  		float: left;
+  		float: none;
   }
   #bc-sf-filter-top-sorting {
       float: right;
