@@ -675,17 +675,6 @@ BCSfFilter.prototype.buildExtrasProductList = function(data, eventType) {
   }
 };
 
-// Build Additional Elements
-BCSfFilter.prototype.buildAdditionalElements = function(data, eventType) {
-  var totalProduct = '';
-  if (data.total_product == 1) {
-    totalProduct = bcSfFilterConfig.label.items_with_count_one.replace(/{{ count }}/g, data.total_product);
-  } else {
-    totalProduct = bcSfFilterConfig.label.items_with_count_other.replace(/{{ count }}/g, data.total_product);
-  }
-  jQ('#bc-sf-filter-total-product').html(totalProduct);
-};
-
 // Build Default layout
 BCSfFilter.prototype.buildDefaultElements=function(){var isiOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream,isSafari=/Safari/.test(navigator.userAgent),isBackButton=window.performance&&window.performance.navigation&&2==window.performance.navigation.type;if(!(isiOS&&isSafari&&isBackButton)){var self=this,url=window.location.href.split("?")[0],searchQuery=self.isSearchPage()&&self.queryParams.hasOwnProperty("q")?"&q="+self.queryParams.q:"";window.location.replace(url+"?view=bc-original"+searchQuery)}};
 
@@ -707,8 +696,16 @@ BCSfFilter.prototype.afterBuildFilterTree = function(data, filterTreeId) {
 
 /**********Customize FS************ */
 BCSfFilter.prototype.buildAdditionalElements = function(data, eventType) {
+	var totalProduct = '';
+    if (data.total_product == 1) {
+      totalProduct = bcSfFilterConfig.label.items_with_count_one.replace(/{{ count }}/g, data.total_product);
+    } else {
+      totalProduct = bcSfFilterConfig.label.items_with_count_other.replace(/{{ count }}/g, data.total_product);
+    }
+    //jQ('#bc-sf-filter-total-product').html(totalProduct);
 
-/***************** Quantity Box ON Collection PAGE **************************/
+    calcHeightElement(".product-card",".product-card");
+  
     $('.BothIcons .qtyplus').click(function(){
         var valuepluss = $(this).attr("max");
             
@@ -807,6 +804,16 @@ BCSfFilter.prototype.buildAdditionalElements = function(data, eventType) {
         }
     }
 };
+
+function calcHeightElement(classInput, classOutput){
+	var maxHeight = 0;
+  	jQ(classInput).each(function(e){
+      if(maxHeight < jQ(this).height()){
+      	maxHeight = jQ(this).height();
+      }
+  	})
+  	jQ(classOutput).height(maxHeight);
+}
 
 // Fix image url issue of swatch option
 function getFilePath(fileName, ext, version) {

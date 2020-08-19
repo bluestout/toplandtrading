@@ -50,7 +50,7 @@
       }
     },
     "search": {
-      "no_results_html": "Please try a different search term or go back to the <a href=\"{{ link }}\">homepage<\/a>.",
+      "no_results_html": "Please try a different search term or go back to the <a href=\"https:\/\/top-land-trading-development.myshopify.com\/\">homepage<\/a>.",
       "empty_search_message": "Search field cannot be empty",
       "results_with_count": {
         "one": "{{ count }} result for \"{{ terms }}\"",

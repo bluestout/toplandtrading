@@ -376,7 +376,7 @@
               "collection": "testcollection2",
               "coll_title": "Garden",
               "coll_description": "Description",
-              "images": "shopify:\/\/shop_images\/collection1.png"
+              "images": "shopify:\/\/shop_images\/home-col4.png"
             }
           },
           "1571883787626": {
@@ -385,7 +385,7 @@
               "collection": "testcollection2",
               "coll_title": "Religious Inspirations",
               "coll_description": "Description",
-              "images": "shopify:\/\/shop_images\/secr_bg.jpg"
+              "images": "shopify:\/\/shop_images\/home-col5.png"
             }
           },
           "1571883792224": {
@@ -503,7 +503,9 @@
           "show_vendor": false,
           "enable_zoom": true,
           "enable_payment_button": false,
-          "show_share_buttons": false
+          "show_share_buttons": false,
+          "email_id": "Email Id",
+          "phone_id": "Phone Number"
         }
       },
       "product-recommendations": {
