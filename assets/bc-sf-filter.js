@@ -343,48 +343,36 @@ function buildImageStyle(data) {
   return imageStyle;
 }
 
+function addInches(n) {
+    return n + '"';
+}
+
+function addCurrentcy(n){
+    if(typeof(n) == 'number'){
+      n = n.toFixed(2);
+    }
+	var newFormat = window.currency_format.replace("{{amount}}", parseFloat(n));
+  	return newFormat;
+}
 
 BCSfFilter.prototype.buildFilterOptionGeneralRangeSlider = function(sliderId, amountId, currentMin, currentMax, rangeMin, rangeMax, data) {
-  var self = this;
-  var slider = document.getElementById(sliderId);
-  var sliderRange = data.hasOwnProperty('sliderRange') && data.sliderRange !== null ? parseInt(data.sliderRange) : 4;
-  // BC-Custom
-  var sliderStep = data.hasOwnProperty('sliderStep') && data.sliderStep !== null ? parseFloat(data.sliderStep) : 1;
-  var sliderDelimiter = data.hasOwnProperty('sliderDelimiter') && data.sliderDelimiter !== null ? data.sliderDelimiter : '';
-  var filterOptionRangeClass = this.class.filterOptionRange; // bc-sf-filter-option-range
-  // Case: Slider is divided into multiple ranges
-  var rangeDecimals = data.filterType.indexOf('price') > -1 ? this.getSettingValue('general.decimalPriceRange') : 0;
-  if (sliderStep <= 0.1) rangeDecimals = 1;
-  if (sliderStep <= 0.01) rangeDecimals = 2;
-  if (sliderStep <= 0.001) rangeDecimals = 3;
-  
-  
-  if (((rangeMax - rangeMin < sliderStep) || rangeMin == null || rangeMax == null) && this.getSettingValue('general.oneValueRangeSlider')) {
-    rangeMin -= 0.0001, rangeMax += 0.0001;
-    noUiSlider.create(slider, {
-      start: [currentMin, currentMax],
-      connect: true, // Display a colored bar between the handles
-      behaviour: 'tap', // Move handle on tap, bar is draggable
-      animate: true,
-      animationDuration: 300,
-      step: sliderStep,
-      range: {
-        'min': rangeMin,
-        'max': rangeMax
-      }
-    });
-    jQ(slider).attr('disabled', ' disabled');
-  } else {
+  if(data.filterType !== 'price'){
+    var self = this;
+    var slider = document.getElementById(sliderId);
+    var sliderRange = data.hasOwnProperty('sliderRange') && data.sliderRange !== null ? parseInt(data.sliderRange) : 4;
     // BC-Custom
-    rangeMin = parseFloat(rangeMin.toFixed(rangeMin));
-    rangeMax = parseFloat(rangeMax.toFixed(rangeDecimals));
+    var sliderStep = data.hasOwnProperty('sliderStep') && data.sliderStep !== null ? parseFloat(data.sliderStep) : 1;
+    var sliderDelimiter = data.hasOwnProperty('sliderDelimiter') && data.sliderDelimiter !== null ? data.sliderDelimiter : '';
+    var filterOptionRangeClass = this.class.filterOptionRange; // bc-sf-filter-option-range
     // Case: Slider is divided into multiple ranges
-    if (sliderRange > 0) {
-      var rangeArr = [];
-      for (var i = 0; i < sliderRange; i++) {
-        rangeArr.push(i * (100 / sliderRange));
-      }
-      rangeArr.push(100);
+    var rangeDecimals = data.filterType.indexOf('price') > -1 ? this.getSettingValue('general.decimalPriceRange') : 0;
+    if (sliderStep <= 0.1) rangeDecimals = 1;
+    if (sliderStep <= 0.01) rangeDecimals = 2;
+    if (sliderStep <= 0.001) rangeDecimals = 3;
+
+
+    if (((rangeMax - rangeMin < sliderStep) || rangeMin == null || rangeMax == null) && this.getSettingValue('general.oneValueRangeSlider')) {
+      rangeMin -= 0.0001, rangeMax += 0.0001;
       noUiSlider.create(slider, {
         start: [currentMin, currentMax],
         connect: true, // Display a colored bar between the handles
@@ -395,32 +383,114 @@ BCSfFilter.prototype.buildFilterOptionGeneralRangeSlider = function(sliderId, am
         range: {
           'min': rangeMin,
           'max': rangeMax
-        },
-        pips: {
-          mode: 'positions',
-          values: rangeArr,
-          density: sliderRange,
-          format: wNumb({
-            decimals: rangeDecimals,
-            thousand: sliderDelimiter,
-            edit: function(value) {
-              return parseFloat(value);
-            }
-          })
         }
       });
-      if (!this.getSettingValue('general.enableSliderRuler')) jQ('#' + sliderId).addClass('no-ruler');
-      jQ('#' + sliderId).addClass('has-pips');
-      slider.noUiSlider.on('update', function() {
-        var last_pips = jQ('#' + sliderId + ' .noUi-pips').find('.noUi-marker').last();
-        if (last_pips.hasClass('noUi-marker-normal')) {
-          last_pips.removeClass('noUi-marker-normal');
-          last_pips.addClass('noUi-marker-large');
-          last_pips.after('<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">' + Math.ceil(rangeMax) + '</div>');
-        }
-      });
-      // Case: Slider doesn't have range
+      jQ(slider).attr('disabled', ' disabled');
     } else {
+      // BC-Custom
+      rangeMin = parseFloat(rangeMin.toFixed(rangeMin));
+      rangeMax = parseFloat(rangeMax.toFixed(rangeDecimals));
+      // Case: Slider is divided into multiple ranges
+      if (sliderRange > 0) {
+        var rangeArr = [];
+        for (var i = 0; i < sliderRange; i++) {
+          rangeArr.push(i * (100 / sliderRange));
+        }
+        rangeArr.push(100);
+        noUiSlider.create(slider, {
+          start: [currentMin, currentMax],
+          connect: true, // Display a colored bar between the handles
+          behaviour: 'tap', // Move handle on tap, bar is draggable
+          animate: true,
+          animationDuration: 300,
+          step: sliderStep,
+          range: {
+            'min': rangeMin,
+            'max': rangeMax
+          },
+          pips: {
+            mode: 'positions',
+            values: rangeArr,
+            density: sliderRange,
+            format: wNumb({
+              decimals: rangeDecimals,
+              thousand: sliderDelimiter,
+              edit: function(value) {
+                return addInches(parseFloat(value));
+              }
+            })
+          }
+        });
+        if (!this.getSettingValue('general.enableSliderRuler')) jQ('#' + sliderId).addClass('no-ruler');
+        jQ('#' + sliderId).addClass('has-pips');
+        slider.noUiSlider.on('update', function() {
+          var last_pips = jQ('#' + sliderId + ' .noUi-pips').find('.noUi-marker').last();
+          if (last_pips.hasClass('noUi-marker-normal')) {
+            last_pips.removeClass('noUi-marker-normal');
+            last_pips.addClass('noUi-marker-large');
+            last_pips.after('<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">' + Math.ceil(rangeMax) + '</div>');
+          }
+          jQ('div[data-type="'+data.filterType+'"]').find(".bc-sf-filter-option-range-amount").html(addInches(currentMin) +" - "+ addInches(currentMin));
+        });
+        // Case: Slider doesn't have range
+      } else {
+        noUiSlider.create(slider, {
+          start: [currentMin, currentMax],
+          connect: true, // Display a colored bar between the handles
+          behaviour: 'tap', // Move handle on tap, bar is draggable
+          animate: true,
+          animationDuration: 300,
+          step: sliderStep,
+          range: {
+            'min': rangeMin,
+            'max': rangeMax
+          }
+        });
+      }
+      // Slide event
+      this.slideEvent(sliderId, amountId, rangeMin, rangeMax, data);
+      // onChange event for textboxes
+      // When the Range has two textboxes (style1)
+      if (this.getSettingValue('general.rangeStyle') == 'style1') {
+        var amountMin = filterOptionRangeClass + '-amount-min', amountMax = filterOptionRangeClass + '-amount-max';
+        // Format value for display
+        var displayValue = this.customizeDisplayRangeValue(currentMin, currentMax, data.filterType, data);
+        var displayMin = displayValue[0], displayMax = displayValue[1];
+        jQ('#' + amountId).find('.' + amountMin).val(displayMin);
+        jQ('#' + amountId).find('.' + amountMax).val(displayMax);
+        
+        // onChange event
+        jQ('#' + amountId).on('change', '.' + amountMin, function() {
+          var minValue = jQ(this).val();
+          var maxValue = jQ('#' + amountId + ' .' + amountMax).val();
+          slider.noUiSlider.set([minValue, maxValue]);
+        });
+        jQ('#' + amountId).on('change', '.' + amountMax, function() {
+          var maxValue = jQ(this).val();
+          var minValue = jQ('#' + amountId + ' .' + amountMin).val();
+          slider.noUiSlider.set([minValue, maxValue]);
+        });
+      }
+      // Set event
+      this.setRangeValueEvent(sliderId, rangeMin, rangeMax, data);
+    }
+  }else{
+  	var self = this;
+    var slider = document.getElementById(sliderId);
+    var sliderRange = data.hasOwnProperty('sliderRange') && data.sliderRange !== null ? parseInt(data.sliderRange) : 4;
+    // BC-Custom
+    var sliderStep = data.hasOwnProperty('sliderStep') && data.sliderStep !== null ? parseFloat(data.sliderStep) : 1;
+    var sliderDelimiter = data.hasOwnProperty('sliderDelimiter') && data.sliderDelimiter !== null ? data.sliderDelimiter : '';
+    var filterOptionRangeClass = this.class.filterOptionRange; // bc-sf-filter-option-range
+    // Case: Slider is divided into multiple ranges
+    var rangeDecimals = data.filterType.indexOf('price') > -1 ? this.getSettingValue('general.decimalPriceRange') : 0;
+    if (sliderStep <= 0.1) rangeDecimals = 1;
+    if (sliderStep <= 0.01) rangeDecimals = 2;
+    if (sliderStep <= 0.001) rangeDecimals = 3;
+
+
+    if (((rangeMax - rangeMin < sliderStep) || rangeMin == null || rangeMax == null) && this.getSettingValue('general.oneValueRangeSlider')) {
+      rangeMin -= 0.0001, rangeMax += 0.0001;
       noUiSlider.create(slider, {
         start: [currentMin, currentMax],
         connect: true, // Display a colored bar between the handles
@@ -433,35 +503,132 @@ BCSfFilter.prototype.buildFilterOptionGeneralRangeSlider = function(sliderId, am
           'max': rangeMax
         }
       });
+      jQ(slider).attr('disabled', ' disabled');
+    } else {
+      // BC-Custom
+      rangeMin = parseFloat(rangeMin.toFixed(rangeMin));
+      rangeMax = parseFloat(rangeMax.toFixed(rangeDecimals));
+      // Case: Slider is divided into multiple ranges
+      if (sliderRange > 0) {
+        var rangeArr = [];
+        for (var i = 0; i < sliderRange; i++) {
+          rangeArr.push(i * (100 / sliderRange));
+        }
+        rangeArr.push(100);
+        noUiSlider.create(slider, {
+          start: [currentMin, currentMax],
+          connect: true, // Display a colored bar between the handles
+          behaviour: 'tap', // Move handle on tap, bar is draggable
+          animate: true,
+          animationDuration: 300,
+          step: sliderStep,
+          range: {
+            'min': rangeMin,
+            'max': rangeMax
+          },
+          pips: {
+            mode: 'positions',
+            values: rangeArr,
+            density: sliderRange,
+            format: wNumb({
+              decimals: rangeDecimals,
+              thousand: sliderDelimiter,
+              edit: function(value) {
+                return addCurrentcy(value);
+              }
+            })
+          }
+        });
+        if (!this.getSettingValue('general.enableSliderRuler')) jQ('#' + sliderId).addClass('no-ruler');
+        jQ('#' + sliderId).addClass('has-pips');
+        slider.noUiSlider.on('update', function() {
+          var last_pips = jQ('#' + sliderId + ' .noUi-pips').find('.noUi-marker').last();
+          if (last_pips.hasClass('noUi-marker-normal')) {
+            last_pips.removeClass('noUi-marker-normal');
+            last_pips.addClass('noUi-marker-large');
+            last_pips.after('<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">' + Math.ceil(rangeMax) + '</div>');
+          }
+          jQ('div[data-type="'+data.filterType+'"]').find(".bc-sf-filter-option-range-amount").html(addCurrentcy(currentMin) +" - "+ addCurrentcy(currentMax));
+        });
+        // Case: Slider doesn't have range
+      } else {
+        noUiSlider.create(slider, {
+          start: [currentMin, currentMax],
+          connect: true, // Display a colored bar between the handles
+          behaviour: 'tap', // Move handle on tap, bar is draggable
+          animate: true,
+          animationDuration: 300,
+          step: sliderStep,
+          range: {
+            'min': rangeMin,
+            'max': rangeMax
+          }
+        });
+      }
+      // Slide event
+      this.slideEvent(sliderId, amountId, rangeMin, rangeMax, data);
+      // onChange event for textboxes
+      // When the Range has two textboxes (style1)
+      if (this.getSettingValue('general.rangeStyle') == 'style1') {
+        var amountMin = filterOptionRangeClass + '-amount-min', amountMax = filterOptionRangeClass + '-amount-max';
+        // Format value for display
+        var displayValue = this.customizeDisplayRangeValue(currentMin, currentMax, data.filterType, data);
+        var displayMin = displayValue[0], displayMax = displayValue[1];
+        jQ('#' + amountId).find('.' + amountMin).val(displayMin);
+        jQ('#' + amountId).find('.' + amountMax).val(displayMax);
+        // onChange event
+        jQ('#' + amountId).on('change', '.' + amountMin, function() {
+          var minValue = jQ(this).val();
+          var maxValue = jQ('#' + amountId + ' .' + amountMax).val();
+          slider.noUiSlider.set([minValue, maxValue]);
+        });
+        jQ('#' + amountId).on('change', '.' + amountMax, function() {
+          var maxValue = jQ(this).val();
+          var minValue = jQ('#' + amountId + ' .' + amountMin).val();
+          slider.noUiSlider.set([minValue, maxValue]);
+        });
+      }
+      // Set event
+      this.setRangeValueEvent(sliderId, rangeMin, rangeMax, data);
     }
-    // Slide event
-    this.slideEvent(sliderId, amountId, rangeMin, rangeMax, data);
-    // onChange event for textboxes
-    // When the Range has two textboxes (style1)
-    if (this.getSettingValue('general.rangeStyle') == 'style1') {
-      var amountMin = filterOptionRangeClass + '-amount-min', amountMax = filterOptionRangeClass + '-amount-max';
-      // Format value for display
-      var displayValue = this.customizeDisplayRangeValue(currentMin, currentMax, data.filterType, data);
-      var displayMin = displayValue[0], displayMax = displayValue[1];
-      jQ('#' + amountId).find('.' + amountMin).val(displayMin);
-      jQ('#' + amountId).find('.' + amountMax).val(displayMax);
-      // onChange event
-      jQ('#' + amountId).on('change', '.' + amountMin, function() {
-        var minValue = jQ(this).val();
-        var maxValue = jQ('#' + amountId + ' .' + amountMax).val();
-        slider.noUiSlider.set([minValue, maxValue]);
-      });
-      jQ('#' + amountId).on('change', '.' + amountMax, function() {
-        var maxValue = jQ(this).val();
-        var minValue = jQ('#' + amountId + ' .' + amountMin).val();
-        slider.noUiSlider.set([minValue, maxValue]);
-      });
-    }
-    // Set event
-    this.setRangeValueEvent(sliderId, rangeMin, rangeMax, data);
   }
 };
 
+// Slide event
+BCSfFilter.prototype.slideEvent = function(sliderId, amountId, rangeMin, rangeMax, fOData) {
+  	var self = this;
+    var slider = document.getElementById(sliderId);
+    var filterOptionRangeClass = self.class.filterOptionRange; // bc-sf-filter-option-range
+    
+    if(sliderId.includes("pf_p_price")){
+      slider.noUiSlider.on('slide', function(values, handle) {
+          // Format value for display
+          var displayValue = self.customizeDisplayRangeValue(values[0], values[1], fOData.filterType, fOData);
+          var minValue = displayValue[0], maxValue = displayValue[1];
+
+          if (self.getSettingValue('general.rangeStyle') == 'style2') {
+              jQ('#' + amountId).html(addCurrentcy(minValue) + ' - ' + addCurrentcy(maxValue));
+          } else {
+              jQ('#' + amountId).find('.' + filterOptionRangeClass + '-amount-min').val(minValue);
+              jQ('#' + amountId).find('.' + filterOptionRangeClass + '-amount-max').val(maxValue);
+          }
+      });
+    }else{
+      slider.noUiSlider.on('slide', function(values, handle) {
+          // Format value for display
+          var displayValue = self.customizeDisplayRangeValue(values[0], values[1], fOData.filterType, fOData);
+          var minValue = displayValue[0], maxValue = displayValue[1];
+
+          if (self.getSettingValue('general.rangeStyle') == 'style2') {
+              jQ('#' + amountId).html(addInches(minValue) + ' - ' + addInches(maxValue));
+          } else {
+              jQ('#' + amountId).find('.' + filterOptionRangeClass + '-amount-min').val(minValue);
+              jQ('#' + amountId).find('.' + filterOptionRangeClass + '-amount-max').val(maxValue);
+          }
+      });
+    }
+  
+};
 
 BCSfFilter.prototype.buildProductListItem = function(data) {
   /*** Prepare data ***/

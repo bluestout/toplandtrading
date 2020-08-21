@@ -201,9 +201,11 @@
 
 
         <li class="CartMenuSTatic"> 
+          <a href="/cart">
           <span class="tlicon-cart"></span> 
-          <a href="/cart" class="CartMobileMenuCount">Cart <b>{{cart.item_count}}</b></a> 
+          <span class="CartMobileMenuCount">Cart <b>{{cart.item_count}}</b></span> 
           <span class="tlicon-caret-right"></span> 
+          </a>
         </li>
         <li class="WishlistMenuSTatic"> 
           {% capture the_snippet_fave_icon_menu %}{% include 'ssw-widget-faveicon-menu' with product.id %}{% endcapture %}
