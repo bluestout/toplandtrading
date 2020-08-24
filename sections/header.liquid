@@ -235,10 +235,9 @@
       <div class="menuLogin"> 
         {% if customer %}
         <ul class="CustomerExist">
-          <li><a href="/account/">Account</a></li>
-          <li><a href="#">Order History</a></li>
-          <li><a href="#">My Addresses</a></li>
-          <li><a href="#">Profile Settings</a></li>
+          {%for link in linklists["customer-account"].links%}
+          <li><a href="{{link.url}}">{{link.title}}</a></li>
+          {%endfor%}
         </ul>
         <a href="/account/logout" class="cst_AfterLogin">Logout</a>
         {% else %}

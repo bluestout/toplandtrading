@@ -1,4 +1,62 @@
 $(document).ready(function(){
+   // Initialize each edit form's country/province selector
+//     $('.address-country-option').each(function() {
+//       var formId = $(this).data('form-id');
+//       var countrySelector = 'AddressCountry_' + formId;
+//       var provinceSelector = 'AddressProvince_' + formId;
+//       var containerSelector = 'AddressProvinceContainer_' + formId;
+
+//       // eslint-disable-next-line no-new
+//       new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {
+//         hideElement: containerSelector
+//       });
+//     });
+
+//     // Toggle new/edit address forms
+//     $('.address-new-toggle').on('click', function() {
+//       var isExpanded = $newAddressFormButton.attr('aria-expanded') === 'true';
+
+//       $newAddressForm.toggleClass('hide');
+//       $newAddressFormButton.attr('aria-expanded', !isExpanded).focus();
+//     });
+
+//     $('.address-edit-toggle').on('click', function() {
+//       var formId = $(this).data('form-id');
+//       var $editButton = $('#EditFormButton_' + formId);
+//       var $editAddress = $('#EditAddress_' + formId);
+//       var isExpanded = $editButton.attr('aria-expanded') === 'true';
+
+//       $editAddress.toggleClass('hide');
+//       $editButton.attr('aria-expanded', !isExpanded).focus();
+//     });
+  $('.address-delete').on('click', function() {
+      var $el = $(this);
+      var target = $el.data('target');
+      var confirmMessage = $el.data('confirm-message');
+
+      // eslint-disable-next-line no-alert
+      if (
+        confirm(
+          confirmMessage || 'Are you sure you wish to delete this address?'
+        )
+      ) {
+        Shopify.postLink(target, {
+          parameters: { _method: 'delete' }
+        });
+      }
+    });
+  $("#AddressNewButton").click(function(){
+  $("#AddressNewForm").toggleClass("hide");
+  })
+  $(".text-link.address-new-toggle").click(function(){
+  $(this).parents("#AddressNewForm").addClass("hide");
+  })
+  $(".btn.btn--small.address-edit-toggle").click(function(){
+  $(this).parents(".address.text-center").next(".form-vertical").toggleClass("hide");
+  })
+  $(".text-link.address-edit-toggle").click(function(){
+  $(this).parents("form").parents(".form-vertical").addClass("hide");
+  });
   $(".CustomHoverList").mouseover(function(){
     var ListNumber = $(this).attr("data-val");
     $(".CustomHoverList").removeClass("subListActive");
@@ -317,8 +375,9 @@ type: 'POST',
   })
   $(".activeSubMenu").parents(".mobile-mega-menu").parents(".mobile-mega-menu-parent").addClass("ActiveMenu");
   $(".mobile-mega-menu-parent").click(function(){
-  
+  if (!$(event.target).closest('.mobile-mega-menu').length) {
   $(this).children(".mobile-mega-menu").toggleClass("parentActive");
+  }
   })
   /********************** ITEM SHOW ON COLLECTION PAGE ***********************/
   
