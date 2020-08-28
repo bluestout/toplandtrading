@@ -1,0 +1,126 @@
+<div class="OrderHis">  
+<div class="tlt-acnt-address-top">
+    <div class="tlt-acnt-address-top-row">
+       {% for order in customer.orders %}{% assign numberget = forloop.index %}{%endfor%}
+      <div class="tlt-acnt-address-top-left"><p>4 orders total . 2 active</p></div>
+      <div class="tlt-acnt-address-top-right"><span class="pastMnths">Past 6 months</span></div>		
+    </div>	
+  </div>
+  <div class="MohTop">
+  <div class="MainOrdrHis">
+  <header>
+    <div class="Mcol mc1">Date</div>
+    <div class="Mcol mc2">Order</div>
+    <div class="Mcol mc3">Amount</div>
+    <div class="Mcol mc4">Payment status</div>
+    <div class="Mcol mc5">Estimated Delivery</div>
+    <div class="Mcol mc6"></div>
+  </header>
+  <div class="mohrow active">
+    <div class="Mcol mc1">05/05/2017</div>
+    <div class="Mcol mc2">#3303</div>
+    <div class="Mcol mc3">$275.00</div>
+    <div class="Mcol mc4"><span>Authorized</span></div>
+    <div class="Mcol mc5">Oct 25, 2017</div>
+    <div class="Mcol mc6"><a class="dlz" href="#">Details ></a></div>
+  </div>
+  <div class="mohrow">
+    <div class="Mcol mc1">05/05/2017</div>
+    <div class="Mcol mc2">#3303</div>
+    <div class="Mcol mc3">$275.00</div>
+    <div class="Mcol mc4"><span>Authorized</span></div>
+    <div class="Mcol mc5">Oct 25, 2017</div>
+    <div class="Mcol mc6"><a class="dlz" href="#">Details ></a></div>
+  </div>
+  <div class="mohrow">
+    <div class="Mcol mc1">05/05/2017</div>
+    <div class="Mcol mc2">#3303</div>
+    <div class="Mcol mc3">$275.00</div>
+    <div class="Mcol mc4"><span>Authorized</span></div>
+    <div class="Mcol mc5">Oct 25, 2017</div>
+    <div class="Mcol mc6"><a class="dlz" href="#">Details ></a></div>
+  </div>
+  <div class="mohrow">
+    <div class="Mcol mc1">05/05/2017</div>
+    <div class="Mcol mc2">#3303</div>
+    <div class="Mcol mc3">$275.00</div>
+    <div class="Mcol mc4"><span>Authorized</span></div>
+    <div class="Mcol mc5">Oct 25, 2017</div>
+    <div class="Mcol mc6"><a class="dlz" href="#">Details ></a></div>
+  </div>
+    {%comment%}
+   {% for order in customer.orders %}
+    <div class="mohrow">
+    <div class="Mcol mc1">{{ order.created_at | time_tag: format: 'date' }}</div>
+    <div class="Mcol mc2">{{ order.name }}</div>
+    <div class="Mcol mc3">{{ order.total_price | money }}</div>
+    <div class="Mcol mc4"><span>{{ order.financial_status_label }}</span></div>
+    <div class="Mcol mc6"><a class="dlz" href="{{ order.customer_url }}">Details ></a></div>
+  </div>
+    {%endfor%}
+     {%endcomment%}
+</div>
+</div>
+<!----------mobile view------------->
+<div class="MobOrdrHis">
+  <div class="mobhrow active">
+  <div class="McoMain1">
+    <div class="Mcolmc1"><p><span>Date</span>05/05/2017</p></div>
+    <div class="Mcolmc2"><p><span>Order</span>#3303</p></div>
+	<div class="Mcolmc3"><p><span>Estimated Delivery</span>Oct 25, 2017</p></div>
+  </div>
+  <div class="McoMain2">
+    <div class="Mcolmc4"><span>Authorized</span></div>
+	<div class="Mcolmc5">$275.00</div>
+  </div>
+    <div class="McoMain3">
+    <div class="Mcolmc6"><a class="dlz" href="#">Details  ></a></div>
+  </div>
+  </div>
+  <div class="mobhrow">
+  <div class="McoMain1">
+    <div class="Mcolmc1"><p><span>Date</span>05/05/2017</p></div>
+    <div class="Mcolmc2"><p><span>Order</span>#3303</p></div>
+	<div class="Mcolmc3"><p><span>Estimated Delivery</span>Oct 25, 2017</p></div>
+  </div>
+  <div class="McoMain2">
+    <div class="Mcolmc4"><span>Authorized</span></div>
+	<div class="Mcolmc5">$275.00</div>
+  </div>
+    <div class="McoMain3">
+    <div class="Mcolmc6"><a class="dlz" href="#">Details  ></a></div>
+  </div>
+  </div>
+    <div class="mobhrow">
+  <div class="McoMain1">
+    <div class="Mcolmc1"><p><span>Date</span>05/05/2017</p></div>
+    <div class="Mcolmc2"><p><span>Order</span>#3303</p></div>
+	<div class="Mcolmc3"><p><span>Estimated Delivery</span>Oct 25, 2017</p></div>
+  </div>
+  <div class="McoMain2">
+    <div class="Mcolmc4"><span>Authorized</span></div>
+	<div class="Mcolmc5">$275.00</div>
+  </div>
+    <div class="McoMain3">
+    <div class="Mcolmc6"><a class="dlz" href="#">Details  ></a></div>
+  </div>
+  </div>  
+   {%comment%}
+  {% for order in customer.orders %}
+  <div class="mobhrow">
+  <div class="McoMain1">
+    <div class="Mcolmc1"><p><span>Date</span>{{ order.created_at | time_tag: format: 'date' }}</p></div>
+    <div class="Mcolmc2"><p><span>Order</span>{{ order.name }}</p></div>
+  </div>
+  <div class="McoMain2">
+    <div class="Mcolmc4"><span>{{ order.financial_status_label }}</span></div>
+	<div class="Mcolmc5">{{ order.total_price | money }}</div>
+  </div>
+    <div class="McoMain3">
+    <div class="Mcolmc6"></div>
+  </div>
+  </div>
+  {%endfor%}
+   {%endcomment%}
+</div>
+</div>

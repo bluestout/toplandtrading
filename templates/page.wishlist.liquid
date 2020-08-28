@@ -55,18 +55,18 @@
                     getProductMetafields(ssw(element), getFaveItemUrl);
                 });
                 ssw(document.body).on('click', '.qtyplus', function(event) { // Bind click to plus button
-                  	event.preventDefault();
-                  	var getQuantity = parseInt(ssw(this).parents('.CustomQunt').find('input[type="text"]').val());
-                  	getQuantity++
-                    ssw(this).parents('.CustomQunt').find('input[type="text"]').val(getQuantity);
+                  //	event.preventDefault();
+                  //	var getQuantity = parseInt(ssw(this).parents('.CustomQunt').find('input[type="text"]').val());
+                  //	getQuantity++
+                  //  ssw(this).parents('.CustomQunt').find('input[type="text"]').val(getQuantity);
                 });
                 ssw(document.body).on('click', '.qtyminus', function(event) { // Bind click to minus button
-                  	event.preventDefault();
-                  	var getQuantity = parseInt(ssw(this).parents('.CustomQunt').find('input[type="text"]').val());
-                    if (getQuantity > 0) {
-                      getQuantity--
-                      ssw(this).parents('.CustomQunt').find('input[type="text"]').val(getQuantity);
-                    }
+                  	//event.preventDefault();
+                  	//var getQuantity = parseInt(ssw(this).parents('.CustomQunt').find('input[type="text"]').val());
+                    //if (getQuantity > 0) {
+                    //  getQuantity--
+                    //  ssw(this).parents('.CustomQunt').find('input[type="text"]').val(getQuantity);
+                    //}
                 });
                 ssw(document.body).on('click', '.ssw-fave-add-to-cart', function(event) { // Bind click to add to cart button
                   	event.preventDefault();

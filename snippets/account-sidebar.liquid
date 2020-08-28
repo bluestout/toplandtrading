@@ -1,0 +1,5 @@
+<ul class="CustomerSidebar">
+{% for link in linklists["customer-account"].links%}
+<li class="{%if forloop.first%}{%endif%}{%if forloop.index == 1 or forloop.index == 2%} cookiclasses{%else%} restclasses{%endif%}"><a href="{{link.url}}">{{link.title}}</a></li>
+{%endfor%}
+</ul>

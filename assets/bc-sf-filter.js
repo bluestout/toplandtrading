@@ -25,6 +25,7 @@ var bcSfFilterTemplate = {
                               '<div class="ssw-faveiticon sswfaveicon{{itemId}}" style="z-index: 100;">' +
                                 '<i data-product-id="{{itemId}}" data-count="0" class="ssw-icon-heart-o ssw-fave-icon ssw-wishlist-element ssw-not-synch"' +
                                   'data-params="{"product_id":"{{itemId}}","event":"fave_button","page":"product_profile"}"></i>' +
+                                  '<p class="favriteIcon">Add to favorites</p>'+
                                 '<span class="faves-count">...</span>' +
                               '</div>' + 
 
@@ -873,32 +874,32 @@ BCSfFilter.prototype.buildAdditionalElements = function(data, eventType) {
 
     calcHeightElement(".product-card",".product-card");
   
-    $('.BothIcons .qtyplus').click(function(){
-        var valuepluss = $(this).attr("max");
+    // $('.BothIcons .qtyplus').click(function(){
+    //     var valuepluss = $(this).attr("max");
             
-        var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
+    //     var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
             
-        if(val_qty >= 0 &&  val_qty < valuepluss)
-        {
-              val_qty = val_qty + 1 ;
-        }
+    //     if(val_qty >= 0 &&  val_qty < valuepluss)
+    //     {
+    //           val_qty = val_qty + 1 ;
+    //     }
       
-        $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
+    //     $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
     
-    });
+    // });
    
-    $('.BothIcons .qtyminus').click(function(){
-        var valueplus = $(this).attr("min");
+    // $('.BothIcons .qtyminus').click(function(){
+    //     var valueplus = $(this).attr("min");
             
-        var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
-        if(val_qty > 1)
-        {
-          val_qty = val_qty - 1 ;
-        }
+    //     var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
+    //     if(val_qty > 1)
+    //     {
+    //       val_qty = val_qty - 1 ;
+    //     }
       
-        $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
+    //     $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
       
-    });
+    // });
 /************************** MOBILE AJAX GRID Qunatity Manage PRODUCT**************************************/
 
     $('.qtyplusgrid').click(function(){
@@ -965,7 +966,8 @@ BCSfFilter.prototype.buildAdditionalElements = function(data, eventType) {
       })
     
     if(jQ(window).width() <= 767){
-    	jQ('.filters-toolbar__label').html("Show");
+      jQ('#bc-sf-filter-top-show-limit .filters-toolbar__label').html("Show");
+      jQ('#bc-sf-filter-top-sorting .filters-toolbar__label').html("Sort");
         if(jQ("#bc-sf-filter-options-wrapper").find(".close").length <= 0){
           jQ("#bc-sf-filter-options-wrapper").prepend('<div class="close"> <span class="tlicon-x"></span> </div>');
         }

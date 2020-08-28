@@ -1,3 +1,58 @@
+<div class="tlt-account-main">
+	<div class="page-width">
+		<div class="tlt-account-main-head">
+			<p>{{ 'customer.account.title' | t }}</p>
+			<h1>Profile Settings</h1>
+		</div>
+		<div class="tlt-account-main-section">
+			<div class="tlt-account-main-sidebar">
+				{% include "account-sidebar" %}
+			</div>
+			<div class="tlt-account-main-info">
+              {% include "order-history" %}
+				<div class="tlt-account-main-form AccountForm">
+                  <div class="tlt-account-main-form-inn">
+					<div class="tlt-account-main-form-row">
+						<label>First name</label>
+						<div class="tlt-account-main-form-field"><input type="text" value="{{customer.first_name}}" /></div>
+					</div>
+					<div class="tlt-account-main-form-row">
+						<label>Last name</label>
+						<div class="tlt-account-main-form-field"><input type="text" value="{{customer.last_name}}"/></div>
+					</div>
+					<div class="tlt-account-main-form-row">
+						<label>Email</label>
+						<div class="tlt-account-main-form-field"><input type="text" value="{{customer.email}}"/></div>
+					</div>
+					<div class="tlt-account-main-form-row tlt-account-main-form-row-gap">
+						<label>Gender</label>
+						<div class="tlt-account-main-form-field">
+                      <select>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                          </select>
+                      </div>
+					</div>
+					<div class="tlt-account-main-form-row">
+						<label>Company name</label>
+						<div class="tlt-account-main-form-field"><input type="text" value="Test"/></div>
+					</div>
+					<div class="tlt-account-main-form-row">
+						<label>Business name</label>
+						<div class="tlt-account-main-form-field"><input type="text" value="Test"/></div>
+					</div>
+					<div class="tlt-account-main-form-row">
+						<label></label>
+						<div class="tlt-account-main-form-field tlt-account-main-form-btn"><input type="button" value="Save changes"/></div>
+					</div>
+                   </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{%comment%}
 <div class="page-width">
   <div class="section-header text-center">
     <h1>{{ 'customer.account.title' | t }}</h1>
@@ -55,3 +110,4 @@
     </div>
   </div>
 </div>
+{%endcomment%}

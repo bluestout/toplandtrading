@@ -1,7 +1,6 @@
 * { 
   outline: none; 
 }
-
 input:focus, textarea:focus, select:focus {
   color: #000 !important;
   opacity: 1 !important;
@@ -2274,7 +2273,7 @@ input{
   display:none;
 }
 .CustomApptemp #bc-sf-filter-products .grid-view-item:hover .ssw-faveiticon {
-  display:block;
+  display:flex;
 }
 .CustomApptemp .bc-sf-filter-option-block .bc-sf-filter-block-title h3 {
   font-family: Lato,sans-serif;
@@ -2792,6 +2791,381 @@ input#address_default_address_new, .cstAddressckbx input[type="checkbox"] {
 
 
 
+/*account page layout starts*/
+.tlt-account-main{
+  margin-bottom: 170px;
+}
+.tlt-account-main-head{
+  text-align: center;
+  margin-bottom: 60px;
+}
+.tlt-account-main-head p{
+  margin: 0 0 6px;
+  color: #959ca4;
+  font-weight: 700;
+  font-size: 16px;
+}
+.tlt-account-main-head h1{
+  margin: 0;
+}
+.tlt-account-main-section:after{
+  clear: both;
+  display: table;
+  content:"";  
+}
+.tlt-account-main-section .tlt-account-main-sidebar{
+  width: 290px;
+  float: left;
+  padding-right: 20px;
+}
+.tlt-account-main-section .tlt-account-main-info{
+  width: calc(100% - 290px);
+  float: left;
+}
+.CustomerSidebar{
+  max-width: 205px;
+}
+.CustomerSidebar li{
+  margin-bottom: 5px;
+}
+.CustomerSidebar li a{
+  color: #959ca4;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 12px 20px;
+  display: block;
+}
+.CustomerSidebar li a:hover,
+.CustomerSidebar li.active a{
+  background-color: #fff;
+  color: #FE5252;
+}
+.tlt-account-main-form-row{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 7px;
+}
+.tlt-account-main-form-row label{
+  width: 140px;
+  padding-right: 25px;
+  text-align: right;
+  color: #959ca4;
+  min-height: 1px;
+  font-size: 14px;
+}
+.tlt-account-main-form-row .tlt-account-main-form-field{
+  width: calc(100% - 140px);
+}
+.tlt-account-main-form-field input[type='text']{
+  border: 1px solid #c8cdd2;
+  padding: 12px 16px 13px;
+  font-size: 14px;
+  background-color: #fff;
+  width: 100%;
+  max-width: 355px;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+}
+.tlt-account-main-form-field select{
+  border: 1px solid #c8cdd2;
+  padding: 12px 16px 13px;
+  font-size: 14px;
+  background-color: #fff;
+  width: 100%;
+  max-width: 355px;
+}
+.tlt-account-main-form-row-gap{
+  margin-bottom: 35px;
+}
+.tlt-account-main-form{
+  max-width: 800px;
+}
+.tlt-account-main-form-inn{
+  max-width: 495px;
+  margin: auto;
+}
+.tlt-account-main-form-btn input{
+  background-color: #fe5252;
+  line-height: 52px;
+  width: 100%;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  cursor: pointer;
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  padding: 0 15px;
+}
+/*account page layout ends*/
+/*account address page starts*/
+.tlt-acnt-address-top{
+  margin-bottom: 11px;
+}
+.tlt-acnt-address-top-row{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;	
+}
+.tlt-red-lined-btn{
+  border:1px solid #FE5252;
+  color: #FE5252 !important;
+  padding: 11px 26px 12px;
+  border-radius: 4px;
+  line-height: normal;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-block;
+}
+.tlt-acnt-address-bot-row{
+  padding: 30px 45px 30px 35px;
+  background-color: #fff;
+  margin-bottom: 4px;
+}
+.tlt-acnt-address-bot-row .form-vertical {
+  margin-top: 20px;
+}
+.tlt-acnt-address-bot-row .form-vertical hr {
+  display: none;
+}
+.tlt-acnt-address-bot-title{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.tlt-acnt-address-bot-title h3{
+  font-family: Lato,sans-serif;
+  font-weight: 700;
+  margin: 0;
+  font-size: 18px;
+}
+.tlt-acnt-address-bot-icon ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tlt-acnt-address-bot-icon ul li{
+  display: inline-block;
+  margin-left: 12px;
+}
+.tlt-acnt-address-bot-icon ul li:first-child{
+  margin-left: 0px;
+}
+.tlt-acnt-address-bot-icon li button {
+  border: none;
+  background: none;
+  padding: 0;
+}
+.tlt-acnt-address-bot-icon li button.btn:not([disabled]):hover, 
+.tlt-acnt-address-bot-icon li button.btn:hover,
+.tlt-acnt-address-bot-icon li button.btn:focus {
+  background-color: transparent;
+}
+.tlt-acnt-address-bot-icon li button svg {
+  width: 18px;
+  fill: #adacad;
+}
+.tlt-acnt-address-bot-icon li button.BtnCheckDlt svg {
+  width: 19px;
+  margin: 4px 0 0;
+}
+.tlt-acnt-address-bot-address-inn{
+  max-width: 705px;
+}
+.tlt-acnt-address-bot-address-inn:after{
+  clear: both;
+  display: table;
+  content:"";
+}
+.tlt-acnt-address-bot-address-inn .tlt-acnt-address-bot-address-col{
+  width: 33.33%;
+  padding-right: 10px;
+  float: left;
+}
+.tlt-acnt-address-bot-address-col p {
+  color: #000;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.tlt-acnt-address-bot-address-col p span{
+  display: block;
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+.tlt-acnt-address-bot-address-col p a {
+  font-size: 14px;
+  word-break: break-word;
+  text-transform: lowercase;
+}
+.tlt-acnt-def-badge {
+  display: inline-block;
+  background: #6d6e6e;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 12px;
+  font-weight: bold;
+  line-height: normal;
+}
+.tlt-acnt-address-top-left p {
+  font-size: 14px;
+  color: #959ca4;
+}
+.tlt-acnt-address-bot-row-fade .tlt-acnt-address-bot-address,
+.tlt-acnt-address-bot-row-fade .tlt-acnt-address-bot-title h3{
+  opacity: .5;
+}
+
+
+/*account address page ends*/
+.MainOrdrHis header, .mohrow {
+  display: flex;
+  width: 100%;
+  padding: 16px 10px;
+}
+.MainOrdrHis {
+  min-width: 680px;
+}
+.MohTop {
+  overflow-x: auto;
+}
+span.pastMnths {
+  font-size: 14px;
+  color: #959ca4;
+  display: none;
+}
+.Mcol {
+  color: #959ca4;
+  font-size: 14px;
+  word-break: break-word;
+  padding: 0 2px;
+}
+.mohrow.active {
+  background: #fff;
+}
+.mohrow.active .Mcol {
+  color: #000;
+  font-weight: 600;
+}
+.Mcol.mc1 {
+  width: 17%;
+}
+.Mcol.mc2, .Mcol.mc3, .Mcol.mc4 {
+  width: 15%;
+}
+.Mcol.mc5 {
+  width: 32%;
+  text-align: center;
+  display: none;
+}
+.Mcol.mc4 span {
+  display: inline-block;
+  background: #6d6e6e;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 10px;
+  font-weight: bold;
+  line-height: normal;
+}
+.Mcol.mc6 {
+  width: 37%;
+  display: flex;
+  justify-content: flex-end;
+}
+.Mcol.mc6 a {
+  color: #FE5252;
+  font-weight: 600;
+  font-size: 14px;
+}
+a.reorder {
+  padding-right: 20px;
+}
+
+.mobhrow.active {
+  background: #fff;
+}
+.mobhrow.active .McoMain1 div p, .mobhrow.active .Mcolmc5 {
+  color: #000;
+}
+.mohrow {
+  border-bottom: 2px solid #eaeaea;
+}
+.MobOrdrHis {
+  display: none;
+}
+.mobhrow {
+  padding: 12px;
+  border-bottom: 2px solid #eaeaea;
+}
+.McoMain1, .McoMain2, .McoMain3 {
+  display: flex;
+}
+.McoMain1 div, .McoMain2 div, .McoMain3 div {
+  padding: 10px;
+}
+.McoMain1 div p {
+  font-size: 13px;
+  color: #959ca4;
+}
+.McoMain1 div p span {
+  font-size: 13px;
+  display: block;
+  color: #959ca4;
+}
+.McoMain2 {
+  justify-content: space-between;
+  align-items: center;
+}
+.McoMain3 {
+  justify-content: flex-end;
+  border-top: 1px solid #eaeaea;
+}
+.Mcolmc3 {
+  display: none;
+}
+.Mcolmc4 span {
+  display: inline-block;
+  background: #6d6e6e;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 10px;
+  font-weight: bold;
+}
+.Mcolmc5 {
+  font-size: 13px;
+  font-weight: bold;
+  color: #959ca4;
+}
+.Mcolmc6 a {
+  color: #FE5252;
+  font-weight: 600;
+  font-size: 14px;
+}
+.OrderHis, .AccountForm {
+  display:none; 
+}
+
+
+
 /***************************/
 /***************************/
 /***********@****************/
@@ -2898,11 +3272,6 @@ input#address_default_address_new, .cstAddressckbx input[type="checkbox"] {
 }
 
 
-
-
-
-
-
 /*************************************************/
 /******************@Animation *******************/
 /*************************************************/
@@ -2983,7 +3352,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 4px 10px;
   } 
   .CustomHeader .ChildrenNav.site-nav__dropdown {
-    top: 50px;
+    top: 49px;
   }
   #shopify-section-header.FixedHeader .CustomHeader .ChildrenNav.site-nav__dropdown {
     top: 30px;
@@ -2992,8 +3361,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media (max-width:1199px) {
-
-
+  .Mcol.mc6 {
+    justify-content: flex-start;
+  }
   .CustomApptemp .qview-button.qview-button--rounded-none.qview-button--mobile-always_show.qview-button--mobile-top_right {
     display: none !important;
   }
@@ -3045,6 +3415,9 @@ input[type=number]::-webkit-outer-spin-button {
     display: flex;
   } 
   .CustomDivImagewrap .ssw-faveiticon p.favriteIcon {
+    display: none;
+  }
+  .ssw-faveiticon p.favriteIcon {
     display: none;
   }
   .sumrOrdr h2 {
@@ -3330,8 +3703,8 @@ input[type=number]::-webkit-outer-spin-button {
   li.NotSubchild.activeMenu a {
     color: #fe5252;
   } 
-  ul.CustomerExist li:first-child a {
-    font-size: 14px;
+  ul.CustomerExist li.AfterAccount a {
+    font-size: 13px;
     color: #999;
   }  
   ul.CustomerExist li a {
@@ -3415,6 +3788,80 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media (max-width:749px) {
+  .tlt-account-main-form.AccountForm {
+    margin: 0 -30px;
+  }
+  .tlt-account-main-head p {
+    font-size: 14px;
+  }
+  .tlt-account-main-head {
+    margin-bottom: 40px;
+  }
+  .tlt-account-main {
+    margin-bottom: 40px;
+  }
+  .tlt-red-lined-btn {
+    padding: 8px 16px;
+  }
+  .tlt-acnt-address-bot-icon li button.BtnCheckDlt svg {
+    margin: 6px 0 0;
+  }
+  .tlt-acnt-address-bot-row {
+    padding: 25px;
+  }
+  .tlt-account-main-info #AddressNewForm {
+    margin: 40px -45px 0;
+  }
+  .tlt-account-main-head h1 {
+    font-size: 24px;
+  }
+  .MohTop {
+    display: none;
+  } 
+  .MobOrdrHis {
+    display: block;
+    margin-left: -67px;
+    margin-right: -67px;
+  }
+  .tlt-account-main-section .tlt-account-main-sidebar{
+    display: none;
+  }
+  .tlt-account-main-section .tlt-account-main-info{
+    width: 100%;
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+  .tlt-account-main-form-inn{
+    max-width: none;
+  }
+  .tlt-account-main-form-row label{
+    width: 100%;
+    padding-right: 0;
+    text-align: left;
+    font-size: 13px;
+  }
+  .tlt-account-main-form-row .tlt-account-main-form-field{
+    width: 100%;
+  }
+  .tlt-account-main-form-field input[type='text']{
+    max-width: none;
+  }
+  .tlt-acnt-address-top{
+    margin-left: -45px;
+    margin-right: -45px;
+  }
+  .tlt-acnt-address-bot{
+    margin-left: -67px;
+    margin-right: -67px;
+  }
+  .tlt-acnt-address-bot-address-inn .tlt-acnt-address-bot-address-col{
+    width: 100%;
+    padding-right: 0px;
+    margin-top: 20px;
+  }
+  .tlt-acnt-address-bot-address-inn .tlt-acnt-address-bot-address-col:first-child{
+    margin-top: 0px;
+  }
   .CustomApptemp #bc-sf-filter-products .grid-view-item .ssw-faveiticon {
     display:block;
   }
@@ -3464,8 +3911,6 @@ input[type=number]::-webkit-outer-spin-button {
   .sprFast b {
     max-width: 100%;
   }
-
-
 
   li.WishlistMenuSTatic a {
     display: flex;
@@ -4021,7 +4466,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 @media (max-width: 480px) {
-  input#address_default_address_new +label {
+  input#address_default_address_new +label, .cstAddressckbx input +label {
     font-size: 12px;
     vertical-align: middle;
     margin: -6px 0 0;
