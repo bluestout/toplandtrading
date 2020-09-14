@@ -1,5 +1,39 @@
 $(document).ready(function(){
-  $(".CustomerSidebar li").removeClass("active");
+  var location = (window.location.pathname);
+ 
+    
+    if(location=="/account"){
+        $(".AccountForm").show();
+    $(".OrderHis").hide();
+      $(".tlt-account-main-head h1").html("Profile Settings");
+      $(".CustomerSidebar li").each(function(){
+      var linkget = $(this).children("a").attr("href");
+        if(linkget==location){
+        $(this).addClass("active");
+        }
+      })
+    }
+    else if(location=="/account/"){
+        $(".AccountForm").hide();
+    $(".OrderHis").show();
+      $(".tlt-account-main-head h1").html("Order History");
+       $(".CustomerSidebar li").each(function(){
+      var linkget = $(this).children("a").attr("href");
+        if(linkget==location){
+        $(this).addClass("active");
+        }
+      })
+    }
+  else
+  {
+   $(".CustomerSidebar li").each(function(){
+      var linkget = $(this).children("a").attr("href");
+        if(linkget==location){
+        $(this).addClass("active");
+        }
+      })
+  }
+  //$(".CustomerSidebar li").removeClass("active");
   function setCookie(cname, cvalue, exdays) {
       var d = new Date();
       d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -21,62 +55,79 @@ $(document).ready(function(){
       }
       return "";
     } 
-  $(".CustomerSidebar li.cookiclasses").click(function(){
-    setCookie("page_cooki", "");
-    var HtmlGet = $(this).children("a").html();
-    if(HtmlGet=="Account"){
-		 setCookie("page_cooki", 1, 365);
-    }
-    else if(HtmlGet=="Order History"){
-		 setCookie("page_cooki", 2, 365);
-    }
+  
+//   $(".CustomerExist li").click(function(){
+//   setCookie("page_cooki", "");
+//      var HtmlGet = $(this).children("a").html();
+//     if(HtmlGet=="Order History"){
+// 		 setCookie("page_cooki", 2, 365);
+//     }
+//     else{
+//     setCookie("page_cooki", 1, 365);
+//     }
+//   })
+//   $(".CustomerSidebar li.cookiclasses").click(function(){
+//     setCookie("page_cooki", "");
+//     var HtmlGet = $(this).children("a").html();
+//     if(HtmlGet.indexOf("Profile Settings") != -1){
+//     //if(HtmlGet=="Profile Settings"){
+// 		 setCookie("page_cooki", 1, 365);
+//     }
+//     else if(HtmlGet=="Order History"){
+// 		 setCookie("page_cooki", 2, 365);
+//     }
    
-    })
-		  var pageCooki = getCookie("page_cooki");
-  if(pageCooki == 1){
-    $(".AccountForm").show();
-    $(".OrderHis").hide();
-   // $(".CustomerSidebar li").removeClass("active");
-  //$("li.cookiclasses:nth-of-type(1)").addClass("active");
-  }
-  else if(pageCooki == 2){
-    $(".AccountForm").hide();
-    $(".OrderHis").show();
-  //  $(".CustomerSidebar li").removeClass("active");
-   //$("li.cookiclasses:nth-of-type(2)").addClass("active");
-  }
-   else if(pageCooki == "")
-    {
-    $(".AccountForm").show();
-    $(".OrderHis").hide();
-    //$(".CustomerSidebar li").removeClass("active");
-  //$("li.cookiclasses:nth-of-type(1)").addClass("active");
-    }
-  $(".CustomerSidebar li").click(function(){
-    setCookie("sidebaractive", "");
-    var HtmlGet = $(this).children("a").html();
-  setCookie("sidebaractive", HtmlGet, 365);
-  })
-   var sidebaractive = getCookie("sidebaractive");
-  if(sidebaractive=="")
-    {
-    $("li.cookiclasses:nth-of-type(1)").addClass("active");
-    }
-  else{
-  $(".CustomerSidebar li").each(function(){
-  var getsidelist = $(this).children("a").html();
-    if(getsidelist==sidebaractive){
-    $(this).addClass("active");
-    }
-  })
-  }
-  $(".CreateAccount").click(function(){
-    setCookie("sidebaractive", "");
-    setCookie("page_cooki", "");
-  $("li.cookiclasses:nth-of-type(1)").addClass("active");
-    $(".AccountForm").show();
-    $(".OrderHis").hide();
-  })
+//     })
+// 		  var pageCooki = getCookie("page_cooki");
+//   var UrlGet = window.location.href;
+
+//   if(pageCooki == 1){
+//     $(".AccountForm").show();
+//     $(".OrderHis").hide();
+//     $(".tlt-account-main-head h1").html("Profile Settings");
+//    // $(".CustomerSidebar li").removeClass("active");
+//   //$("li.cookiclasses:nth-of-type(1)").addClass("active");
+//   }
+//   else if(pageCooki == 2){
+//     $(".AccountForm").hide();
+//     $(".OrderHis").show();
+//     $(".tlt-account-main-head h1").html("Order History");
+//   //  $(".CustomerSidebar li").removeClass("active");
+//    //$("li.cookiclasses:nth-of-type(2)").addClass("active");
+//   }
+//    else if(pageCooki == "")
+//     {
+//     $(".AccountForm").show();
+//     $(".OrderHis").hide();
+//     //$(".CustomerSidebar li").removeClass("active");
+//   //$("li.cookiclasses:nth-of-type(1)").addClass("active");
+//     }
+//   $(".CustomerSidebar li").click(function(){
+//     setCookie("sidebaractive", "");
+//     var HtmlGet = $(this).children("a").html();
+//   setCookie("sidebaractive", HtmlGet, 365);
+//   })
+//    var sidebaractive = getCookie("sidebaractive");
+//   if(sidebaractive=="")
+//     {
+      
+//     $(".CustomerSidebar li:nth-of-type(3)").addClass("active");
+//     }
+//   else{
+//   $(".CustomerSidebar li").each(function(){
+//   var getsidelist = $(this).children("a").html();
+//     if(getsidelist==sidebaractive){
+//     $(this).addClass("active");
+//     }
+//   })
+//   }
+//   $(".CreateAccount").click(function(){
+//     setCookie("sidebaractive", "");
+//     setCookie("page_cooki", "");
+//   $("li.cookiclasses:nth-of-type(3)").addClass("active");
+//     $(".AccountForm").show();
+//     $(".OrderHis").hide();
+//   })
   $(".BtnCheckDlt").click(function(){
      
   $(this).parents(".tlt-acnt-address-bot-title").next(".tlt-acnt-address-bot-address").next(".form-vertical").toggleClass("hide");

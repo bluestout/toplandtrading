@@ -81,7 +81,7 @@
                     }
                   });
                 });
-              }); 
+              });
             } else {
               ssw.post(ssw_request_url, data, 'html').done(function (response) {
                 ssw('#ssw-page').css('opacity', 0);
@@ -101,7 +101,3 @@
     </script>
   {% endif %}
 {% endif %}
-{% if customer %}
-{%else%}
-<div class="page-width CustomLinkWishlist"><a href="/account/login">Log In</a></div>
-{%endif%}
