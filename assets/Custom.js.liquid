@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var location = (window.location.pathname);
- 
+ console.log('test ready');
     
     if(location=="/account"){
         $(".AccountForm").show();
@@ -489,23 +489,26 @@ $('body').on('click', '.qtyminuscart', function() {
   $(".CustomLoop").slick({dots: true});
   /***************************** ADD TO CART ON GRID PRODUCT *********************/
   /***********because of filtering app, go bc-sf-filter.js*************/
-  $(".AjaxCartBtn").click(function(){
+  $(document).on('click', '.AjaxCartBtn', function(){
+    console.log('test click');
+    console.log("----------1");
   var GetQuant = $(this).prev(".CustomQunt").children(".QuantityBox").val();
   var IdVar = $(this).prev(".CustomQunt").children(".QuantityBox").attr("data-id");
-$.ajax({
-type: 'POST',
+  console.log("----------2");
+  $.ajax({
+  type: 'POST',
     url: '/cart/add.js',
     data: 'quantity=' + GetQuant + '&id=' + IdVar,
     dataType: 'json',
     success: function(line_item) { 
-      location.href="/cart";
+      console.log("----------3");
+      window.location.href = '/cart';
     },
     error: function(XMLHttpRequest, textStatus) {
       Shopify.onError(XMLHttpRequest, textStatus);
     }
   });
-
-  })
+  });
   /*********************************MENU MOBILE ******************************/
   $(".js-mobile-nav-toggle").click(function(){
   $("body").addClass("ActiveMenu");
@@ -552,16 +555,16 @@ var GetCurrentUrl = window.location.href;
   
   /************************** MOBILE AJAX GRID PRODUCT**************************************/
   /***********because of filtering app, go bc-sf-filter.js*************/
-  $(".AjaxCartBtnGrid").click(function(){
+  $(document).on('click', '.AjaxCartBtnGrid', function(){
   var quntityGet = $(this).prev(".grid_quantBox").children(".gridQuant").val();
   var IdGet = $(this).prev(".grid_quantBox").children(".gridQuant").attr("data-idGrid");
     $.ajax({
-type: 'POST',
+    type: 'POST',
     url: '/cart/add.js',
     data: 'quantity=' + quntityGet + '&id=' + IdGet,
     dataType: 'json',
     success: function(line_item) { 
-      location.href="/cart";
+      window.location.href = '/cart';
     },
     error: function(XMLHttpRequest, textStatus) {
       Shopify.onError(XMLHttpRequest, textStatus);
