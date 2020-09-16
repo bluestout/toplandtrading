@@ -1,47 +1,46 @@
 $(document).ready(function(){
   var location = (window.location.pathname);
- console.log('test ready');
-    
-    if(location=="/account"){
-        $(".AccountForm").show();
+  if(location=="/account")
+  {
+    $(".AccountForm").show();
     $(".OrderHis").hide();
-      $(".tlt-account-main-head h1").html("Profile Settings");
-      $(".CustomerSidebar li").each(function(){
+    $(".tlt-account-main-head h1").html("Profile Settings");
+    $(".CustomerSidebar li").each(function(){
       var linkget = $(this).children("a").attr("href");
-        if(linkget==location){
+      if(linkget==location){
         $(this).addClass("active");
-        }
-      })
-    }
-    else if(location=="/account/"){
-        $(".AccountForm").hide();
+      }
+    })
+  }
+  else if(location=="/account/")
+  {
+    $(".AccountForm").hide();
     $(".OrderHis").show();
-      $(".tlt-account-main-head h1").html("Order History");
-       $(".CustomerSidebar li").each(function(){
+    $(".tlt-account-main-head h1").html("Order History");
+    $(".CustomerSidebar li").each(function(){
       var linkget = $(this).children("a").attr("href");
-        if(linkget==location){
+      if(linkget==location){
         $(this).addClass("active");
-        }
-      })
-    }
+      }
+    })
+  }
   else
   {
-   $(".CustomerSidebar li").each(function(){
+    $(".CustomerSidebar li").each(function(){
       var linkget = $(this).children("a").attr("href");
-        if(linkget==location){
+      if(linkget==location){
         $(this).addClass("active");
-        }
-      })
+      }
+    })
   }
-  //$(".CustomerSidebar li").removeClass("active");
   function setCookie(cname, cvalue, exdays) {
-      var d = new Date();
-      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-      var expires = "expires="+d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 
-    function getCookie(cname) {
+  function getCookie(cname) {
       var name = cname + "=";
       var ca = document.cookie.split(';');
       for(var i = 0; i < ca.length; i++) {
@@ -54,117 +53,15 @@ $(document).ready(function(){
         }
       }
       return "";
-    } 
+  } 
   
-//   $(".CustomerExist li").click(function(){
-//   setCookie("page_cooki", "");
-//      var HtmlGet = $(this).children("a").html();
-//     if(HtmlGet=="Order History"){
-// 		 setCookie("page_cooki", 2, 365);
-//     }
-//     else{
-//     setCookie("page_cooki", 1, 365);
-//     }
-//   })
-//   $(".CustomerSidebar li.cookiclasses").click(function(){
-//     setCookie("page_cooki", "");
-//     var HtmlGet = $(this).children("a").html();
-//     if(HtmlGet.indexOf("Profile Settings") != -1){
-//     //if(HtmlGet=="Profile Settings"){
-// 		 setCookie("page_cooki", 1, 365);
-//     }
-//     else if(HtmlGet=="Order History"){
-// 		 setCookie("page_cooki", 2, 365);
-//     }
-   
-//     })
-// 		  var pageCooki = getCookie("page_cooki");
-//   var UrlGet = window.location.href;
-
-//   if(pageCooki == 1){
-//     $(".AccountForm").show();
-//     $(".OrderHis").hide();
-//     $(".tlt-account-main-head h1").html("Profile Settings");
-//    // $(".CustomerSidebar li").removeClass("active");
-//   //$("li.cookiclasses:nth-of-type(1)").addClass("active");
-//   }
-//   else if(pageCooki == 2){
-//     $(".AccountForm").hide();
-//     $(".OrderHis").show();
-//     $(".tlt-account-main-head h1").html("Order History");
-//   //  $(".CustomerSidebar li").removeClass("active");
-//    //$("li.cookiclasses:nth-of-type(2)").addClass("active");
-//   }
-//    else if(pageCooki == "")
-//     {
-//     $(".AccountForm").show();
-//     $(".OrderHis").hide();
-//     //$(".CustomerSidebar li").removeClass("active");
-//   //$("li.cookiclasses:nth-of-type(1)").addClass("active");
-//     }
-//   $(".CustomerSidebar li").click(function(){
-//     setCookie("sidebaractive", "");
-//     var HtmlGet = $(this).children("a").html();
-//   setCookie("sidebaractive", HtmlGet, 365);
-//   })
-//    var sidebaractive = getCookie("sidebaractive");
-//   if(sidebaractive=="")
-//     {
-      
-//     $(".CustomerSidebar li:nth-of-type(3)").addClass("active");
-//     }
-//   else{
-//   $(".CustomerSidebar li").each(function(){
-//   var getsidelist = $(this).children("a").html();
-//     if(getsidelist==sidebaractive){
-//     $(this).addClass("active");
-//     }
-//   })
-//   }
-//   $(".CreateAccount").click(function(){
-//     setCookie("sidebaractive", "");
-//     setCookie("page_cooki", "");
-//   $("li.cookiclasses:nth-of-type(3)").addClass("active");
-//     $(".AccountForm").show();
-//     $(".OrderHis").hide();
-//   })
   $(".BtnCheckDlt").click(function(){
-     
-  $(this).parents(".tlt-acnt-address-bot-title").next(".tlt-acnt-address-bot-address").next(".form-vertical").toggleClass("hide");
- $('html, body').animate({
+    $(this).parents(".tlt-acnt-address-bot-title").next(".tlt-acnt-address-bot-address").next(".form-vertical").toggleClass("hide");
+    $('html, body').animate({
         'scrollTop' : $(this).parents(".tlt-acnt-address-bot-title").next(".tlt-acnt-address-bot-address").next(".form-vertical").children("form").children(".cstAddressckbx").position().top-100
     });
   })
-   // Initialize each edit form's country/province selector
-//     $('.address-country-option').each(function() {
-//       var formId = $(this).data('form-id');
-//       var countrySelector = 'AddressCountry_' + formId;
-//       var provinceSelector = 'AddressProvince_' + formId;
-//       var containerSelector = 'AddressProvinceContainer_' + formId;
-
-//       // eslint-disable-next-line no-new
-//       new Shopify.CountryProvinceSelector(countrySelector, provinceSelector, {
-//         hideElement: containerSelector
-//       });
-//     });
-
-//     // Toggle new/edit address forms
-//     $('.address-new-toggle').on('click', function() {
-//       var isExpanded = $newAddressFormButton.attr('aria-expanded') === 'true';
-
-//       $newAddressForm.toggleClass('hide');
-//       $newAddressFormButton.attr('aria-expanded', !isExpanded).focus();
-//     });
-
-//     $('.address-edit-toggle').on('click', function() {
-//       var formId = $(this).data('form-id');
-//       var $editButton = $('#EditFormButton_' + formId);
-//       var $editAddress = $('#EditAddress_' + formId);
-//       var isExpanded = $editButton.attr('aria-expanded') === 'true';
-
-//       $editAddress.toggleClass('hide');
-//       $editButton.attr('aria-expanded', !isExpanded).focus();
-//     });
+   
   $('.address-delete').on('click', function() {
       var $el = $(this);
       var target = $el.data('target');
@@ -180,26 +77,30 @@ $(document).ready(function(){
           parameters: { _method: 'delete' }
         });
       }
-    });
+  });
   
   $(".tlt-red-lined-btn").click(function(e){
     e.preventDefault();
-  $("#AddressNewForm").toggleClass("hide");
+    $("#AddressNewForm").toggleClass("hide");
   })
   
   
   $("#AddressNewButton").click(function(){
-  $("#AddressNewForm").toggleClass("hide");
+    $("#AddressNewForm").toggleClass("hide");
   })
+  
   $(".text-link.address-new-toggle").click(function(){
-  $(this).parents("#AddressNewForm").addClass("hide");
+    $(this).parents("#AddressNewForm").addClass("hide");
   })
+
   $(".btn.btn--small.address-edit-toggle").click(function(){
-  $(this).parents(".tlt-acnt-address-bot-title").next(".tlt-acnt-address-bot-address").next(".form-vertical").toggleClass("hide");
+    $(this).parents(".tlt-acnt-address-bot-title").next(".tlt-acnt-address-bot-address").next(".form-vertical").toggleClass("hide");
   })
+
   $(".text-link.address-edit-toggle").click(function(){
-  $(this).parents("form").parents(".form-vertical").addClass("hide");
+    $(this).parents("form").parents(".form-vertical").addClass("hide");
   });
+
   $(".CustomHoverList").mouseover(function(){
     var ListNumber = $(this).attr("data-val");
     $(".CustomHoverList").removeClass("subListActive");
@@ -213,96 +114,95 @@ $(document).ready(function(){
       else{
       $(this).removeClass("ActiveContainer");
       }
+    })
   })
-})
   
- $(window).scroll(function() {
+  $(window).scroll(function() {
     if ($(this).scrollTop() > 5) { // this refers to window
         $("#shopify-section-header").addClass("FixedHeader");
     }
-   else{
-   $("#shopify-section-header").removeClass("FixedHeader");
-   }
-})
+    else{
+      $("#shopify-section-header").removeClass("FixedHeader");
+    }
+  })
   /***************** Quantity Box ON COLLECTION AND HOMEPAGE PAGE **************************/
   /*****because of filtering app please goe bc-sf-filter.js for collection page***************/
   $('body').on('click', '.BothIcons .qtyplus', function() {  
- //$('.BothIcons .qtyplus').click(function(){
+      //$('.BothIcons .qtyplus').click(function(){
       
- var valuepluss = $(this).attr("max");
+    var valuepluss = $(this).attr("max");
      
-     var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
+    var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
      
-  if(val_qty >= 0 &&  val_qty < valuepluss)
-  {
-        val_qty = val_qty + 1 ;
-  }
+    if(val_qty >= 0 &&  val_qty < valuepluss)
+    {
+          val_qty = val_qty + 1 ;
+    }
 
     $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
 
-    });
-$('body').on('click', '.BothIcons .qtyminus', function() { 
- var valueplus = $(this).attr("min");
+  });
+
+  $('body').on('click', '.BothIcons .qtyminus', function() { 
+    var valueplus = $(this).attr("min");
      
-     var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
-  if(val_qty > 1)
-  {
-        val_qty = val_qty - 1 ;
-  }
+    var val_qty = parseInt($(this).parents(".BothIcons").prev(".QuantityBox").val());
+    if(val_qty > 1)
+    {
+          val_qty = val_qty - 1 ;
+    }
 
     $(this).parents(".BothIcons").prev(".QuantityBox").val(val_qty);
 
-    });
+  });
  
  /***************** Quantity Box ON PRODUCT PAGE **************************/
- $('body').on('click', '.product-form .qtyplus', function() { 
-   // $('.product-form .qtyplus').click(function(){
+  $('body').on('click', '.product-form .qtyplus', function() { 
+                  // $('.product-form .qtyplus').click(function(){
     $(".Qunatity_alert").hide();
- var valuepluss = $(this).attr("max");
+    var valuepluss = $(this).attr("max");
      
-     var val_qty = parseInt($(this).prev(".product-form__input").val());
+    var val_qty = parseInt($(this).prev(".product-form__input").val());
       
-  if(val_qty >= 0 &&  val_qty < valuepluss)
-  {
-        val_qty = val_qty + 1 ;
-  }
+    if(val_qty >= 0 &&  val_qty < valuepluss)
+    {
+          val_qty = val_qty + 1 ;
+    }
 
     $(this).prev(".product-form__input").val(val_qty);
 
-    });
-$('body').on('click', '.product-form .qtyminus', function() { 
-     //$('.product-form .qtyminus').click(function(){
- var valueplus = $(this).attr("min");
+  });
+
+  $('body').on('click', '.product-form .qtyminus', function() { 
+        //$('.product-form .qtyminus').click(function(){
+    var valueplus = $(this).attr("min");
      
      var val_qty = parseInt($(this).next(".product-form__input").val());
-  if(val_qty > valueplus)
-  {
-        val_qty = val_qty - 1 ;
-     $(".Qunatity_alert").hide();
-  }
-       else{
-       $(".Qunatity_alert").show();
-       }
+    if(val_qty > valueplus)
+    {
+          val_qty = val_qty - 1 ;
+      $(".Qunatity_alert").hide();
+    }
+    else{
+      $(".Qunatity_alert").show();
+    }
 
     $(this).next(".product-form__input").val(val_qty);
 
-    });
+  });
   
   /********************** CART PAGE QUANIITY CHANGE **********************/
   $('body').on('click', '.qtypluscart', function() {
-      console.log("Title");
- var valuepluss = $(this).attr("max");
-     
-     var val_qty = parseInt($(this).prev(".cart__qty-input").val());
-      console.log(val_qty);
-  if(val_qty >= 0 &&  val_qty < valuepluss)
-  {
+    var valuepluss = $(this).attr("max");
+
+    var val_qty = parseInt($(this).prev(".cart__qty-input").val());
+    if(val_qty >= 0 &&  val_qty < valuepluss)
+    {
         val_qty = val_qty + 1 ;
-  }
+    }
 
     $(this).prev(".cart__qty-input").val(val_qty);
-     var getline = $(this).parents(".cart__qty").attr("data-line");
-     console.log(getline);
+    var getline = $(this).parents(".cart__qty").attr("data-line");
     $.ajax({
       type: 'POST',
       url: '/cart/change.js',
@@ -328,7 +228,6 @@ $('body').on('click', '.product-form .qtyminus', function() {
           success: function(data) 
           {
             console.log("syncCart");
-            // console.log(data);
             var minicartdata=$(data).find('.CustomCartTemp').html();
             console.log(minicartdata);
             $('.CustomCartTemp').html(minicartdata);
@@ -336,20 +235,19 @@ $('body').on('click', '.product-form .qtyminus', function() {
         })
       }
     })
-    });
-$('body').on('click', '.qtyminuscart', function() {
-       console.log("CArtClick");
- var valueplus = $(this).attr("min");
+  });
+
+  $('body').on('click', '.qtyminuscart', function() {
+    var valueplus = $(this).attr("min");
      
-     var val_qty = parseInt($(this).next(".cart__qty-input").val());
-  if(val_qty > 1)
-  {
-        val_qty = val_qty - 1 ;
-  }
+    var val_qty = parseInt($(this).next(".cart__qty-input").val());
+    if(val_qty > 1)
+    {
+          val_qty = val_qty - 1 ;
+    }
 
     $(this).next(".cart__qty-input").val(val_qty);
- var getline = $(this).parents(".cart__qty").attr("data-line");
-     console.log(getline);
+    var getline = $(this).parents(".cart__qty").attr("data-line");
     $.ajax({
       type: 'POST',
       url: '/cart/change.js',
@@ -375,7 +273,6 @@ $('body').on('click', '.qtyminuscart', function() {
           success: function(data) 
           {
             console.log("syncCart");
-            // console.log(data);
             var minicartdata=$(data).find('.CustomCartTemp').html();
             console.log(minicartdata);
             $('.CustomCartTemp').html(minicartdata);
@@ -383,75 +280,74 @@ $('body').on('click', '.qtyminuscart', function() {
         })
       }
     })
-    });
+  });
   /*********************** Accordion On Product Page *******************/
   $( "#accordionCustom" ).accordion({
       collapsible: true,heightStyle: "content"
   });
+
   $( "#accordionReviews" ).accordion({
       collapsible: true,heightStyle: "content"
   });
- $( ".CustomFootMob" ).accordion({
-      collapsible: true,heightStyle: "content"
- });
+
+  $( ".CustomFootMob" ).accordion({
+        collapsible: true,heightStyle: "content"
+  });
   /************************** Slider For Homepage Product*******************/
   if ($(window).width() < 749) {
-
     $('.CustomProductListing ul').slick({
       slidesToShow: 1,
-         dots: true,
+      dots: true,
       slidesToScroll: 1
     });
   }
-  
-    else if ($(window).width() < 1023) {
+  else if ($(window).width() < 1023) {
    $(".CustomProductListing ul").slick({
-  slidesToShow: 3,
-     dots: true,
-  slidesToScroll: 3
-});
-    }
-  
+      slidesToShow: 3,
+      dots: true,
+      slidesToScroll: 3
+    });
+  }
   else{
    $('.CustomProductListing ul').slick({
-  slidesToShow: 4,
-     dots: true,
-  slidesToScroll: 4
-});
+      slidesToShow: 4,
+        dots: true,
+      slidesToScroll: 4
+    });
   }
  /*************** RELATED PRODUCT SLIDER *****************/
   setTimeout(function(){
-  if ($(window).width() < 375) {
-   $(".RecommendationPro").slick({
-  slidesToShow: 1,
-     dots: true,
-  slidesToScroll: 1
-});
+    if ($(window).width() < 375) {
+      $(".RecommendationPro").slick({
+        slidesToShow: 1,
+        dots: true,
+        slidesToScroll: 1
+      });
     }
-     else if ($(window).width() < 749) {
-   $(".RecommendationPro").slick({
-  slidesToShow: 2,
-     dots: true,
-  slidesToScroll: 2
-});
+    else if ($(window).width() < 749) {
+        $(".RecommendationPro").slick({
+          slidesToShow: 2,
+            dots: true,
+          slidesToScroll: 2
+        });
     }
     else if ($(window).width() < 1023) {
-   $(".RecommendationPro").slick({
-  slidesToShow: 3,
-     dots: true,
-  slidesToScroll: 3
-});
+      $(".RecommendationPro").slick({
+            slidesToShow: 3,
+              dots: true,
+            slidesToScroll: 3
+      });
     }
     else{
-  $(".RecommendationPro").slick({
-  slidesToShow: 4,
-     dots: true,
-  slidesToScroll: 4
-});
+      $(".RecommendationPro").slick({
+            slidesToShow: 4,
+              dots: true,
+            slidesToScroll: 4
+      });
     }
-   $(".RecommendationPro .CustomLoop").slick({dots: true});
+    $(".RecommendationPro .CustomLoop").slick({dots: true});
   
-     }, 2000);
+  }, 2000);
   /*********************** HOMEPAGE MOBILE SHOW HIDE **********************/
   $(".tsmnlShwall a").click(function(){
     
@@ -465,21 +361,19 @@ $('body').on('click', '.qtyminuscart', function() {
     });
   /*********************************** CART NOTE  ****************************/
   $(".CustomCheckNote").click(function(){
- if ($('input.CustomCheckNote').is(':checked')) {
-   $(".cart-note").show();
-    $(".cart-note textarea").text("");
-       $(".cart-note textarea").val("");
-       $(".cart-note textarea").html("");
-   $(this).parents(".EnableNot").addClass("activeNote");
-   $()
- }
-    else{
-  
-       $(".cart-note").hide();
+    if ($('input.CustomCheckNote').is(':checked')) {
+      $(".cart-note").show();
       $(".cart-note textarea").text("");
-       $(".cart-note textarea").val("");
-       $(".cart-note textarea").html("");
-       $(this).parents(".EnableNot").removeClass("activeNote");
+      $(".cart-note textarea").val("");
+      $(".cart-note textarea").html("");
+      $(this).parents(".EnableNot").addClass("activeNote");
+    }
+    else{
+      $(".cart-note").hide();
+      $(".cart-note textarea").text("");
+      $(".cart-note textarea").val("");
+      $(".cart-note textarea").html("");
+      $(this).parents(".EnableNot").removeClass("activeNote");
     }
   })
   
@@ -490,57 +384,56 @@ $('body').on('click', '.qtyminuscart', function() {
   /***************************** ADD TO CART ON GRID PRODUCT *********************/
   /***********because of filtering app, go bc-sf-filter.js*************/
   $(document).on('click', '.AjaxCartBtn', function(){
-    console.log('test click');
-    console.log("----------1");
-  var GetQuant = $(this).prev(".CustomQunt").children(".QuantityBox").val();
-  var IdVar = $(this).prev(".CustomQunt").children(".QuantityBox").attr("data-id");
-  console.log("----------2");
-  $.ajax({
-  type: 'POST',
-    url: '/cart/add.js',
-    data: 'quantity=' + GetQuant + '&id=' + IdVar,
-    dataType: 'json',
-    success: function(line_item) { 
-      console.log("----------3");
-      window.location.href = '/cart';
-    },
-    error: function(XMLHttpRequest, textStatus) {
-      Shopify.onError(XMLHttpRequest, textStatus);
-    }
-  });
+    var GetQuant = $(this).prev(".CustomQunt").children(".QuantityBox").val();
+    var IdVar = $(this).prev(".CustomQunt").children(".QuantityBox").attr("data-id");
+    $.ajax({
+      type: 'POST',
+        url: '/cart/add.js',
+        data: 'quantity=' + GetQuant + '&id=' + IdVar,
+        dataType: 'json',
+        success: function(line_item) { 
+          window.location.href = '/cart';
+        },
+        error: function(XMLHttpRequest, textStatus) {
+          Shopify.onError(XMLHttpRequest, textStatus);
+        }
+    });
   });
   /*********************************MENU MOBILE ******************************/
   $(".js-mobile-nav-toggle").click(function(){
-  $("body").addClass("ActiveMenu");
+    $("body").addClass("ActiveMenu");
   })
+
   $(".tlicon-x").click(function(){
-  $("body").removeClass("ActiveMenu");
+    $("body").removeClass("ActiveMenu");
   })
+
   $(".tlicon-caret-bottom").click(function(){
-  $(this).parents(".mobile-mega-menu-parent").toggleClass("subchildactive");
+    $(this).parents(".mobile-mega-menu-parent").toggleClass("subchildactive");
   })
+
   $(".activeSubMenu").parents(".mobile-mega-menu").parents(".mobile-mega-menu-parent").addClass("ActiveMenu");
+
   $(".mobile-mega-menu-parent").click(function(){
-  if (!$(event.target).closest('.mobile-mega-menu').length) {
-  $(this).children(".mobile-mega-menu").toggleClass("parentActive");
-  }
+    if (!$(event.target).closest('.mobile-mega-menu').length) {
+      $(this).children(".mobile-mega-menu").toggleClass("parentActive");
+    }
   })
   /********************** ITEM SHOW ON COLLECTION PAGE ***********************/
   
-var GetCurrentUrl = window.location.href;
+  var GetCurrentUrl = window.location.href;
   var origin   = window.location.origin;
 
   $(".CustomFilter").change(function(){
-  var GetSelected = $(this).val();
- window.location.href = GetSelected;
+    var GetSelected = $(this).val();
+    window.location.href = GetSelected;
   })
   var Getselectedvalue = $(".CustomFilter").val();
- 
-   
+    
   $(".CustomFilter option").each(function(){
-  var geteachval = $(this).val();
+    var geteachval = $(this).val();
     if (GetCurrentUrl.indexOf(geteachval) >= 0){
-    $('.CustomFilter').val(geteachval); 
+      $('.CustomFilter').val(geteachval); 
     }
   })
   
@@ -556,69 +449,71 @@ var GetCurrentUrl = window.location.href;
   /************************** MOBILE AJAX GRID PRODUCT**************************************/
   /***********because of filtering app, go bc-sf-filter.js*************/
   $(document).on('click', '.AjaxCartBtnGrid', function(){
-  var quntityGet = $(this).prev(".grid_quantBox").children(".gridQuant").val();
-  var IdGet = $(this).prev(".grid_quantBox").children(".gridQuant").attr("data-idGrid");
+    var quntityGet = $(this).prev(".grid_quantBox").children(".gridQuant").val();
+    var IdGet = $(this).prev(".grid_quantBox").children(".gridQuant").attr("data-idGrid");
     $.ajax({
-    type: 'POST',
-    url: '/cart/add.js',
-    data: 'quantity=' + quntityGet + '&id=' + IdGet,
-    dataType: 'json',
-    success: function(line_item) { 
-      window.location.href = '/cart';
-    },
-    error: function(XMLHttpRequest, textStatus) {
-      Shopify.onError(XMLHttpRequest, textStatus);
-    }
-  });
+      type: 'POST',
+      url: '/cart/add.js',
+      data: 'quantity=' + quntityGet + '&id=' + IdGet,
+      dataType: 'json',
+      success: function(line_item) { 
+        window.location.href = '/cart';
+      },
+      error: function(XMLHttpRequest, textStatus) {
+        Shopify.onError(XMLHttpRequest, textStatus);
+      }
+    });
   })
   /************************** MOBILE AJAX GRID Qunatity Manage PRODUCT**************************************/
   /*************because of filtering app , go bc-sf-filter.js********************/
- $('.qtyplusgrid').click(function(){
+  $(document).on('click','.qtyplusgrid', function(){
+  //$('.qtyplusgrid').click(function(){
    
- var valuepluss = $(this).attr("max");
-     
-     var val_qty = parseInt($(this).prev(".gridQuant").val());
+    var valuepluss = $(this).attr("max");
       
-  if(val_qty >= 0 &&  val_qty < valuepluss)
-  {
-        val_qty = val_qty + 1 ;
-  }
+    var val_qty = parseInt($(this).prev(".gridQuant").val());
+        
+    if(val_qty >= 0 &&  val_qty < valuepluss)
+    {
+          val_qty = val_qty + 1 ;
+    }
 
     $(this).prev(".gridQuant").val(val_qty);
 
-    });
+  });
 
-     $('.qtyminusgrid').click(function(){
- var valueplus = $(this).attr("min");
-     
-     var val_qty = parseInt($(this).next(".gridQuant").val());
-  if(val_qty > 1)
-  {
-        val_qty = val_qty - 1 ;
-  }
+  $(document).on('click','.qtyminusgrid', function(){
+  //$('.qtyminusgrid').click(function(){
+    var valueplus = $(this).attr("min");
+
+    var val_qty = parseInt($(this).next(".gridQuant").val());
+    if(val_qty > 1)
+    {
+          val_qty = val_qty - 1 ;
+    }
 
     $(this).next(".gridQuant").val(val_qty);
 
-    });
+  });
   /*************************** MOBILE MENU CLICK ***********************************/
   $(".mobileOverlay").click(function(){
-  $("body.ActiveMenu").removeClass("ActiveMenu");
+    $("body.ActiveMenu").removeClass("ActiveMenu");
   })
   /*************************** MOBILE CONTENT TOGGLE ***************************/
   $(".itc_clps a").click(function(){
     $(this).toggleClass("ContentShow");
     if($(this).hasClass("ContentShow")){
-    $(this).html("Show cart content");
+     $(this).html("Show cart content");
     }
     else{
-    $(this).html("Collapse cart content");
+      $(this).html("Collapse cart content");
     }
-  $(".CartLeft").toggle();
-    })
+    $(".CartLeft").toggle();
+  })
   /**************** SCROLL UPTO RELATED PRODUCR ON PDP *************************/
   $(".LinkRelated").on('click',function() {
     $('html, body').animate({
         'scrollTop' : $(".product-recommendations__inner").position().top
     });
-});
+  });
 })
