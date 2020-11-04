@@ -1,7 +1,7 @@
 {% if shop.customer_accounts_enabled %}
   {% assign ssw_fave_enabled = 1 %}
   {% if shop.metafields.ssw['fave_enabled'] %}
-    {% assign ssw_fave_enabled = shop.metafields.ssw['fave_enabled'] %}
+    {% assign ssw_fave_enabled = shop.metafields.ssw['fave_enabled'] | plus: 0 %}
   {% endif %}
   {% if ssw_fave_enabled == 1 %}
     {% assign productId = ssw-widget-favebtn %}

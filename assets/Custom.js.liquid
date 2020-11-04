@@ -467,7 +467,6 @@ $(document).ready(function(){
   /************************** MOBILE AJAX GRID Qunatity Manage PRODUCT**************************************/
   /*************because of filtering app , go bc-sf-filter.js********************/
   $(document).on('click','.qtyplusgrid', function(){
-  //$('.qtyplusgrid').click(function(){
    
     var valuepluss = $(this).attr("max");
       
@@ -483,7 +482,6 @@ $(document).ready(function(){
   });
 
   $(document).on('click','.qtyminusgrid', function(){
-  //$('.qtyminusgrid').click(function(){
     var valueplus = $(this).attr("min");
 
     var val_qty = parseInt($(this).next(".gridQuant").val());

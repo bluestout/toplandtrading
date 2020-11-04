@@ -1,4 +1,5 @@
-{% if shop.customer_accounts_enabled and shop.metafields.ssw['review_enabled'] == 1 and shop.metafields.ssw.settings.reviews_widget_enabled == 1 %}
+{% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] | plus: 0 %}
+{% if shop.customer_accounts_enabled and ssw_review_enabled == 1 and shop.metafields.ssw.settings.reviews_widget_enabled == 1 %}
   {% if shop.metafields.ssw.settings.reviews_tab_position == 'left' %}
     {% assign direction = 'left' %}
     {% assign tab_position = 'ssw-left-top' %}
@@ -14,24 +15,16 @@
         <span class="ssw-mobile-visible"><i class="ssw-icon-star"></i></span>
       </div>
     </div>
-    <div class="ssw-reviews-wlist {{ tab_position }}">
+    <div class="ssw-reviews-wlist {{ tab_position }} {% unless shop.metafields.ssw_cache.review_tab %}ssw-html-widget{% endunless %}" data-module="recommendation" data-name="reviewsPopup" data-metafield_key="review_tab">
     </div>
   </div>
-  <script type="text/javascript" defer>
-    if(typeof sswReviewBarInterval == 'undefined'){
-      var sswReviewBarInterval = setInterval(function(){
-        if(typeof sswLibraryJsLoaded != 'undefined' && sswLibraryJsLoaded ) {
-          clearInterval(sswReviewBarInterval);
-          ssw.ajax({
-            url: sswProxyUrl + '/lite2/core/widget/index',
-            data: {'_sid': sswCookie('hesid'), 'module': 'recommendation', 'name': 'reviewsPopup'},
-            dataType: 'html',
-            success: function (response) {
-              ssw('#ssw-widget-review-bar').find('.ssw-reviews-wlist').append(response);
-            }
-          });
-        }
-      }, 300);
-    }
-  </script>
+  {% if shop.metafields.ssw_cache.review_tab %}
+    <script type="text/javascript">
+      if (typeof sswRun !== 'undefined') {
+        sswRun(function ($) {
+          $('#ssw-widget-review-bar').find('.ssw-reviews-wlist').append({{ shop.metafields.ssw_cache.review_tab | json }});
+        });
+      }
+    </script>
+  {% endif %}
 {% endif %}

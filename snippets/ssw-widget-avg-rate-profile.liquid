@@ -1,16 +1,18 @@
-{% if content_for_header contains 'ssw-empty.js' or shop.metafields.ssw['manual_uninstall'] == 1 or shop.metafields.ssw['script_tags_allowed'] != 1 %}
+{% assign ssw_manual_uninstall = shop.metafields.ssw['manual_uninstall'] | plus: 0 %}
+{% assign ssw_script_tags_allowed = shop.metafields.ssw['script_tags_allowed'] | plus: 0 %}
+{% if content_for_header contains 'ssw-empty.js' or ssw_manual_uninstall == 1 or ssw_script_tags_allowed != 1 %}
 {% if product %}
   {% assign ssw_review_enabled = 1 %}
   {% if shop.metafields.ssw['review_enabled'] %}
-    {% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] %}
+    {% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] | plus: 0 %}
   {% endif %}
   {% assign ssw_questions_enabled = 0 %}
   {% if shop.metafields.ssw['questions_enabled'] %}
-    {% assign ssw_questions_enabled = shop.metafields.ssw['questions_enabled'] %}
+    {% assign ssw_questions_enabled = shop.metafields.ssw['questions_enabled'] | plus: 0 %}
   {% endif %}
   {% assign ssw_unite_reviews = 0 %}
   {% if shop.metafields.ssw['unite_reviews'] %}
-    {% assign ssw_unite_reviews = shop.metafields.ssw['unite_reviews'] %}
+    {% assign ssw_unite_reviews = shop.metafields.ssw['unite_reviews'] | plus: 0 %}
   {% endif %}
   <div id="ssw-avg-rate-profile-html" data-product-id="{{ product.id }}">
     {% if ssw_review_enabled == 1 %}

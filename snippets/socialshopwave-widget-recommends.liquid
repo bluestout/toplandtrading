@@ -1,7 +1,7 @@
 {% if product and shop.customer_accounts_enabled %}
   {% assign ssw_review_enabled = 1 %}
   {% if shop.metafields.ssw['review_enabled'] %}
-    {% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] %}
+    {% assign ssw_review_enabled = shop.metafields.ssw['review_enabled'] | plus: 0 %}
   {% endif %}
   {% if ssw_review_enabled %}
     {% assign ssw_new_widget = 0 %}
