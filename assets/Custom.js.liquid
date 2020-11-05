@@ -281,6 +281,28 @@ $(document).ready(function(){
       }
     })
   });
+  
+  
+  $('body').on('click', '.cart__remove', function() {
+  	console.log('clicked cart remove');
+    /*
+    $.ajax({
+      type: "GET",
+      url: "/cart",
+      dataType: 'html',
+
+      success: function(data) 
+      {
+        console.log("syncCart");
+        var minicartdata=$(data).find('.CustomCartTemp').html();
+        console.log(minicartdata);
+        $('.CustomCartTemp').html(minicartdata);
+      }
+    })
+    */
+  });
+  
+  
   /*********************** Accordion On Product Page *******************/
   $( "#accordionCustom" ).accordion({
       collapsible: true,heightStyle: "content"

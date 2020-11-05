@@ -1515,7 +1515,10 @@ body.template-cart {
   width: 25%;
   border: none;
   float: left;
-  padding: 0 16px 60px;
+  padding: 0 16px 0px;
+}
+.CustomCartTemp table .cart__row td.cart__final-price{
+	padding-bottom: 60px !important;
 }
 .CustomCartTemp table tr td {
   width: 100%;
@@ -3450,8 +3453,14 @@ input[type=number]::-webkit-outer-spin-button {
   }
   .CustomCartTemp table .cart__row {
     width: 50%;
-    padding: 0 5px 40px;
+    padding: 0 5px 0px;
   }
+  .CustomCartTemp table .cart__row td.cart__final-price{
+  	padding-bottom: 40px !important;
+  }
+  /*.CustomCartTemp table .cart__row:nth-child(2n + 1){
+  	clear: left;
+  }*/
   h2.headerCart {
     margin: 0 0 40px;  
   }
