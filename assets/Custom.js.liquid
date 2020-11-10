@@ -520,13 +520,21 @@ $(document).ready(function(){
     $("body.ActiveMenu").removeClass("ActiveMenu");
   })
   /*************************** MOBILE CONTENT TOGGLE ***************************/
-  $(".itc_clps a").click(function(){
+  $(".itc_clps .firstA").click(function(){
     $(this).toggleClass("ContentShow");
     if($(this).hasClass("ContentShow")){
      $(this).html("Show cart content");
     }
     else{
       $(this).html("Collapse cart content");
+    }
+    $(".CartLeft").toggle();
+  })
+  $(".itc_clps .secondA").click(function(){
+    $(this).toggleClass("ContentShow");
+    if($(this).hasClass("ContentShow")){
+    }
+    else{
     }
     $(".CartLeft").toggle();
   })

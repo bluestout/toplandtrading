@@ -14,12 +14,14 @@
        
          <div class="calship">
              <p> Shipping cost will be determined after order is packed and weighed for shipment</p>
-             <p class="hwclclt"> <a href="https://top-land-trading-development.myshopify.com/pages/wholesale-info"> <span class="tlicon-help"></span> <b>How is it calculated?</b></a></p>
+             <p class="hwclclt"> <a href="https://top-land-trading-development.myshopify.com/pages/shipping-policies"> <span class="tlicon-help"></span> <b>How is it calculated?</b></a></p>
          </div>
        
         <div class="itemscartContent">
              <p class="ttlitems"> {{cart.item_count}}{% if cart.item_count > 1 %} Items{%else%} Item{%endif%}</p>
-             <p class="itc_clps"> <a href="#">Collapse cart content</a> <span class="tlicon-caret-bottom"></span></p>
+             <p class="itc_clps"> <a href="#" class="firstA">Collapse cart content</a> 
+             <a href="#" class="secondA"><span class="tlicon-caret-bottom"></span></a>
+             </p>
          </div>
        
           <div class="gotocheckout{% if section.settings.cart_notes_enable %} {% endif %}">
